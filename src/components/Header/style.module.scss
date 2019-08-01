@@ -1,0 +1,132 @@
+@import '~@/styles/variables.scss';
+
+.header {
+	// height: ;
+	border-bottom: 1px solid #d1d5da;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.075);
+	height: $header-height;
+	width: 100%;
+	position: fixed;
+	left: 0;
+	top: 0;
+	z-index: 10;
+	background-color: #ffffff;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	animation: come-from-up 1s;
+
+	.menuIcon {
+		display: none;
+		font-size: 20px;
+		margin: 0 0.35rem 0 1rem;
+	}
+
+	.sideMenu {
+		display: none;
+		margin-left: $header-gap * 2;
+		margin-right: $header-gap;
+	}
+
+	.name {
+		font-weight: bold;
+		font-size: 1.5rem;
+		margin: 0 $header-gap;
+	}
+	.avatar {
+		width: 2.5rem;
+		height: 2.5rem;
+		margin: 0 $header-gap;
+	}
+
+	.menuList {
+		width: 45%;
+		margin: 0 $header-gap;
+		height: 100%;
+	}
+
+	.menuMain {
+		width: 100%;
+		height: 100%;
+	}
+
+	.menuItem {
+		font-size: 1rem;
+		padding: 0 $header-item-padding;
+		font-weight: bold;
+		text-align: center;
+		color: #515151;
+		height: 100%;
+		line-height: $header-height;
+		display: inline-block;
+		transition: all 0.2s ease;
+
+		&.menuItemActive,
+		&:hover {
+			color: $main-color;
+		}
+	}
+}
+
+@keyframes come-from-up {
+	from {
+		opacity: 0;
+		transform: translateY(-100%);
+	}
+	to {
+		opacity: 1;
+		transform: none;
+	}
+}
+
+@media (max-width: 1000px) {
+	.header {
+		justify-content: flex-start;
+
+		.menuIcon {
+			display: block;
+		}
+		.sideMenu {
+			display: block;
+		}
+		.menuList {
+			//display: none;
+			position: absolute;
+			left: 0;
+			top: 4rem;
+			display: flex;
+			flex-direction: column;
+			width: 100vw;
+			height: calc(100vh - 4rem);
+			background-color: rgba(255, 255, 255, 0.5);
+			margin: 0;
+			transition: opacity 0.15s ease-out;
+			opacity: 0;
+			pointer-events: none;
+
+			.menuMain {
+				background-color: #fff;
+				box-shadow: 0 1px 2px rgba(0, 0, 0, 0.075);
+				width: 60%;
+				transform: translate(-100%);
+				transition: transform 0.15s ease-out;
+
+				.menuItem {
+					display: block;
+					height: auto;
+					font-size: 1.2rem;
+				}
+			}
+		}
+		.menuShow {
+			opacity: 1;
+			pointer-events: auto;
+
+			.menuMain {
+				transform: translate(0);
+			}
+		}
+		.avatar {
+		}
+	}
+}

@@ -1,0 +1,70 @@
+@import url('https://unpkg.com/normalize.css@8.0.1/normalize.css');
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+/* root font-size setting */
+html {
+	font-size: 16px;
+	line-height: 1.5;
+}
+@media screen and (max-width: 1366px) {
+	html {
+		font-size: 12px;
+	}
+}
+
+body {
+	color: #24292e;
+	background-color: #f5f7f9;
+	font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif, Apple Color Emoji,
+		Segoe UI Emoji, Segoe UI Symbol;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+code {
+	font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+ol,
+li,
+ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+button {
+	&:focus {
+		outline: 0;
+	}
+}
+
+::-webkit-scrollbar {
+	width: 5px;
+	height: 5px;
+}
+
+::-webkit-scrollbar-track {
+	background: transparent;
+	border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+	background-color: #e1e1e1;
+	min-height: 50px;
+	border-radius: 4px;
+	margin-right: 2px;
+}
+
+pre {
+	padding: 0.5rem;
+	color: #abb2bf;
+	background: #282c34;
+}

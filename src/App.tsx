@@ -1,26 +1,20 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import '@/styles/fix.scss';
+import '@/styles/global.scss';
+import 'highlight.js/styles/atom-one-dark.css';
+import Pages from '@/pages/Pages';
+import { load } from 'utils/loadIcon';
+load();
+import { Provider } from '@/ctx/DocCtx';
 
 const App: React.FC = () => {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+	return (
+		<div className="App">
+			<Provider>
+				<Pages />
+			</Provider>
+		</div>
+	);
+};
 
 export default App;

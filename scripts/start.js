@@ -24,7 +24,7 @@ const { choosePort, createCompiler, prepareProxy, prepareUrls } = require('react
 const openBrowser = require('react-dev-utils/openBrowser');
 const paths = require('../config/paths');
 const configFactory = require('../config/webpack.config');
-const createDevServerConfig = require('../config/webpackDevServer.config');
+const createDevServerConfig = require('../config/devServer.config');
 
 const useYarn = fs.existsSync(paths.yarnLockFile);
 const isInteractive = process.stdout.isTTY;
@@ -50,13 +50,11 @@ if (process.env.HOST) {
 // We require that you explicitly set browsers and do not fall back to
 // browserslist defaults.
 const { checkBrowsers } = require('react-dev-utils/browsersHelper');
-checkBrowsers(paths.appPath, isInteractive)
-	.then(() => {
-		// We attempt to use the default port but if it is busy, we offer the user to
-		// run on a different port. `choosePort()` Promise resolves to the next free port.
-		return choosePort(HOST, DEFAULT_PORT);
-	})
-	.then(port => {
+
+async function start(closeSignalCallback) {
+	try {
+		await checkBrowsers(paths.appPath, isInteractive);
+		const port = await choosePort(HOST, DEFAULT_PORT);
 		if (port == null) {
 			// We have not found a port.
 			return;
@@ -115,12 +113,22 @@ checkBrowsers(paths.appPath, isInteractive)
 			process.on(sig, function() {
 				devServer.close();
 				process.exit();
+				closeSignalCallback();
 			});
 		});
-	})
-	.catch(err => {
+	} catch (err) {
 		if (err && err.message) {
 			console.log(err.message);
 		}
 		process.exit(1);
+		closeSignalCallback();
+	}
+}
+
+const mdParser = require('./mdParser');
+(async function() {
+	await mdParser.run();
+	await start(() => {
+		mdParser.close();
 	});
+})();

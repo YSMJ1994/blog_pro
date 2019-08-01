@@ -1,0 +1,58 @@
+@import '~@/styles/variables.scss';
+.pagination {
+	display: inline-block;
+}
+.paginationItem {
+	display: inline-block;
+	width: 3rem;
+	text-align: center;
+	padding: 0.6rem 1.2rem;
+	cursor: pointer;
+	user-select: none;
+
+	&:hover,
+	&.current {
+		font-weight: bold;
+		color: $main-color;
+	}
+}
+.paginationEscapeBox {
+	position: relative;
+	display: inline-block;
+	cursor: pointer;
+	width: 1.5rem;
+	text-align: center;
+
+	&:hover {
+		.paginationEscape {
+			opacity: 0;
+		}
+		.paginationArrow {
+			opacity: 1;
+		}
+	}
+	.paginationArrow {
+		opacity: 0;
+		transition: all 0.2s ease-in-out;
+		display: inline-block;
+		color: $main-color;
+		font-size: 0.75rem;
+
+		&.left {
+			transform: rotate(90deg);
+		}
+		&.right {
+			transform: rotate(-90deg);
+		}
+	}
+	.paginationEscape {
+		color: rgba(0, 0, 0, 0.25);
+		position: absolute;
+		left: 50%;
+		top: 50%;
+		transform: translate(-50%, -50%);
+		pointer-events: none;
+		transition: opacity 0.1s;
+		letter-spacing: -1px;
+	}
+}

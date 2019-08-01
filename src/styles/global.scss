@@ -1,0 +1,15 @@
+:global {
+	.test2 {
+		font-size: 18px;
+	}
+	.test {
+		color: #000;
+	}
+	.clearfix {
+		&::after {
+			display: block;
+			clear: both;
+			content: ' ';
+		}
+	}
+}
