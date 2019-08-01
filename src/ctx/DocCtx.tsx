@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import docArray from '@/assets/md';
 
 interface MdDoc {
@@ -116,16 +116,24 @@ function resolveGroups(docArray: MdDoc[], result: Group[]): void {
 }
 
 export const Provider: React.FC = ({ children }) => {
-	const tags: Tag[] = [],
-		group: Group[] = [];
-	resolveTags(docArray, tags);
-	resolveGroups(docArray, group);
-	const DocInfo = {
-		articles: docArray,
-		tags,
-		group
-	};
-	return <DocCtx.Provider value={DocInfo}>{children}</DocCtx.Provider>;
+	const [docInfo, setDocInfo] = useState<DocInfo>({
+		articles: [],
+		tags: [],
+		group: []
+	});
+	useEffect(() => {
+		const tags: Tag[] = [],
+			group: Group[] = [];
+		resolveTags(docArray, tags);
+		resolveGroups(docArray, group);
+		const info: DocInfo = {
+			articles: docArray,
+			tags,
+			group
+		};
+		setDocInfo(info);
+	}, []);
+	return <DocCtx.Provider value={docInfo}>{children}</DocCtx.Provider>;
 };
 
 export default DocCtx;
