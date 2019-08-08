@@ -1,0 +1,18 @@
+.pageTitle {
+	font-size: 1.5rem;
+	margin: 1rem 0;
+
+	.sub {
+		//margin-top: .5rem;
+		display: block;
+		font-size: 0.875rem;
+	}
+
+	@media (max-width: 1000px) {
+		.sub {
+			display: inline;
+			margin-top: unset;
+			margin-left: 0.5rem;
+		}
+	}
+}

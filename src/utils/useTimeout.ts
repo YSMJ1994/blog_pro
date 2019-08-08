@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 
-type anyFn = ([...any]?) => any;
+type anyFn = () => any;
 export default function useTimeout(cb: anyFn, delay: number) {
 	const ref = useRef<anyFn>();
 	useEffect(() => {

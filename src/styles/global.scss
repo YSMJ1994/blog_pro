@@ -1,12 +1,6 @@
 :global {
-	.test2 {
-		font-size: 18px;
-	}
-	.test {
-		color: #000;
-	}
 	.clearfix {
-		&::after {
+		&:after {
 			display: block;
 			clear: both;
 			content: ' ';

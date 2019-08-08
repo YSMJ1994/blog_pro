@@ -1,11 +1,10 @@
 @import '~@/styles/variables.scss';
 .search {
-	height: 4rem;
+	height: calc(4rem - 1px);
 	position: absolute;
 	top: 0;
 	right: 20vw;
 	transition: all 0.5s ease;
-	border-bottom: 1px solid #d1d5da;
 	width: 12.5rem;
 }
 .searchInput {
@@ -23,15 +22,16 @@
 	outline: none;
 	border-radius: 1rem;
 	transition: all 0.2s ease-in-out;
-	background: #fff url('~@/assets/img/search.png') 8px 5px no-repeat;
+	background: #fff url('~@/assets/img/search.png') 0.5rem 0.32rem no-repeat;
 	background-size: 1.3rem;
 	vertical-align: middle !important;
 	font-size: 0.875rem;
 
 	&:focus {
-		border: 2px solid $main-color;
-		transform: scale(1.02);
-		background-position: 8px 4px;
+		border-color: $main-color;
+		//border: 1px solid $main-color;
+		//transform: scale(1.02);
+		//background-position: 0.5rem 0.25rem;
 	}
 }
 
@@ -67,15 +67,20 @@
 			width: 11rem;
 			right: 5vw;
 			transition: all 0.5s ease;
-			background-position: 0.6rem 0.3rem;
+			background-position: 0.6rem 0.4rem;
+			height: 2.2rem;
+			border-radius: 1.1rem;
+			margin: 0.9rem 0;
+			line-height: 1;
 		}
 	}
 	.cancelText {
 		position: absolute;
-		width: 10vw;
+		width: 12vw;
 		text-align: center;
 		right: 0;
 		top: 0;
+		font-size: 1.2rem;
 	}
 	.searchFocus {
 		right: 0;
@@ -84,8 +89,8 @@
 		background-color: #fff;
 
 		.searchInput {
-			width: 85vw;
-			right: 10vw;
+			width: 83vw;
+			right: 12vw;
 		}
 		.cancelText {
 			display: block;
@@ -94,7 +99,7 @@
 	.searchPane {
 		display: block;
 		background-color: #fff;
-		position: fixed;
+		position: absolute;
 		min-height: 0;
 		right: 0;
 		top: 4rem;

@@ -16,6 +16,15 @@
 		}
 	}
 
+	&.activeHover {
+		&:hover {
+			&:after {
+				visibility: visible;
+				transform: scaleX(1);
+			}
+		}
+	}
+
 	&:after {
 		content: '';
 		position: absolute;

@@ -1,0 +1,7 @@
+@mixin card() {
+	box-shadow: 0 4px 8px 0 rgba(7, 17, 27, 0.05);
+	border-radius: 5px;
+	overflow: hidden;
+	background-color: #fff;
+	padding: 1rem;
+}

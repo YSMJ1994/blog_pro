@@ -16,9 +16,9 @@
     "jsx": "preserve",
     "baseUrl": "src",
     "paths": {
-      "@/*": ["./*"]
+      "@/*": ["./*"],
+      "~/*": ["../*"]
     }
   },
-  "include": ["src"],
-  "exclude": ["src/setupProxy.js"]
+  "include": ["src/**/*"]
 }

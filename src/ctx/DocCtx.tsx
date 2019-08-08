@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import docArray from '@/assets/md';
 
-interface MdDoc {
+export interface MdDoc {
 	title: string;
 	createTime: number;
 	modifyTime: number;
 	group: string[];
 	tag?: string[];
+	review: string;
 	content: string;
 }
 
@@ -16,22 +17,26 @@ interface Tag {
 	name: string;
 }
 
-interface Group {
+export interface Group {
 	name: string;
 	articles: MdDoc[];
-	children?: Group[];
+	groups?: Group[];
 }
 
 interface DocInfo {
 	articles: MdDoc[];
 	tags: Tag[];
 	group: Group[];
+	tagMap: { [name: string]: Tag };
+	articleMap: { [title: string]: MdDoc };
 }
 
 const DocCtx = React.createContext<DocInfo>({
 	articles: [],
 	tags: [],
-	group: []
+	group: [],
+	tagMap: {},
+	articleMap: {}
 });
 
 function resolveTags(docArray: MdDoc[], result: Tag[]): void {
@@ -76,8 +81,8 @@ function resolveGroupTree(groupList: GroupObjItem[], allGroupList: GroupObjItem[
 		result.push(resultItem);
 		const children = allGroupList.filter(g => g.parent === key).sort((a, b) => (a.name > b.name ? 1 : -1));
 		if (children && children.length) {
-			resultItem.children = [];
-			resolveGroupTree(children, allGroupList, resultItem.children);
+			resultItem.groups = [];
+			resolveGroupTree(children, allGroupList, resultItem.groups);
 		}
 	});
 }
@@ -115,21 +120,41 @@ function resolveGroups(docArray: MdDoc[], result: Group[]): void {
 	resolveGroupTree(topGroup, groupList, result);
 }
 
+function resolveTagMap(tags: Tag[]) {
+	const result: { [key: string]: Tag } = {};
+	return tags.reduce((pre, tag) => {
+		const { name } = tag;
+		pre[name] = tag;
+		return pre;
+	}, result);
+}
+
 export const Provider: React.FC = ({ children }) => {
 	const [docInfo, setDocInfo] = useState<DocInfo>({
 		articles: [],
 		tags: [],
-		group: []
+		group: [],
+		tagMap: {},
+		articleMap: {}
 	});
 	useEffect(() => {
 		const tags: Tag[] = [],
 			group: Group[] = [];
 		resolveTags(docArray, tags);
 		resolveGroups(docArray, group);
+		const articles = docArray.sort((a, b) => b.modifyTime - a.modifyTime);
 		const info: DocInfo = {
-			articles: docArray,
+			articles,
 			tags,
-			group
+			group,
+			tagMap: resolveTagMap(tags),
+			articleMap: articles.reduce(
+				(pre, article) => {
+					pre[article.title] = article;
+					return pre;
+				},
+				{} as { [title: string]: MdDoc }
+			)
 		};
 		setDocInfo(info);
 	}, []);

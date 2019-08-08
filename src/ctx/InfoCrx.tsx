@@ -13,6 +13,7 @@ export const Provider: FC = ({ children }) => {
 		getInfo().then(result => {
 			if (result) {
 				set(cacheKey, result);
+				console.log('request github info', result);
 				setInfo(result);
 			}
 		});

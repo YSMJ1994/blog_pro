@@ -30,6 +30,7 @@ export default function Search() {
 		const inputDom = inputRef.current;
 		if (inputDom) {
 			const listenFocus = function() {
+				window.scrollTo({ left: 0, top: 0, behavior: 'smooth' });
 				setFocus(true);
 			};
 			const listenBlur = function() {

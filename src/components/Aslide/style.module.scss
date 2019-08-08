@@ -1,0 +1,14 @@
+@import '~@/styles/variables.scss';
+.aside {
+	width: 100%;
+	min-height: 5rem;
+	position: sticky;
+	top: $header-height + 1rem;
+}
+
+@media screen and (max-width: 1000px) {
+	/*移动端适配*/
+	.aside {
+		position: static;
+	}
+}

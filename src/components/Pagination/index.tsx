@@ -9,9 +9,9 @@ interface PaginationProps {
 	current: number;
 	pageSize: number;
 	total: number;
-	onChange?: (current: number, pageSize?: number) => void;
+	onChange?: (current: number, pageSize?: number) => any;
 }
-const Index: React.FC<PaginationProps> = ({ className, style, current, pageSize, total, onChange }) => {
+const Pagination: React.FC<PaginationProps> = ({ className, style, current, pageSize, total, onChange }) => {
 	const [prefixPages, setPrefixPages] = useState<number[]>([]);
 	const [middlePages, setMiddlePages] = useState<number[]>([]);
 	const [suffixPages, setSuffixPages] = useState<number[]>([]);
@@ -62,57 +62,73 @@ const Index: React.FC<PaginationProps> = ({ className, style, current, pageSize,
 		[current]
 	);
 	return (
-		<div className={cs(styles.pagination, className)} style={style}>
-			{prefixPages.map(page => {
-				return (
-					<div
-						key={page}
-						className={cs(styles.paginationItem, { [styles.current]: page === current })}
-						onClick={() => resolveClick(page)}
-					>
-						{page}
+		<div className={cs(styles.paginationWrap, className)}>
+			<div
+				className={cs(styles.pageBtn, { [styles.pageBtnDisabled]: current <= 1 })}
+				onClick={() => current > 1 && resolveClick(current - 1)}
+				title="上一页"
+			>
+				<SIcon className={styles.pageIconLeft} name="arrow-right-line" />
+			</div>
+			<div className={styles.pagination} style={style}>
+				{prefixPages.map(page => {
+					return (
+						<div
+							key={page}
+							className={cs(styles.paginationItem, { [styles.current]: page === current })}
+							onClick={() => resolveClick(page)}
+						>
+							{page}
+						</div>
+					);
+				})}
+				{leftArrowShow && (
+					<div className={styles.paginationEscapeBox} onClick={() => resolveClick(Math.max(1, current - 2))}>
+						<SIcon name="duble-arrow-down" className={cs(styles.paginationArrow, styles.left)} />
+						<span className={styles.paginationEscape}>•••</span>
 					</div>
-				);
-			})}
-			{leftArrowShow && (
-				<div className={styles.paginationEscapeBox} onClick={() => resolveClick(Math.max(1, current - 2))}>
-					<SIcon name="duble-arrow-down" className={cs(styles.paginationArrow, styles.left)} />
-					<span className={styles.paginationEscape}>•••</span>
-				</div>
-			)}
-			{middlePages.map(page => {
-				return (
+				)}
+				{middlePages.map(page => {
+					return (
+						<div
+							key={page}
+							className={cs(styles.paginationItem, { [styles.current]: page === current })}
+							onClick={() => resolveClick(page)}
+						>
+							{page}
+						</div>
+					);
+				})}
+				{rightArrowShow && (
 					<div
-						key={page}
-						className={cs(styles.paginationItem, { [styles.current]: page === current })}
-						onClick={() => resolveClick(page)}
+						className={styles.paginationEscapeBox}
+						onClick={() => resolveClick(Math.min(maxPage, current + 2))}
 					>
-						{page}
+						<SIcon name="duble-arrow-down" className={cs(styles.paginationArrow, styles.right)} />
+						<span className={styles.paginationEscape}>•••</span>
 					</div>
-				);
-			})}
-			{rightArrowShow && (
-				<div
-					className={styles.paginationEscapeBox}
-					onClick={() => resolveClick(Math.min(maxPage, current + 2))}
-				>
-					<SIcon name="duble-arrow-down" className={cs(styles.paginationArrow, styles.right)} />
-					<span className={styles.paginationEscape}>•••</span>
-				</div>
-			)}
-			{suffixPages.map(page => {
-				return (
-					<div
-						key={page}
-						className={cs(styles.paginationItem, { [styles.current]: page === current })}
-						onClick={() => resolveClick(page)}
-					>
-						{page}
-					</div>
-				);
-			})}
+				)}
+				{suffixPages.map(page => {
+					return (
+						<div
+							key={page}
+							className={cs(styles.paginationItem, { [styles.current]: page === current })}
+							onClick={() => resolveClick(page)}
+						>
+							{page}
+						</div>
+					);
+				})}
+			</div>
+			<div
+				className={cs(styles.pageBtn, { [styles.pageBtnDisabled]: current === maxPage })}
+				onClick={() => current < maxPage && resolveClick(current + 1)}
+				title="下一页"
+			>
+				<SIcon className={styles.pageIconRight} name="arrow-right-line" />
+			</div>
 		</div>
 	);
 };
 
-export default Index;
+export default Pagination;

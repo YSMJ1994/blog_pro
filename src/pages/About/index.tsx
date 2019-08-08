@@ -1,7 +1,7 @@
 import React from 'react';
 
-const Index = () => {
-	return <div>about</div>;
+const About = ({ className }: { className?: string }) => {
+	return <div className={className}>about</div>;
 };
 
-export default Index;
+export default About;

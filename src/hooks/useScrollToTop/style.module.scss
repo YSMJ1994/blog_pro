@@ -1,0 +1,35 @@
+@import '~@/styles/variables.scss';
+
+.toTop {
+	background-color: #fff;
+	width: 2.5rem;
+	height: 2.5rem;
+	box-shadow: 0 1px 3px rgba(26, 26, 26, 0.1);
+	border-radius: 4px;
+	outline: none !important;
+	border: 0;
+	cursor: pointer;
+
+	&:hover {
+		color: $main-color;
+	}
+}
+.toTopIcon {
+	font-size: 1.5rem;
+	display: inline-block;
+	transform: rotate(180deg);
+	color: #8590a6;
+}
+
+@media (max-width: 1000px) {
+	.toTop {
+		width: 3rem;
+		height: 3rem;
+		box-shadow: 0 1px 3px rgba(26, 26, 26, 0.2);
+		padding: 0;
+
+		.toTopIcon {
+			font-size: 1.8rem;
+		}
+	}
+}

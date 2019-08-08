@@ -19,7 +19,7 @@ export const defaultInfo = {
 	received_events_url: '',
 	type: '',
 	site_admin: false,
-	name: '',
+	name: 'SoberZ',
 	company: null,
 	blog: '',
 	location: '',

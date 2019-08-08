@@ -4,6 +4,7 @@ import cs from 'classnames';
 
 interface LinkProps {
 	active?: boolean;
+	hoverShowUnderline?: boolean;
 	onClick?: MouseEventHandler<HTMLAnchorElement>;
 	className?: string;
 	style?: CSSProperties;
@@ -12,6 +13,7 @@ interface LinkProps {
 }
 const Index: React.FC<LinkProps> = ({
 	active = false,
+	hoverShowUnderline = false,
 	children,
 	to = 'javascript:',
 	title = '',
@@ -21,7 +23,10 @@ const Index: React.FC<LinkProps> = ({
 }) => {
 	return (
 		<a
-			className={cs(styles.customLink, className, { [styles.active]: active })}
+			className={cs(styles.customLink, className, {
+				[styles.active]: active,
+				[styles.activeHover]: hoverShowUnderline
+			})}
 			style={style}
 			href={to}
 			title={title}

@@ -1,2 +1,106 @@
+@import '~@/styles/variables.scss';
 .infoCard {
+	width: 100%;
+	height: 100%;
+	background-color: #fff;
+	padding: 1.2rem 0.6rem;
+	font-size: 0.875rem;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.075);
+	border-radius: 5px;
+
+	.author {
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-start;
+		align-items: center;
+
+		.avatar {
+			width: 60%;
+			border-radius: 100%;
+			border: 1px solid #eee;
+			padding: 2px;
+		}
+		.name {
+			font-size: 1.5rem;
+			font-weight: bold;
+		}
+		.bio {
+			color: #999;
+			line-height: 1.5rem;
+			font-size: 0.825rem;
+		}
+	}
+	.docInfo {
+		display: flex;
+		justify-content: center;
+		margin-top: 0.7rem;
+		.docInfoItem {
+			border-right: 1px solid #eee;
+			padding: 0 0.7rem;
+			text-align: center;
+			user-select: none;
+			cursor: pointer;
+
+			&:hover {
+				color: $main-color;
+
+				.docInfoItemLabel {
+					color: $main-color;
+				}
+			}
+			&:last-child {
+				border-right: 0;
+			}
+
+			.docInfoItemCount {
+				transition: color 0.15s;
+				font-size: 1rem;
+				font-weight: bold;
+			}
+			.docInfoItemLabel {
+				transition: color 0.15s;
+				color: #999;
+				font-size: 0.825rem;
+			}
+		}
+	}
+	.thirdPartInfo {
+		margin-top: 0.7rem;
+		display: flex;
+		flex-flow: row wrap;
+		align-content: flex-start;
+		padding: 0 1rem;
+
+		.thirdPartInfoItem {
+			width: 50%;
+			font-size: 0.825rem;
+			border-radius: 4px;
+			margin-top: 0.3rem;
+			text-decoration: none;
+			vertical-align: middle;
+			color: inherit;
+			padding: 0.3rem 0.5rem;
+			line-height: 1rem;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+			word-break: break-all;
+			overflow: hidden;
+
+			&:hover {
+				background-color: #eee;
+			}
+
+			.thirdPartInfoItemIcon {
+				font-size: 0.875rem;
+				margin-right: 0.4rem;
+				vertical-align: middle;
+				display: inline-block;
+			}
+
+			.thirdPartInfoItemLabel {
+				vertical-align: middle;
+				display: inline-block;
+			}
+		}
+	}
 }

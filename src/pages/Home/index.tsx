@@ -1,19 +1,31 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import DocCtx from '@/ctx/DocCtx';
+import cs from 'classnames';
+import DocCard from '@/components/DocCard';
+import styles from './style.module.scss';
+import usePagination from '@/hooks/usePagination';
 
-function Home() {
+function Home({ className }: { className?: string }) {
 	const docInfo = useContext(DocCtx);
 	console.log('docInfo', docInfo);
 	const { articles } = docInfo;
+	const [list, page, Pagination] = usePagination(articles, 2);
+	useEffect(() => {
+		window.scrollTo({ left: 0, top: 0, behavior: 'smooth' });
+	}, [page]);
 	return (
-		<div style={{ height: '1200px' }}>
-			<h1>home</h1>
+		<div className={cs(styles.home, className)}>
 			<ul>
-				{articles.map((doc, i) => {
-					const { title, content } = doc;
-					return <li key={title + `_${i}`} dangerouslySetInnerHTML={{ __html: content }} />;
+				{list.map((doc, i) => {
+					const { title } = doc;
+					return (
+						<li key={title + `_${i}`}>
+							<DocCard mini doc={doc} />
+						</li>
+					);
 				})}
 			</ul>
+			<Pagination />
 		</div>
 	);
 }

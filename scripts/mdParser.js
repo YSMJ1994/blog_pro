@@ -52,16 +52,19 @@ async function getInfo(content, filePath = '') {
 		createTime: birthtimeMs,
 		modifyTime: mtimeMs,
 		group: [],
+		review: '',
 		content: ''
 	};
-	const titleRegExp = /\[title]:#\((.+)\)/;
+	const titleRegExp = /\[title]:\s*#\((.+)\)/;
 	info.title = (content.match(titleRegExp) || [])[1] || '';
-	const tagRegExp = /\[tag]:#\((.+)\)/;
+	const tagRegExp = /\[tag]:\s*#\((.+)\)/;
 	let tag = (content.match(tagRegExp) || [])[1] || '';
 	info.tag = tag
 		.split(/[,，]/)
 		.filter(t => t)
 		.map(t => `${t}`.trim());
+	const reviewRegExp = /\[preview]:\s*#\(start\)((?:.|\r|\n)+)\[preview]:\s*#\(end\)/;
+	info.review = (content.match(reviewRegExp) || [])[1] || '';
 	let relativePath = filePath.slice(filePath.lastIndexOf('doc') + 3);
 	let groupArr = Array.from(relativePath.match(/[\/\\]+[^\/\\]+/g));
 	groupArr.pop();
@@ -73,8 +76,11 @@ async function parseMd(filePath, resultPath) {
 	const buffer = await fs.readFile(filePath);
 	const content = buffer.toString('utf8');
 	const info = await getInfo(content, filePath);
+	let review = MarkdownIt.render(info.review);
+	// info.review = review.replace(/[\n\r]/g, '');
+	info.review = review;
 	let html = MarkdownIt.render(content);
-	html = html.replace(/[\n\r]/g, '');
+	// html = html.replace(/[\n\r]/g, '');
 	info.content = html;
 	let moduleHtml = `export default ${JSON.stringify(info)}`;
 	resultPath = resultPath.replace(/\.md$/, outSuffix);

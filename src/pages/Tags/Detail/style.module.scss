@@ -1,0 +1,26 @@
+@import '~@/styles/variables.scss';
+.tagDetail {
+	//margin: 1rem 0;
+}
+.tagList {
+	.tagItem {
+		margin-bottom: 1rem;
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
+}
+
+.tagName {
+	color: $main-color;
+}
+.tagDesc {
+	font-size: 0.875rem;
+	margin-left: 0.5rem;
+}
+
+@media (max-width: 1000px) {
+	.title {
+		margin-left: 0.5rem;
+	}
+}

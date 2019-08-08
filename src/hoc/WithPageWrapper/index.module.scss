@@ -1,0 +1,20 @@
+.pageWrapper {
+	overflow: hidden;
+	min-height: calc(60vh);
+	animation: fade-in 0.3s ease-in-out;
+}
+
+@media screen and (max-device-width: 1000px) {
+	.pageWrapper {
+		min-height: unset;
+	}
+}
+
+@keyframes fade-in {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
