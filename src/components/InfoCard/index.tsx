@@ -37,13 +37,13 @@ const InfoCard: React.FC<RouteComponentProps> = ({ history }) => {
 					<div className={styles.docInfoItemCount}>{docCount}</div>
 					<div className={styles.docInfoItemLabel}>文章</div>
 				</div>
-				<div className={styles.docInfoItem} onClick={() => history.push('/group')}>
-					<div className={styles.docInfoItemCount}>{groupCount}</div>
-					<div className={styles.docInfoItemLabel}>分类</div>
-				</div>
 				<div className={styles.docInfoItem} onClick={() => history.push('/tags')}>
 					<div className={styles.docInfoItemCount}>{tagCount}</div>
 					<div className={styles.docInfoItemLabel}>标签</div>
+				</div>
+				<div className={styles.docInfoItem} onClick={() => history.push('/group')}>
+					<div className={styles.docInfoItemCount}>{groupCount}</div>
+					<div className={styles.docInfoItemLabel}>分类</div>
 				</div>
 			</div>
 			<div className={styles.thirdPartInfo}>

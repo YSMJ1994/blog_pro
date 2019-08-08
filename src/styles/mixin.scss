@@ -5,3 +5,11 @@
 	background-color: #fff;
 	padding: 1rem;
 }
+
+@mixin clearFix() {
+	&:after {
+		display: block;
+		clear: both;
+		content: ' ';
+	}
+}

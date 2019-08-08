@@ -1,4 +1,4 @@
-import React, { FC, PropsWithChildren, useContext, useState, MouseEvent } from 'react';
+import React, { FC, PropsWithChildren, useContext, useState, useEffect, MouseEvent } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 import cs from 'classnames';
 import styles from './style.module.scss';
@@ -43,16 +43,30 @@ const ArticleItem: FC<MdDoc & { onClick?: (e: MouseEvent<HTMLDivElement>) => voi
 	);
 };
 
-const GroupItem: FC<Group & { open?: boolean; goArticle?: (title: string) => void }> = ({
-	name,
-	articles = [],
-	groups = [],
-	open = false,
-	goArticle
-}) => {
-	const [itemOpen, setItemOpen] = useState(open);
+const GroupItem: FC<
+	Group & {
+		open?: boolean;
+		goArticle?: (id: number) => void;
+		paramsName?: string;
+		onChildOpen?: (name: string) => void;
+	}
+> = ({ name, articles = [], groups = [], open = false, goArticle, paramsName, onChildOpen }) => {
+	// 若默认url参数name和当前分组名称相同或默认为展开则当前分组展开
+	const [itemOpen, setItemOpen] = useState(name === paramsName || open);
 	const hasChildrenGroups = Boolean(groups.length);
 	const hasArticles = Boolean(articles.length);
+	// 监听子分组open 事件，子分组展开则当前分组也展开
+	const listenChildOpen = (name: string) => {
+		if (!itemOpen) {
+			setItemOpen(true);
+		}
+	};
+	// 若当前分组展开则通知父组件
+	useEffect(() => {
+		if (itemOpen) {
+			onChildOpen && onChildOpen(name);
+		}
+	}, [itemOpen]);
 	return (
 		<div className={styles.groupItem}>
 			<TreeRow open={itemOpen} onClick={() => setItemOpen(!itemOpen)}>
@@ -63,7 +77,13 @@ const GroupItem: FC<Group & { open?: boolean; goArticle?: (title: string) => voi
 					groups.map(childGroup => {
 						return (
 							<li key={childGroup.name}>
-								<GroupItem {...childGroup} open={open} goArticle={goArticle} />
+								<GroupItem
+									{...childGroup}
+									open={open}
+									goArticle={goArticle}
+									onChildOpen={listenChildOpen}
+									paramsName={paramsName}
+								/>
 							</li>
 						);
 					})}
@@ -71,7 +91,7 @@ const GroupItem: FC<Group & { open?: boolean; goArticle?: (title: string) => voi
 					articles.map(article => {
 						return (
 							<li key={article.title}>
-								<ArticleItem {...article} onClick={() => goArticle && goArticle(article.title)} />
+								<ArticleItem {...article} onClick={() => goArticle && goArticle(article.id)} />
 							</li>
 						);
 					})}
@@ -80,16 +100,22 @@ const GroupItem: FC<Group & { open?: boolean; goArticle?: (title: string) => voi
 	);
 };
 
-const GroupPage: FC<{ className?: string } & RouteComponentProps<any>> = ({ className, history }) => {
+const GroupPage: FC<{ className?: string } & RouteComponentProps<{ name?: string }>> = ({
+	className,
+	history,
+	match: {
+		params: { name }
+	}
+}) => {
 	const { group: groups } = useContext(DocCtx);
-	const goArticle = (title: string) => {
-		history.push(`/article/${title}`);
+	const goArticle = (id: number) => {
+		history.push(`/article/${id}`);
 	};
 	return (
 		<div className={cs(styles.groupWrap, className)}>
 			<PageTitle title="分类" sub={`共计${groups.length}个分类`} />
 			{groups.map(group => {
-				return <GroupItem key={group.name} {...group} goArticle={goArticle} />;
+				return <GroupItem key={group.name} {...group} goArticle={goArticle} paramsName={name} />;
 			})}
 		</div>
 	);

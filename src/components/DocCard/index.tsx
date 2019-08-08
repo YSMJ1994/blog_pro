@@ -5,14 +5,16 @@ import { formatTime } from '@/utils';
 import { MdDoc } from '@/ctx/DocCtx';
 import Title from '@/components/Link';
 import cs from 'classnames';
+import { PropsWithChildren } from '~/node_modules/@types/react';
 
 interface DocCardProps {
 	doc: MdDoc;
 	mini?: boolean;
-	tagClick?: (tag: string) => void;
-	groupClick?: (group: string) => void;
 }
-const DocCard: FC<DocCardProps & RouteComponentProps<any>> = ({ mini = false, doc, tagClick, groupClick, history }) => {
+
+type ResolveProps = PropsWithChildren<DocCardProps & RouteComponentProps<any>>;
+
+const DocCard: FC<ResolveProps> = ({ mini = false, doc, history, children }) => {
 	const { tag: tags = [], group: groups = [], createTime, modifyTime, title = '', review = '', content = '' } = doc;
 	const createTimeStr = formatTime(createTime);
 	const modifyTimeStr = formatTime(modifyTime);
@@ -22,7 +24,7 @@ const DocCard: FC<DocCardProps & RouteComponentProps<any>> = ({ mini = false, do
 				<Title
 					className={styles.headerLabel}
 					hoverShowUnderline={mini}
-					onClick={() => history.push(`/article/${doc.title}`)}
+					onClick={() => history.push(`/article/${doc.id}`)}
 				>
 					{title}
 				</Title>
@@ -48,7 +50,7 @@ const DocCard: FC<DocCardProps & RouteComponentProps<any>> = ({ mini = false, do
 										<button
 											key={tag}
 											className={styles.tag}
-											onClick={() => tagClick && tagClick(tag)}
+											onClick={() => history.push(`/tags/${tag}`)}
 										>
 											{tag}
 										</button>
@@ -66,7 +68,7 @@ const DocCard: FC<DocCardProps & RouteComponentProps<any>> = ({ mini = false, do
 										<span
 											key={group}
 											className={styles.group}
-											onClick={() => groupClick && groupClick(group)}
+											onClick={() => history.push(`/group/${group}`)}
 										>
 											{group}
 										</span>
@@ -77,8 +79,9 @@ const DocCard: FC<DocCardProps & RouteComponentProps<any>> = ({ mini = false, do
 					)}
 				</div>
 			</div>
+			{children && <div className={styles.appendChildren}>{children}</div>}
 		</div>
 	);
 };
 
-export default withRouter<DocCardProps & RouteComponentProps<any>>(DocCard);
+export default withRouter<ResolveProps>(DocCard);

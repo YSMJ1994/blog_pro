@@ -21,7 +21,7 @@
 	.header {
 		overflow: hidden;
 		margin-top: 1.5rem;
-		padding: 0 2rem;
+		padding: 0 1.5rem;
 
 		.headerLabel {
 			font-size: $h1Size;
@@ -30,7 +30,7 @@
 			font-weight: 500;
 		}
 		.headerDesc {
-			margin: 0;
+			margin-top: 1rem;
 			font-size: 0.875rem;
 		}
 		.headerDescItem {
@@ -46,7 +46,7 @@
 		}
 	}
 	.body {
-		padding: 2rem 2.5rem;
+		padding: 1rem 2.5rem;
 
 		h1 {
 			font-size: $h1Size;
@@ -99,8 +99,70 @@
 		}
 	}
 	.footer {
-	}
+		padding: 0 1.5rem;
+		.footerContent {
+			display: flex;
+			flex-flow: row wrap;
+			justify-content: space-between;
+			align-content: flex-start;
 
+			.footerItem {
+			}
+			.footerItemLabel {
+				vertical-align: middle;
+
+				&:after {
+					content: ': ';
+				}
+			}
+			.footerItemContent {
+				vertical-align: middle;
+			}
+			.tag {
+				display: inline-block;
+				border: 1px solid #e8eaec;
+				border-radius: 2px;
+				margin: 0 0.3em;
+				font-size: 0.825rem;
+				height: 1.75rem;
+				padding: 0 1rem;
+				cursor: pointer;
+				user-select: none;
+				transition: all 0.15s;
+				text-align: center;
+				-webkit-writing-mode: horizontal-tb;
+				text-rendering: auto;
+
+				&:hover {
+					color: $main-color;
+					border-color: $main-color;
+				}
+			}
+			@media (max-width: 1000px) {
+				.tag {
+					height: 2rem;
+				}
+			}
+			.group {
+				font-size: 0.825rem;
+				display: inline-block;
+				border-bottom: 1px solid #e8eaec;
+				margin: 0 0.3rem;
+				cursor: pointer;
+				user-select: none;
+				transition: all 0.15s;
+
+				&:hover {
+					color: #000;
+					border-color: #555;
+				}
+			}
+		}
+	}
+	.appendChildren {
+		padding: 0 1.5rem;
+		margin-top: 1.5rem;
+	}
 	&.mini {
 		padding: 1rem 1.5rem;
 		$h1Size: 1.5rem;
@@ -158,64 +220,28 @@
 			}
 		}
 		.footer {
-			.footerContent {
-				display: flex;
-				flex-flow: row wrap;
-				justify-content: space-between;
-				align-content: flex-start;
+		}
+	}
+}
 
-				.footerItem {
-				}
-				.footerItemLabel {
-					vertical-align: middle;
+@media (max-width: 1000px) {
+	.docCard {
+		padding: 1rem 1.5rem;
+		.header {
+			padding: 0;
+		}
+		.body {
+			padding: 0;
 
-					&:after {
-						content: ': ';
-					}
-				}
-				.footerItemContent {
-					vertical-align: middle;
-				}
-				.tag {
-					display: inline-block;
-					border: 1px solid #e8eaec;
-					border-radius: 2px;
-					margin: 0 0.3em;
-					font-size: 0.825rem;
-					height: 1.75rem;
-					padding: 0 1rem;
-					cursor: pointer;
-					user-select: none;
-					transition: all 0.15s;
-					text-align: center;
-					-webkit-writing-mode: horizontal-tb;
-					text-rendering: auto;
-
-					&:hover {
-						color: $main-color;
-						border-color: $main-color;
-					}
-				}
-				@media (max-width: 1000px) {
-					.tag {
-						height: 2rem;
-					}
-				}
-				.group {
-					font-size: 0.825rem;
-					display: inline-block;
-					border-bottom: 1px solid #e8eaec;
-					margin: 0 0.3rem;
-					cursor: pointer;
-					user-select: none;
-					transition: all 0.15s;
-
-					&:hover {
-						color: #000;
-						border-color: #555;
-					}
-				}
+			pre {
+				overflow: auto;
 			}
+			img {
+				max-width: 100%;
+			}
+		}
+		.footer {
+			padding: 0;
 		}
 	}
 }

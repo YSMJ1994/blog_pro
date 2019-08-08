@@ -3,7 +3,7 @@ import cs from 'classnames';
 import styles from './style.module.scss';
 import useTimeout from '@/utils/useTimeout';
 
-interface WrapperProps {
+export interface AnimateShowWrapperProps {
 	className?: string;
 	style?: CSSProperties;
 	direction?: 'up' | 'down' | 'left' | 'right';
@@ -12,7 +12,7 @@ interface WrapperProps {
 }
 const WithAnimateShow = <P extends { className?: string; style?: CSSProperties }>(
 	WrappedComp: FC<P> | ComponentClass<P>
-): FC<P & WrapperProps> => (props: P & WrapperProps) => {
+): FC<P & AnimateShowWrapperProps> => (props: P & AnimateShowWrapperProps) => {
 	const { className, style, direction = 'down', delay = 0, distance = 2 } = props;
 	let xOffset, yOffset;
 	const calcDistance = typeof distance === 'number' ? `${distance}rem` : distance;

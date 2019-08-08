@@ -7,11 +7,11 @@ import usePagination from '@/hooks/usePagination';
 
 function Home({ className }: { className?: string }) {
 	const docInfo = useContext(DocCtx);
-	console.log('docInfo', docInfo);
+	// console.log('docInfo', docInfo);
 	const { articles } = docInfo;
 	const [list, page, Pagination] = usePagination(articles, 2);
 	useEffect(() => {
-		window.scrollTo({ left: 0, top: 0, behavior: 'smooth' });
+		window.scrollTo({ left: 0, top: 0 });
 	}, [page]);
 	return (
 		<div className={cs(styles.home, className)}>

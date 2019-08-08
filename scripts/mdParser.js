@@ -47,6 +47,7 @@ async function cleanDir(dirPath) {
 async function getInfo(content, filePath = '') {
 	const { birthtimeMs, mtimeMs } = await fs.stat(filePath);
 	const info = {
+		id: parseInt(birthtimeMs),
 		title: '',
 		tag: [],
 		createTime: birthtimeMs,
