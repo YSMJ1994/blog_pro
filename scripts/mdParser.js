@@ -57,7 +57,9 @@ async function getInfo(content, filePath = '') {
 		content: ''
 	};
 	const titleRegExp = /\[title]:\s*#\((.+)\)/;
-	info.title = (content.match(titleRegExp) || [])[1] || '';
+	// 文件名（无后缀）
+	const filename = filePath.match(/\/(.+).md$/)[1];
+	info.title = (content.match(titleRegExp) || [])[1] || filename;
 	const tagRegExp = /\[tag]:\s*#\((.+)\)/;
 	let tag = (content.match(tagRegExp) || [])[1] || '';
 	info.tag = tag
