@@ -27,12 +27,18 @@
 	}
 
 	&.btnDisabled {
+		opacity: 1;
 		color: rgba(0, 0, 0, 0.25);
 		background-color: #f5f5f5;
 		border-color: #d9d9d9;
 		cursor: not-allowed;
+		&:before {
+			border-top-color: #d9d9d9 !important;
+		}
 	}
 	&.btnLoading {
+		opacity: 0.6;
+		cursor: auto;
 		&:before {
 			content: ' ';
 			display: inline-block;
@@ -56,10 +62,49 @@
 	&.btn--normal {
 	}
 	&.btn--success {
+		border-color: $success-color;
+		color: $success-color;
+
+		&.btnFill {
+			background-color: $success-color;
+			color: #fff;
+			&.btnLoading:before {
+				border-top-color: #fff;
+			}
+		}
+		&.btnLoading:before {
+			border-top-color: $success-color;
+		}
 	}
 	&.btn--warn {
+		border-color: $warning-color;
+		color: $warning-color;
+
+		&.btnFill {
+			background-color: $warning-color;
+			color: #fff;
+			&.btnLoading:before {
+				border-top-color: #fff;
+			}
+		}
+		&.btnLoading:before {
+			border-top-color: $warning-color;
+		}
 	}
 	&.btn--error {
+		border-color: $error-color;
+		color: $error-color;
+
+		&.btnFill {
+			background-color: $error-color;
+			color: #fff;
+			&.btnLoading:before {
+				border-top-color: #fff;
+			}
+		}
+		&.btnLoading:before {
+			border-top-color: $error-color;
+		}
 	}
 }
 

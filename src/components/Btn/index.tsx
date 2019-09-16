@@ -29,7 +29,7 @@ const Btn: FC<PropsWithChildren<BtnProps>> = ({
 				[styles.btnFill]: fill
 			})}
 			style={style}
-			onClick={onClick}
+			onClick={e => !loading && !disabled && onClick && onClick(e)}
 		>
 			{children}
 		</button>
