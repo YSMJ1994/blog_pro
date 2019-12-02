@@ -1,15 +1,23 @@
 import React, { FC } from 'react';
 import styles from './style.module.scss';
 import cs from 'classnames';
+import SIcon from 'components/SIcon';
 
-const PageTitle: FC<{ className?: string; title: string | React.ReactElement; sub?: string | React.ReactElement }> = ({
-	className,
-	title,
-	sub
-}) => {
+interface PageTitleProps {
+	className?: string;
+	title: string | React.ReactElement;
+	icon?: string;
+	sub?: string | React.ReactElement;
+}
+
+const PageTitle: FC<PageTitleProps> = ({ className, title, sub, icon }) => {
 	return (
 		<div className={cs(styles.pageTitle, className)}>
-			<span>{title}</span>
+			<div className={styles.titleBox}>
+				{!!icon && <SIcon className={styles.titleIcon} name={icon} />}
+				<span className={styles.title}>{title}</span>
+				<div className={styles.separator} />
+			</div>
 			<span className={styles.sub}>{sub}</span>
 		</div>
 	);

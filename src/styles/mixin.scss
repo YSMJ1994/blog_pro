@@ -13,3 +13,14 @@
 		content: ' ';
 	}
 }
+@mixin withRotate($transform, $duration: 1s, $delay: 0s, $count: infinite, $direction: normal) {
+	animation: rotateKeyframes $duration linear $delay $count $direction;
+	@keyframes rotateKeyframes {
+		from {
+			transform: rotate(0deg) $transform;
+		}
+		to {
+			transform: rotate(360deg) $transform;
+		}
+	}
+}

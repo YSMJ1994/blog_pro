@@ -15,6 +15,7 @@ const Timeline = WithPageWrapper(asyncComponent(() => import(/* webpackChunkName
 const Tags = WithPageWrapper(asyncComponent(() => import(/* webpackChunkName: "tags" */ './Tags')));
 const Group = WithPageWrapper(asyncComponent(() => import(/* webpackChunkName: "group" */ './Group')));
 const Article = WithPageWrapper(asyncComponent(() => import(/* webpackChunkName: "article" */ './Article')));
+const Test = WithPageWrapper(asyncComponent(() => import(/* webpackChunkName: "test" */ './Test')));
 const AsideWrapped = WithAnimateShow(Aside);
 import InfoCtx from '@/ctx/InfoCrx';
 import defaultAvatar from '@/assets/img/avatar.jpeg';
@@ -30,7 +31,7 @@ const AnimateMainWrap = WithAnimateShow<ResolveMainWrapProps>(({ className, styl
 	useEffect(() => {
 		return history.listen((location, action) => {
 			if (action === 'PUSH') {
-				window.scrollTo({ left: 0, top: 0, behavior: 'smooth' });
+				window.scrollTo({ left: 0, top: 0, behavior: 'auto' });
 			}
 		});
 	}, []);
@@ -43,6 +44,7 @@ const AnimateMainWrap = WithAnimateShow<ResolveMainWrapProps>(({ className, styl
 				<Route path="/group/:name?" component={Group} />
 				<Route path="/tags" component={Tags} />
 				<Route path="/article/:id" component={Article} />
+				<Route path="/test" component={Test} />
 				<Redirect to="/" />
 			</Switch>
 		</div>

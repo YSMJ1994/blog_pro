@@ -2,63 +2,73 @@
 /// <reference types="react" />
 /// <reference types="react-dom" />
 
-declare namespace NodeJS {
-	interface ProcessEnv {
-		readonly NODE_ENV: 'development' | 'production' | 'test';
-		readonly PUBLIC_URL: string;
+import React, { FC, ComponentClass } from 'react';
+
+declare global {
+	namespace NodeJS {
+		interface ProcessEnv {
+			readonly NODE_ENV: 'development' | 'production' | 'test';
+			readonly PUBLIC_URL: string;
+			readonly BASE_API: string;
+			readonly ICON_URL: string;
+			readonly GITHUB_TOKEN: string;
+			readonly PROXY_PATH: string;
+		}
 	}
-}
 
-declare module '*.bmp' {
-	const src: string;
-	export default src;
-}
+	module '*.bmp' {
+		const src: string;
+		export default src;
+	}
 
-declare module '*.gif' {
-	const src: string;
-	export default src;
-}
+	module '*.gif' {
+		const src: string;
+		export default src;
+	}
 
-declare module '*.jpg' {
-	const src: string;
-	export default src;
-}
+	module '*.jpg' {
+		const src: string;
+		export default src;
+	}
 
-declare module '*.jpeg' {
-	const src: string;
-	export default src;
-}
+	module '*.jpeg' {
+		const src: string;
+		export default src;
+	}
 
-declare module '*.png' {
-	const src: string;
-	export default src;
-}
+	module '*.png' {
+		const src: string;
+		export default src;
+	}
 
-declare module '*.webp' {
-	const src: string;
-	export default src;
-}
+	module '*.webp' {
+		const src: string;
+		export default src;
+	}
 
-declare module '*.svg' {
-	import * as React from 'react';
+	module '*.svg' {
+		import * as React from 'react';
 
-	export const ReactComponent: React.FunctionComponent<React.SVGProps<SVGSVGElement>>;
+		export const ReactComponent: React.FunctionComponent<React.SVGProps<SVGSVGElement>>;
 
-	const src: string;
-	export default src;
-}
+		const src: string;
+		export default src;
+	}
 
-declare module '*.module.css' {
-	const classes: { [key: string]: string };
-	export default classes;
-}
+	module '*.module.css' {
+		const classes: { [key: string]: string };
+		export default classes;
+	}
 
-declare module '*.module.scss' {
-	const classes: { [key: string]: string };
-	export default classes;
-}
+	module '*.module.scss' {
+		const classes: { [key: string]: string };
+		export default classes;
+	}
 
-declare module '*.module.sass' {
-	const classes: { [key: string]: string };
-	export default classes;
+	module '*.module.sass' {
+		const classes: { [key: string]: string };
+		export default classes;
+	}
+
+	type RC<P, S = {}> = FC<P> | ComponentClass<P, S>;
 }

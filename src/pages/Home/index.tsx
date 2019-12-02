@@ -5,6 +5,8 @@ import DocCard from '@/components/DocCard';
 import styles from './style.module.scss';
 import usePagination from '@/hooks/usePagination';
 
+export const a = 1;
+
 function Home({ className }: { className?: string }) {
 	const docInfo = useContext(DocCtx);
 	// console.log('docInfo', docInfo);

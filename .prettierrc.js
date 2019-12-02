@@ -46,6 +46,14 @@ module.exports = {
 				tabWidth: 2,
 				useTabs: false
 			}
+		},
+		{
+			files: ['*.md'],
+			options: {
+				parser: 'markdown',
+				tabWidth: 4,
+				useTabs: false
+			}
 		}
 	]
 };

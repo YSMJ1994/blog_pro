@@ -4,7 +4,11 @@
   "private": true,
   "scripts": {
     "start": "node scripts/start.js",
-    "build": "node scripts/build.js"
+    "build": "node scripts/build.js",
+    "publish-home": "scp -r ./build/* soberz@home.soberz.cn:/home/soberz/workspace/static/blog",
+    "publish-tencent": "scp -r ./build/* sober@soberz.cn:/home/sober/staticManager/blog",
+    "build-publish-home": "yarn run build && yarn run publish-home",
+    "build-publish-tencent": "yarn run build && yarn run publish-tencent"
   },
   "husky": {
     "hooks": {
@@ -38,6 +42,7 @@
     "css-loader": "2.1.1",
     "dotenv": "6.2.0",
     "dotenv-expand": "4.2.0",
+    "dts-gen": "^0.5.7",
     "file-loader": "3.0.1",
     "fs-extra": "^7.0.1",
     "highlight.js": "^9.15.9",
@@ -53,6 +58,7 @@
     "lint-staged": "^8.1.5",
     "markdown-it": "^8.4.2",
     "mini-css-extract-plugin": "0.5.0",
+    "moment": "^2.24.0",
     "node-sass": "^4.12.0",
     "optimize-css-assets-webpack-plugin": "5.0.1",
     "pnp-webpack-plugin": "1.2.1",
@@ -71,6 +77,7 @@
     "resolve": "1.10.0",
     "sass-loader": "7.1.0",
     "semver": "6.0.0",
+    "sober_components": "^0.1.6",
     "style-loader": "0.23.1",
     "terser-webpack-plugin": "1.2.3",
     "typescript": "3.4.5",

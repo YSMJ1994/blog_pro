@@ -1,0 +1,135 @@
+{
+  "id": "1169897",
+  "name": "soberz_website",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "SoberZ的个人站点",
+  "glyphs": [
+    {
+      "icon_id": "128976",
+      "name": "github",
+      "font_class": "github",
+      "unicode": "e7ab",
+      "unicode_decimal": 59307
+    },
+    {
+      "icon_id": "281396",
+      "name": "double-arrow-down",
+      "font_class": "duble-arrow-down",
+      "unicode": "e6bd",
+      "unicode_decimal": 59069
+    },
+    {
+      "icon_id": "433840",
+      "name": "email",
+      "font_class": "email",
+      "unicode": "e638",
+      "unicode_decimal": 58936
+    },
+    {
+      "icon_id": "602165",
+      "name": "arrow down",
+      "font_class": "arrow-down-little",
+      "unicode": "e623",
+      "unicode_decimal": 58915
+    },
+    {
+      "icon_id": "1017353",
+      "name": "arrows down line",
+      "font_class": "arrow-down-line",
+      "unicode": "e68b",
+      "unicode_decimal": 59019
+    },
+    {
+      "icon_id": "1190940",
+      "name": "timeline",
+      "font_class": "timeline",
+      "unicode": "e685",
+      "unicode_decimal": 59013
+    },
+    {
+      "icon_id": "1393473",
+      "name": "article",
+      "font_class": "article",
+      "unicode": "e6a6",
+      "unicode_decimal": 59046
+    },
+    {
+      "icon_id": "1718507",
+      "name": "Arrow",
+      "font_class": "arrow-right-line",
+      "unicode": "e6bc",
+      "unicode_decimal": 59068
+    },
+    {
+      "icon_id": "1842121",
+      "name": "menu",
+      "font_class": "menu",
+      "unicode": "e600",
+      "unicode_decimal": 58880
+    },
+    {
+      "icon_id": "1899065",
+      "name": "tag",
+      "font_class": "tag",
+      "unicode": "e72f",
+      "unicode_decimal": 59183
+    },
+    {
+      "icon_id": "2515702",
+      "name": "about",
+      "font_class": "about",
+      "unicode": "e7a6",
+      "unicode_decimal": 59302
+    },
+    {
+      "icon_id": "5330504",
+      "name": "文件夹",
+      "font_class": "dir-close",
+      "unicode": "e79c",
+      "unicode_decimal": 59292
+    },
+    {
+      "icon_id": "5634777",
+      "name": "npm",
+      "font_class": "npm",
+      "unicode": "f1fe",
+      "unicode_decimal": 61950
+    },
+    {
+      "icon_id": "7206007",
+      "name": "Arrow down",
+      "font_class": "arrow-down-hollow",
+      "unicode": "e62e",
+      "unicode_decimal": 58926
+    },
+    {
+      "icon_id": "8765245",
+      "name": "文件夹-2",
+      "font_class": "dir-open",
+      "unicode": "e63a",
+      "unicode_decimal": 58938
+    },
+    {
+      "icon_id": "9566817",
+      "name": "article-line",
+      "font_class": "article-line",
+      "unicode": "e8b9",
+      "unicode_decimal": 59577
+    },
+    {
+      "icon_id": "9758626",
+      "name": "down arrow",
+      "font_class": "arrow-down",
+      "unicode": "e610",
+      "unicode_decimal": 58896
+    },
+    {
+      "icon_id": "11982745",
+      "name": "List, menu, options",
+      "font_class": "list",
+      "unicode": "e9dd",
+      "unicode_decimal": 59869
+    }
+  ]
+}

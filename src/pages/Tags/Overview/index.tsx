@@ -10,7 +10,7 @@ const Overview: FC<RouteComponentProps<any>> = ({ history, match }) => {
 	const count = tags.length;
 	return (
 		<div className={styles.tagOverview}>
-			<PageTitle className={styles.title} title="标签" sub={`共计${count}个标签`} />
+			<PageTitle className={styles.title} title="标签" icon="tag" sub={`共计${count}个标签`} />
 			<div className={styles.tagList}>
 				{tags.map(tag => {
 					const { name, size } = tag;
@@ -22,7 +22,7 @@ const Overview: FC<RouteComponentProps<any>> = ({ history, match }) => {
 								history.push(`${match.path}/${name}`);
 							}}
 						>
-							{name}({size})
+							{name} ( {size} )
 						</button>
 					);
 				})}

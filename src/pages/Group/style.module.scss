@@ -34,18 +34,19 @@
 	.rowIcon {
 		display: inline-block;
 		width: 1.2rem;
-		//margin-right: .3rem;
+		margin-right: 0.1em;
 	}
 	.rowLabel {
 	}
 }
 .treeRow {
 	cursor: pointer;
+	line-height: 2.5;
+	font-size: 1rem;
 
 	&:hover {
 		color: $main-color;
 	}
-	line-height: 2;
 	.treeRowIcon {
 		display: inline-block;
 		width: 1.2rem;

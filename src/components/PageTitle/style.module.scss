@@ -2,6 +2,30 @@
 	font-size: 1.5rem;
 	margin: 1rem 0;
 
+	.titleBox {
+		display: flex;
+		align-items: center;
+		justify-content: flex-start;
+		margin-bottom: 0.5rem;
+
+		.titleIcon {
+			margin-right: 0.5rem;
+		}
+		.title {
+			color: rgb(22, 27, 61);
+			font-family: Noto Sans, sans-serif;
+			font-size: 1em;
+			font-weight: 700;
+			margin-right: 0.5rem;
+			text-transform: uppercase;
+			letter-spacing: 0.2em;
+		}
+		.separator {
+			height: 1px;
+			background-color: #dcdfe7;
+			flex: 1;
+		}
+	}
 	.sub {
 		//margin-top: .5rem;
 		display: block;

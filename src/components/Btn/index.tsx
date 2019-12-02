@@ -21,6 +21,7 @@ const Btn: FC<PropsWithChildren<BtnProps>> = ({
 	children,
 	onClick
 }) => {
+	console.log('children', children);
 	return (
 		<button
 			className={cs(styles.btn, styles[`btn--${type}`], className, {

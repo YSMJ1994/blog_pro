@@ -15,8 +15,19 @@ interface MenuItemProps extends RouteComponentProps {
 	onClick?: (e?: MouseEvent) => void;
 }
 const MenuItem = withRouter<MenuItemProps>(({ label, link, cross = false, history, location, onClick }) => {
+	const [active, setActive] = useState(false);
 	const { pathname } = location;
-	const active = link === '/' ? pathname === link : pathname.startsWith(link);
+	useEffect(() => {
+		// 去文章详情页面不改变导航栏激活状态
+		if (/^\/article/.test(pathname)) {
+			return;
+		}
+		if (link === '/') {
+			setActive(pathname === link);
+		} else {
+			setActive(pathname.startsWith(link));
+		}
+	}, [pathname]);
 	return (
 		<CustomLink
 			active={active}

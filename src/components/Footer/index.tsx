@@ -1,18 +1,17 @@
-import React, { useContext } from 'react';
+import React, { useContext, FC } from 'react';
 import styles from './style.module.scss';
 import moment from 'moment';
 import SIcon from '@/components/SIcon';
 import InfoCrx from '@/ctx/InfoCrx';
 
-const Footer = () => {
-	const year = moment().year();
-	console.log('year', year);
+const Footer: FC = () => {
+	// const year = moment().year();
+	// console.log('year', year);
 	const { name } = useContext(InfoCrx);
 	return (
 		<footer className={styles.footer}>
 			<div>
-				&copy;
-				{year}
+				&copy; 2019
 				<SIcon name="github" className={styles.userIcon} />
 				{name}
 			</div>
