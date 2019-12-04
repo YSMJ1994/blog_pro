@@ -7,8 +7,8 @@
     "build": "node scripts/build.js",
     "publish2home": "scp -r ./build/* soberz@home.soberz.cn:/home/soberz/workspace/static/blog",
     "publish2tencent": "scp -r ./build/* sober@soberz.cn:/home/sober/staticManager/blog",
-    "build&publish2home": "yarn run build && yarn run publish-home",
-    "build&publish2tencent": "yarn run build && yarn run publish-tencent"
+    "build&publish2home": "yarn run build && yarn run publish2home",
+    "build&publish2tencent": "yarn run build && yarn run publish2tencent"
   },
   "husky": {
     "hooks": {
