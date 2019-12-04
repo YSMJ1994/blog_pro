@@ -38,7 +38,8 @@
 			}
 			.navigatorBody {
 				padding: 1rem 1.5rem;
-				flex: auto;
+				flex: 1;
+				overflow: hidden;
 
 				.hint {
 					color: #9daab6;
@@ -80,6 +81,9 @@
 			padding: 0.5rem 0;
 			.navigator {
 				width: calc(50% - 0.3rem);
+				.navigatorBody {
+					padding: 1rem;
+				}
 			}
 		}
 	}
