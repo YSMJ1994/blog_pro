@@ -1,7 +1,5 @@
 import fetch from '@/utils/fetch';
 
-const github_token = 'c5f7c5bb6157bc61845ebe4c37fba09ac1a1425e';
-
 export const defaultInfo = {
 	login: '',
 	id: 0,
@@ -53,7 +51,7 @@ export type InfoType = typeof defaultInfo;
 export function getInfo() {
 	return fetch.get<any, InfoType>('https://api.github.com/user', {
 		params: {
-			access_token: github_token
+			access_token: process.env.GITHUB_TOKEN
 		}
 	});
 }
