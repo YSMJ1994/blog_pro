@@ -58,6 +58,7 @@ async function getInfo(content, filePath = '') {
 	};
 	const titleRegExp = /\[title]:\s*#\((.+)\)/;
 	// 文件名（无后缀）
+	console.log('filePath', filePath);
 	const filename = filePath.match(/\/(.+).md$/)[1];
 	info.title = (content.match(titleRegExp) || [])[1] || filename;
 	const tagRegExp = /\[tag]:\s*#\((.+)\)/;
@@ -76,6 +77,9 @@ async function getInfo(content, filePath = '') {
 }
 
 async function parseMd(filePath, resultPath) {
+	if (!/\.md$/.test(filePath)) {
+		return;
+	}
 	const buffer = await fs.readFile(filePath);
 	const content = buffer.toString('utf8');
 	const info = await getInfo(content, filePath);
@@ -94,8 +98,8 @@ async function parseMd(filePath, resultPath) {
 }
 
 async function parseDir(dirPath, resultPath) {
-	const flieNames = await fs.readdir(dirPath);
-	await asyncForEach(flieNames, async fileName => {
+	const children = await fs.readdir(dirPath);
+	await asyncForEach(children, async fileName => {
 		const filePath = dirPath + '/' + fileName;
 		const resPath = resultPath + '/' + fileName;
 		const stat = await fs.stat(filePath);

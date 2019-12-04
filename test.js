@@ -1,3 +1,4 @@
+/*
 (function () {
 	
 	const oldScripts = document.querySelectorAll('script');
@@ -53,3 +54,4 @@
 	tt.src = 'http://127.0.0.1:8080/test.js';
 	document.body.appendChild(tt);
 })()
+*/

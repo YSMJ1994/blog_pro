@@ -48,6 +48,18 @@
 	.body {
 		padding: 1rem 2.5rem;
 
+		a {
+			color: #00b3b3;
+			text-decoration: none;
+
+			&[href] {
+				cursor: pointer;
+
+				&:hover {
+					text-decoration: underline;
+				}
+			}
+		}
 		h1 {
 			font-size: $h1Size;
 		}

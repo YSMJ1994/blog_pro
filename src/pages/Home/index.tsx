@@ -11,7 +11,7 @@ function Home({ className }: { className?: string }) {
 	const docInfo = useContext(DocCtx);
 	// console.log('docInfo', docInfo);
 	const { articles } = docInfo;
-	const [list, page, Pagination] = usePagination(articles, 2);
+	const [list, page, Pagination] = usePagination(articles, 5);
 	useEffect(() => {
 		window.scrollTo({ left: 0, top: 0 });
 	}, [page]);
