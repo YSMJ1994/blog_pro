@@ -11,7 +11,7 @@ type BtnProps = {
 	style?: CSSProperties;
 	onClick?: EventHandler<MouseEvent<HTMLButtonElement>>;
 };
-const Btn: FC<PropsWithChildren<BtnProps>> = ({
+const Btn: FC<BtnProps> = ({
 	className,
 	style,
 	disabled = false,

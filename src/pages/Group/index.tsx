@@ -17,9 +17,12 @@ const Row: FC<{ label: string; icon?: string }> = ({ label, icon }) => {
 	);
 };
 
-const TreeRow: FC<
-	PropsWithChildren<{ open?: boolean; isLeaf?: boolean; onClick?: (e: MouseEvent<HTMLDivElement>) => void }>
-> = ({ open = false, isLeaf = false, onClick, children }) => {
+const TreeRow: FC<{ open?: boolean; isLeaf?: boolean; onClick?: (e: MouseEvent<HTMLDivElement>) => void }> = ({
+	open = false,
+	isLeaf = false,
+	onClick,
+	children
+}) => {
 	return (
 		<div className={styles.treeRow} onClick={onClick}>
 			<span className={styles.treeRowIcon}>
@@ -55,7 +58,8 @@ const GroupItem: FC<
 	}
 > = ({ name, articles = [], groups = [], open = false, goArticle, paramsName, onChildOpen, animated = true }) => {
 	// 若默认url参数name和当前分组名称相同或默认为展开则当前分组展开
-	const [itemOpen, setItemOpen] = useState(name === paramsName || open);
+	const [itemOpen, setItemOpen] = useState(open);
+	const [isInit, setIsInit] = useState(true);
 	const hasChildrenGroups = Boolean(groups.length);
 	const hasArticles = Boolean(articles.length);
 	// 监听子分组open 事件，子分组展开则当前分组也展开
@@ -64,10 +68,9 @@ const GroupItem: FC<
 			setItemOpen(true);
 		}
 	};
-
 	useEffect(() => {
 		// 若prop传入的open变化，则同步当前展开状态
-		setItemOpen(open);
+		setItemOpen(isInit ? name === paramsName || open : open);
 	}, [open]);
 
 	// 若当前分组展开则通知父组件
@@ -76,6 +79,10 @@ const GroupItem: FC<
 			onChildOpen && onChildOpen(name);
 		}
 	}, [itemOpen]);
+
+	useEffect(() => {
+		setIsInit(false);
+	}, []);
 	return (
 		<div className={styles.groupItem}>
 			<TreeRow open={itemOpen} onClick={() => setItemOpen(!itemOpen)}>
