@@ -1,13 +1,13 @@
-import React, { CSSProperties } from 'react';
+import React, { CSSProperties, FC } from 'react';
 import cs from 'classnames';
 import styles from './style.module.scss';
 import InfoCard from '@/components/InfoCard';
 
 interface AsideProps {
 	className?: string;
-	style?: CSSProperties;
+	style: CSSProperties;
 }
-const Aside: React.FC<AsideProps> = ({ className, style }) => {
+const Aside: FC<AsideProps> = ({ className, style }) => {
 	return (
 		<aside className={cs(styles.aside, className)} style={style}>
 			<InfoCard />

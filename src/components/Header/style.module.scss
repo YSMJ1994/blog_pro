@@ -13,7 +13,12 @@
 	display: flex;
 	justify-content: center;
 	background-color: #ffffff;
-	animation: come-from-up 1s;
+	//animation: come-from-up 1s;
+	transition: transform 0.5s;
+
+	&.headerHide {
+		transform: translateY(-100%);
+	}
 
 	.headerInner {
 		height: 100%;

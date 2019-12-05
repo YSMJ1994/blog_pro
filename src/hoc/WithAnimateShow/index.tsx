@@ -1,4 +1,4 @@
-import React, { ComponentClass, CSSProperties, FC, useState } from 'react';
+import React, { ComponentClass, CSSProperties, FC, useState, PropsWithChildren } from 'react';
 import cs from 'classnames';
 import styles from './style.module.scss';
 import useTimeout from '@/utils/useTimeout';
@@ -10,10 +10,13 @@ export interface AnimateShowWrapperProps {
 	delay?: number;
 	distance?: string | number;
 }
-const WithAnimateShow = <P extends { className?: string; style?: CSSProperties }>(
-	WrappedComp: FC<P> | ComponentClass<P>
-): FC<P & AnimateShowWrapperProps> => (props: P & AnimateShowWrapperProps) => {
-	const { className, style, direction = 'down', delay = 0, distance = 2 } = props;
+
+interface WithAnimateShow {
+	<P extends { style: CSSProperties }>(Comp: RC<P>): FC<Merge<P, AnimateShowWrapperProps>>;
+}
+
+const WithAnimateShow: WithAnimateShow = WrappedComp => props => {
+	const { style, direction = 'down', delay = 0, distance = 2, ...otherProps } = props;
 	let xOffset, yOffset;
 	const calcDistance = typeof distance === 'number' ? `${distance}rem` : distance;
 	switch (direction) {
@@ -38,9 +41,10 @@ const WithAnimateShow = <P extends { className?: string; style?: CSSProperties }
 			break;
 		}
 	}
-	const initStyle = {
+	const initStyle: CSSProperties = {
 		opacity: 0,
-		transform: `translate(${xOffset},${yOffset})`
+		transform: `translate(${xOffset},${yOffset})`,
+		transition: 'opacity 1s ease-in-out, transform 1s ease-in-out'
 	};
 	const [calcStyle, setCalcStyle] = useState<CSSProperties>({
 		...style,
@@ -49,11 +53,17 @@ const WithAnimateShow = <P extends { className?: string; style?: CSSProperties }
 	useTimeout(() => {
 		setCalcStyle({
 			...style,
+			transition: 'opacity 1s ease-in-out, transform 1s ease-in-out',
 			opacity: 1,
 			transform: 'unset'
 		});
 	}, delay);
-	return <WrappedComp {...props} className={cs(className, styles.animateShow)} style={calcStyle} />;
+	useTimeout(() => {
+		setCalcStyle({
+			...style
+		});
+	}, delay + 1000);
+	return <WrappedComp {...otherProps as any} style={calcStyle} />;
 };
 
 export default WithAnimateShow;

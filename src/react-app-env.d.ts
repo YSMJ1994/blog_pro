@@ -71,4 +71,8 @@ declare global {
 	}
 
 	type RC<P, S = {}> = FC<P> | ComponentClass<P, S>;
+
+	type Merge<T extends {}, P extends {}> = { [K in Exclude<keyof T, keyof P>]: T[K] } & { [K in keyof P]: P[K] };
+
+	type PartialPart<T extends {}, P extends keyof T> = Merge<T, Partial<Pick<T, P>>>;
 }

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState, useRef, CSSProperties, FC } from 'react';
 import Styles from './style.module.scss';
 import Search from '@/components/Search';
 import { Link, RouteComponentProps, withRouter } from 'react-router-dom';
@@ -90,16 +90,44 @@ const menu = [
 		link: '/timeline'
 	}
 ];
-function Header() {
+
+const Header: FC<{ className?: string; style: CSSProperties }> = ({ className, style }) => {
 	const [avatar, setAvatar] = useState('');
 	const [phoneShowMenu, setPhoneShowMenu] = useState(false);
 	const info = useContext(InfoCtx);
+	const [hide, setHide] = useState<boolean>(false);
 	const { avatar_url, name } = info;
 	useEffect(() => {
 		setAvatar(avatar_url);
 	}, [avatar_url]);
+
+	useEffect(() => {
+		let beforeScrollY = window.scrollY;
+		const listener = () => {
+			if (!beforeScrollY) {
+				beforeScrollY = window.scrollY;
+			}
+			const scrollY = window.scrollY;
+			const offset = scrollY - beforeScrollY;
+			if (offset > 20) {
+				// 下滑50px则隐藏header
+				!hide && setHide(true);
+				// 记录scrollY
+				beforeScrollY = scrollY;
+			} else if (offset < -20) {
+				// 上滑50px则显示header
+				hide && setHide(false);
+				// 记录
+				beforeScrollY = scrollY;
+			}
+		};
+		window.addEventListener('scroll', listener);
+		return () => {
+			window.removeEventListener('scroll', listener);
+		};
+	}, [hide]);
 	return (
-		<header className={Styles.header}>
+		<header className={cs(Styles.header, className, { [Styles.headerHide]: hide })} style={style}>
 			<div className={Styles.headerInner}>
 				<SIcon name="menu" className={Styles.menuIcon} onClick={() => setPhoneShowMenu(!phoneShowMenu)} />
 				<Link to="/" style={{ fontSize: 0 }}>
@@ -121,6 +149,6 @@ function Header() {
 			<Search />
 		</header>
 	);
-}
+};
 
 export default Header;

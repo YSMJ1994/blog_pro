@@ -7,7 +7,7 @@ import Aside from '@/components/Aslide';
 import useScrollToTop from '@/hooks/useScrollToTop';
 import asyncComponent from '@/components/asyncComponent';
 import { HashRouter as Router, Route, Switch, Redirect, withRouter, RouteComponentProps } from 'react-router-dom';
-import WithAnimateShow, { AnimateShowWrapperProps } from '@/hoc/WithAnimateShow';
+import WithAnimateShow from '@/hoc/WithAnimateShow';
 import WithPageWrapper from '@/hoc/WithPageWrapper';
 const Home = WithPageWrapper(asyncComponent(() => import(/* webpackChunkName: "home" */ './Home')));
 const About = WithPageWrapper(asyncComponent(() => import(/* webpackChunkName: "about" */ './About')));
@@ -22,12 +22,12 @@ import defaultAvatar from '@/assets/img/avatar.jpeg';
 
 interface MainWrapProps {
 	className?: string;
-	style?: CSSProperties;
+	style: CSSProperties;
 }
 
-type ResolveMainWrapProps = MainWrapProps & AnimateShowWrapperProps & RouteComponentProps<any>;
+type ResolveMainWrapProps = MainWrapProps & RouteComponentProps<any>;
 
-const AnimateMainWrap = WithAnimateShow<ResolveMainWrapProps>(({ className, style, history }) => {
+const AnimateMainWrap = WithAnimateShow(({ className, style, history }: ResolveMainWrapProps) => {
 	useEffect(() => {
 		return history.listen((location, action) => {
 			if (action === 'PUSH') {
@@ -51,7 +51,9 @@ const AnimateMainWrap = WithAnimateShow<ResolveMainWrapProps>(({ className, styl
 	);
 });
 
-const MainWrap = withRouter<ResolveMainWrapProps>(AnimateMainWrap);
+const MainWrap = withRouter(AnimateMainWrap);
+
+const AnimatedHeader = WithAnimateShow(Header);
 
 export default function() {
 	const info = useContext(InfoCtx);
@@ -69,7 +71,7 @@ export default function() {
 	}, []);
 	return (
 		<Router>
-			<Header />
+			<AnimatedHeader direction="up" />
 			<div className={Styles.root}>
 				<MainWrap direction="down" />
 				<AsideWrapped direction="right" className={Styles.aside} delay={1000} />

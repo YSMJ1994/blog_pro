@@ -16,7 +16,7 @@ const Article: FC<{ className?: string } & RouteComponentProps<{ id: string }>> 
 	const intId = +id;
 	const { articles } = useContext(DocCtx);
 	let index: number = 0;
-	console.log('articles', articles, id);
+	// console.log('articles', articles, id);
 	const article = articles.filter((a, i) => {
 		if (a.id === intId) {
 			index = i;
