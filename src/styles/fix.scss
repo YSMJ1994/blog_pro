@@ -1,4 +1,5 @@
 @import url('https://unpkg.com/normalize.css@8.0.1/normalize.css');
+@import './variables';
 
 html,
 body {
@@ -23,7 +24,7 @@ html {
 
 body {
 	//color: #24292e;
-	color: #2c3e50;
+	color: $font-color;
 	background-color: #f5f7f9;
 	font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif, Apple Color Emoji,
 		Segoe UI Emoji, Segoe UI Symbol;
