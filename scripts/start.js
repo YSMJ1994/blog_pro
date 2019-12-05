@@ -113,7 +113,7 @@ async function start(closeSignalCallback) {
 			process.on(sig, function() {
 				devServer.close();
 				process.exit();
-				closeSignalCallback();
+				closeSignalCallback && closeSignalCallback();
 			});
 		});
 	} catch (err) {
@@ -121,7 +121,7 @@ async function start(closeSignalCallback) {
 			console.log(err.message);
 		}
 		process.exit(1);
-		closeSignalCallback();
+		closeSignalCallback && closeSignalCallback();
 	}
 }
 

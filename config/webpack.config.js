@@ -268,7 +268,7 @@ module.exports = function(webpackEnv = 'development') {
 				// To fix this, we prevent you from importing files out of src/ -- if you'd like to,
 				// please link the files into your node_modules/ and let module-resolution kick in.
 				// Make sure your source files are compiled, as they will not be processed in any way.
-				new ModuleScopePlugin(paths.appSrc, [paths.appPackageJson])
+				new ModuleScopePlugin([paths.appSrc, paths.appDoc], [paths.appPackageJson])
 			]
 		},
 		resolveLoader: {
@@ -413,6 +413,11 @@ module.exports = function(webpackEnv = 'development') {
 								},
 								'sass-loader'
 							)
+						},
+						{
+							test: /\.md$/,
+							include: paths.appDoc,
+							loader: require.resolve('./md-loader.js')
 						},
 						// "file" loader makes sure those assets get served by WebpackDevServer.
 						// When you `import` an asset, you get its (virtual) filename.
