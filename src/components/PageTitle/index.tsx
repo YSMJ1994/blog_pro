@@ -18,7 +18,7 @@ const PageTitle: FC<PageTitleProps> = ({ className, title, sub, icon }) => {
 				<span className={styles.title}>{title}</span>
 				<div className={styles.separator} />
 			</div>
-			<span className={styles.sub}>{sub}</span>
+			{!!sub && <span className={styles.sub}>{sub}</span>}
 		</div>
 	);
 };
