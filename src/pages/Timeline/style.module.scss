@@ -1,0 +1,61 @@
+@import '~@/styles/variables.scss';
+@import '~@/styles/mixin.scss';
+
+.timeline {
+}
+
+@media (max-width: 1000px) {
+	.timeline {
+		@include card;
+		padding-bottom: 2rem;
+	}
+}
+
+.yearBox {
+	line-height: 3rem;
+	.yearTitle {
+		font-size: 1.6rem;
+		font-weight: bold;
+	}
+	.yearContent {
+		padding-left: 2em;
+	}
+}
+
+.monthBox {
+	line-height: 2.6rem;
+	.monthTitle {
+		font-size: 1.3rem;
+	}
+	.monthContent {
+		font-size: 1rem;
+		padding-left: 2em;
+	}
+}
+
+.article {
+	line-height: inherit;
+	position: relative;
+	cursor: pointer;
+	transition: all 0.2s;
+
+	.articleTitle {
+		margin-left: 1rem;
+	}
+
+	&:hover {
+		color: $main-color;
+	}
+	&:before {
+		//position: ;
+		content: ' ';
+		position: relative;
+		top: -0.15rem;
+		margin-right: 1rem;
+		display: inline-block;
+		width: 0.4rem;
+		height: 0.4rem;
+		border-radius: 50%;
+		background-color: $font-color;
+	}
+}
