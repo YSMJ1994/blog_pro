@@ -20,3 +20,10 @@ export type Time = string | number | Date | Moment | undefined;
 export function formatTime(time: Time = +moment(), format = 'YYYY-MM-DD HH:mm:ss') {
 	return moment(time).format(format);
 }
+
+export function* ObjectIterator(obj: any) {
+	const keys = Object.keys(obj).sort((a, b) => (a > b ? 1 : -1));
+	for (let i = 0, len = keys.length; i < len; i++) {
+		yield obj[keys[i]];
+	}
+}
