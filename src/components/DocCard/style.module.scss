@@ -113,6 +113,7 @@
 		}
 		img {
 			max-width: 100%;
+			box-shadow: 0 0 8px 2px #f0f0f0;
 		}
 		pre {
 			padding: 1rem;
@@ -125,6 +126,10 @@
 				color: inherit;
 				border-radius: 0;
 			}
+		}
+		ul li {
+			list-style: disc;
+			text-indent: 2em;
 		}
 	}
 	.footer {
