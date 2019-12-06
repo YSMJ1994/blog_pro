@@ -9,6 +9,9 @@ import asyncComponent from '@/components/asyncComponent';
 import { HashRouter as Router, Route, Switch, Redirect, withRouter, RouteComponentProps } from 'react-router-dom';
 import WithAnimateShow from '@/hoc/WithAnimateShow';
 import WithPageWrapper from '@/hoc/WithPageWrapper';
+import InfoCtx from '@/ctx/InfoCrx';
+import defaultAvatar from '@/assets/img/avatar.jpeg';
+
 const Home = WithPageWrapper(asyncComponent(() => import(/* webpackChunkName: "home" */ './Home')));
 const About = WithPageWrapper(asyncComponent(() => import(/* webpackChunkName: "about" */ './About')));
 const Timeline = WithPageWrapper(asyncComponent(() => import(/* webpackChunkName: "timeline" */ './Timeline')));
@@ -17,8 +20,6 @@ const Group = WithPageWrapper(asyncComponent(() => import(/* webpackChunkName: "
 const Article = WithPageWrapper(asyncComponent(() => import(/* webpackChunkName: "article" */ './Article')));
 const Test = WithPageWrapper(asyncComponent(() => import(/* webpackChunkName: "test" */ './Test')));
 const AsideWrapped = WithAnimateShow(Aside);
-import InfoCtx from '@/ctx/InfoCrx';
-import defaultAvatar from '@/assets/img/avatar.jpeg';
 
 interface MainWrapProps {
 	className?: string;
