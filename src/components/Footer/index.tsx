@@ -21,10 +21,11 @@ const Footer: FC = () => {
 					React v16.8.6
 				</a>
 				&
-				<a href="https://react.docschina.org/" target="_blank">
-					TypeScript v3.4.5
+				<a href="http://www.typescriptlang.org/" target="_blank">
+					TypeScript v3.7.2
 				</a>
 			</div>
+			<div>苏ICP备18024799号</div>
 		</footer>
 	);
 };
