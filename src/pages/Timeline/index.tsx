@@ -7,17 +7,17 @@ import Moment from 'moment';
 import styles from './style.module.scss';
 
 type TimelineItem = {
-	year: string;
+	year: number;
 	months: MonthItem[];
 };
 
 type MonthItem = {
-	month: string;
+	month: number;
 	articles: MdDoc[];
 };
 
 type YearItem = {
-	year: string;
+	year: number;
 	months: Obj<MonthItem>;
 };
 
@@ -37,16 +37,19 @@ const ArticleItem: FC<{ article: MdDoc; onClick: EventHandler<MouseEvent<HTMLAnc
 	);
 };
 
-const MonthBox: FC<{ month: string }> = ({ month, children }) => {
+const MonthBox: FC<{ month: number }> = ({ month, children }) => {
+	const time = Moment([0, month]);
+	time.locale('en');
+	const monthStr = time.format('MMMM');
 	return (
 		<div className={styles.monthBox}>
-			<div className={styles.monthTitle}>{month}</div>
+			<div className={styles.monthTitle}>{monthStr}</div>
 			<div className={styles.monthContent}>{children}</div>
 		</div>
 	);
 };
 
-const YearBox: FC<{ year: string }> = ({ year, children }) => {
+const YearBox: FC<{ year: number }> = ({ year, children }) => {
 	return (
 		<div className={styles.yearBox}>
 			<div className={styles.yearTitle}>{year}</div>
@@ -64,11 +67,10 @@ const Timeline: FC<RouteComponentProps & { className: string }> = ({ className, 
 			const { createTime } = doc;
 			const time = Moment(createTime);
 			const year = time.year();
-			time.locale('en');
-			const month = time.format('MMMM');
+			const month = time.month();
 			if (!timelineObj[year]) {
 				timelineObj[year] = {
-					year: String(year),
+					year,
 					months: {}
 				};
 			}
@@ -76,7 +78,7 @@ const Timeline: FC<RouteComponentProps & { className: string }> = ({ className, 
 			const monthObj = yearItem.months;
 			if (!monthObj[month]) {
 				monthObj[month] = {
-					month: String(month),
+					month,
 					articles: []
 				};
 			}
@@ -97,12 +99,13 @@ const Timeline: FC<RouteComponentProps & { className: string }> = ({ className, 
 									articles
 								};
 							})
-							.sort((a, b) => (a.month > b.month ? 1 : -1))
+							.sort((a, b) => (a.month < b.month ? 1 : -1))
 					};
 				})
-				.sort((a, b) => (a.year > b.year ? 1 : -1))
+				.sort((a, b) => (a.year < b.year ? 1 : -1))
 		);
 	}, [articles]);
+	console.log('timeline', timeline);
 	return (
 		<div className={cs(styles.timeline, className)}>
 			<PageTitle title={`归档 ${articles.length}posts`} icon="timeline" />
