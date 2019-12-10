@@ -131,6 +131,27 @@
 			list-style: disc;
 			margin-left: 2em;
 		}
+
+		table {
+			border: 1px solid #ddd;
+			border-collapse: collapse;
+			width: 100%;
+
+			thead {
+				background-color: rgba(0, 0, 0, 0.02);
+				font-weight: 500;
+			}
+			tr {
+				border-bottom: 1px solid #ddd;
+				border-collapse: collapse;
+			}
+			td,
+			th {
+				padding: 0 1em;
+				line-height: 2.5em;
+				text-align: left;
+			}
+		}
 	}
 	.footer {
 		padding: 0 1.5rem;
