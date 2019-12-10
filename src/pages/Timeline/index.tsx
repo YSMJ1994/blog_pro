@@ -39,11 +39,14 @@ const ArticleItem: FC<{ article: MdDoc; onClick: EventHandler<MouseEvent<HTMLAnc
 
 const MonthBox: FC<{ month: number }> = ({ month, children }) => {
 	const time = Moment([0, month]);
+	const zh = time.format('MMMM');
 	time.locale('en');
-	const monthStr = time.format('MMMM');
+	const en = time.format('MMMM');
 	return (
 		<div className={styles.monthBox}>
-			<div className={styles.monthTitle}>{monthStr}</div>
+			<div className={styles.monthTitle}>
+				{zh} {en}
+			</div>
 			<div className={styles.monthContent}>{children}</div>
 		</div>
 	);
@@ -96,7 +99,7 @@ const Timeline: FC<RouteComponentProps & { className: string }> = ({ className, 
 								const { month, articles } = months[monthKey];
 								return {
 									month,
-									articles
+									articles: articles.sort((a, b) => (a.createTime < b.createTime ? 1 : -1))
 								};
 							})
 							.sort((a, b) => (a.month < b.month ? 1 : -1))
