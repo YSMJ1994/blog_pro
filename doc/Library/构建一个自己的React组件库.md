@@ -36,7 +36,9 @@ yarn start
 ![doc目录](img/dir_doc.png)
 ![doc文档](img/doc_demo.png)
 
-`---config ---`为该文档配置，以`key: value`的方式设置，其中`name`为该文档的标题，如果不设置则默认为文件名，显示在组件库文档的左侧列表中；`order`为文档的排序权重，按从小到大排序，如果不设置或相等则按照`name`的字母表排序。
+`---config ---`为该文档配置，以`key: value`的方式设置，可配置的key有：
+- `name`为文档的标题，如果不设置则默认为文件名，显示在web文档的左侧列表中；
+- `order`为文档的排序权重，按从小到大排序，如果不设置或相等则按照`name`的字母表排序。
 
 `---dependencies ---`为该文档的组件依赖，文档内可以使用我们在`components`目录下定义的React组件，前提是，在`dependencies`里面配置的对应的依赖。例如`quickStart.md`中引入的`Button`组件。webpack配置了别名`components`指向`components`目录。
 
@@ -60,7 +62,7 @@ yarn start
 ![Button的demo](img/comp_demo.png)
 
 
-##### components/*/index.md组件文档的说明
+##### `components/*/index.md`组件文档的说明
 组件文档的配置方式与`doc`下的文档类似，同样是以`---config ---`的格式定义文档说明。可配置的key有：
 - `order` 为排序权重，不传则以`name`的字母表排序
 - `name` 为组件名，不传则以目录名称作为组件名
@@ -73,7 +75,7 @@ yarn start
 
 ![Button文档](img/button_doc.png)
 
-##### components/*/demo/\*.md组件demo的说明
+##### `components/*/demo/\*.md`组件demo的说明
 demo文档同样以`---config ---`格式定义文档说明。可配置的key有：
 - `order` 为排序权重，不传则以`title`的字母表排序
 - `title` 为demo的标题，不传则以目录名称作为标题名
