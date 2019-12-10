@@ -111,19 +111,7 @@ const Header: FC<{ className?: string; style: CSSProperties }> = ({ className, s
 			}
 			const scrollY = window.scrollY;
 			const offset = scrollY - beforeScrollY;
-			if (offset > 20) {
-				// 下滑50px则隐藏header
-				if (!hide && !timeoutRef.current) {
-					// timeoutRef.current && clearTimeout(timeoutRef.current);
-					timeoutRef.current = setTimeout(() => {
-						setHide(true);
-						timeoutRef.current = undefined;
-					}, 200);
-				}
-				// !hide && setHide(true);
-				// 记录scrollY
-				beforeScrollY = scrollY;
-			} else if (offset < -20) {
+			if (offset < -20 || scrollY <= 0) {
 				// 上滑50px则显示header
 				if (hide && !timeoutRef.current) {
 					// timeoutRef.current && clearTimeout(timeoutRef.current);
@@ -134,6 +122,18 @@ const Header: FC<{ className?: string; style: CSSProperties }> = ({ className, s
 				}
 				// hide && setHide(false);
 				// 记录
+				beforeScrollY = scrollY;
+			} else if (offset > 20) {
+				// 下滑50px则隐藏header
+				if (!hide && !timeoutRef.current) {
+					// timeoutRef.current && clearTimeout(timeoutRef.current);
+					timeoutRef.current = setTimeout(() => {
+						setHide(true);
+						timeoutRef.current = undefined;
+					}, 200);
+				}
+				// !hide && setHide(true);
+				// 记录scrollY
 				beforeScrollY = scrollY;
 			}
 		};
