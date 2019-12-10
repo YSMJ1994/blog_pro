@@ -7,6 +7,7 @@ import CustomLink from '@/components/Link';
 import cs from 'classnames';
 import InfoCtx from '@/ctx/InfoCrx';
 import defaultAvatar from '@/assets/img/avatar.jpeg';
+import useTimeout from '@/utils/useTimeout';
 
 interface MenuItemProps extends RouteComponentProps {
 	label: string;
@@ -96,6 +97,7 @@ const Header: FC<{ className?: string; style: CSSProperties }> = ({ className, s
 	const [phoneShowMenu, setPhoneShowMenu] = useState(false);
 	const info = useContext(InfoCtx);
 	const [hide, setHide] = useState<boolean>(false);
+	const timeoutRef = useRef<NodeJS.Timeout>();
 	const { avatar_url, name } = info;
 	useEffect(() => {
 		setAvatar(avatar_url);
@@ -111,12 +113,26 @@ const Header: FC<{ className?: string; style: CSSProperties }> = ({ className, s
 			const offset = scrollY - beforeScrollY;
 			if (offset > 20) {
 				// 下滑50px则隐藏header
-				!hide && setHide(true);
+				if (!hide && !timeoutRef.current) {
+					// timeoutRef.current && clearTimeout(timeoutRef.current);
+					timeoutRef.current = setTimeout(() => {
+						setHide(true);
+						timeoutRef.current = undefined;
+					}, 200);
+				}
+				// !hide && setHide(true);
 				// 记录scrollY
 				beforeScrollY = scrollY;
 			} else if (offset < -20) {
 				// 上滑50px则显示header
-				hide && setHide(false);
+				if (hide && !timeoutRef.current) {
+					// timeoutRef.current && clearTimeout(timeoutRef.current);
+					timeoutRef.current = setTimeout(() => {
+						setHide(false);
+						timeoutRef.current = undefined;
+					}, 200);
+				}
+				// hide && setHide(false);
 				// 记录
 				beforeScrollY = scrollY;
 			}
