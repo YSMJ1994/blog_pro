@@ -56,7 +56,7 @@ function resolveTags(docArray: MdDoc[], result: Tag[]): void {
 	Object.keys(tagObj)
 		.sort((a, b) => (a > b ? 1 : -1))
 		.forEach(name => {
-			const articles = tagObj[name].sort((a, b) => b.modifyTime - a.modifyTime);
+			const articles = tagObj[name].sort((a, b) => b.createTime - a.createTime);
 			result.push({
 				name,
 				size: articles.length,
@@ -161,7 +161,7 @@ export const Provider: React.FC = ({ children }) => {
 			group: Group[] = [];
 		resolveTags(docArray, tags);
 		resolveGroups(docArray, group);
-		const articles = docArray.sort((a, b) => b.modifyTime - a.modifyTime);
+		const articles = docArray.sort((a, b) => b.createTime - a.createTime);
 		const info: DocInfo = {
 			articles,
 			tags,

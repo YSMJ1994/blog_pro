@@ -70,6 +70,20 @@ declare global {
 		export default classes;
 	}
 
+	module '*.md' {
+		const markdown: {
+			id: number;
+			title: string;
+			tag: string[];
+			createTime: number;
+			modifyTime: number;
+			group: string[];
+			review: string;
+			content: string;
+		};
+		export default markdown;
+	}
+
 	type RC<P, S = {}> = FC<P> | ComponentClass<P, S>;
 
 	type Merge<T extends {}, P extends {}> = { [K in Exclude<keyof T, keyof P>]: T[K] } & { [K in keyof P]: P[K] };
