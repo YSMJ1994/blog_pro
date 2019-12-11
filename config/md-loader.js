@@ -3,9 +3,24 @@ const path = require('path');
 const {appDoc} = require('./paths')
 const markdownItConfig = require('../markdownit.config');
 const MDT = require('markdown-it')(markdownItConfig);
+const iterator = require('markdown-it-for-inline');
 const titleRegExp = /\[title]:\s*#\((.+)\)/;
 const tagRegExp = /\[tag]:\s*#\((.+)\)/;
 const reviewRegExp = /\[preview]:\s*#\(start\)([\s\S]+)\[preview]:\s*#\(end\)/;
+
+// a标签设置target为_blank
+MDT.use(iterator, 'url_new_win', 'link_open', function (tokens, idx) {
+	const aIndex = tokens[idx].attrIndex('target');
+	if (aIndex < 0) {
+		tokens[idx].attrPush(['target', '_blank']);
+	} else {
+		tokens[idx].attrs[aIndex][1] = '_blank';
+	}
+});
+
+// table块添加一个div作为wrapper
+MDT.renderer.rules.table_open  = function () { return '<div class="table-wrapper"><table>'; };
+MDT.renderer.rules.table_close  = function () { return '</table></div>'; };
 
 async function mdLoader(source) {
 	const callback = this.async();
