@@ -65,6 +65,13 @@
 		}
 		h2 {
 			font-size: $h1Size * $h2Ratio;
+
+			&:after {
+				content: ' ';
+				height: 1px;
+				display: block;
+				background-color: #dcdfe7;
+			}
 		}
 		h3 {
 			font-size: $h1Size * $h3Ratio;
