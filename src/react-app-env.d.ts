@@ -2,7 +2,7 @@
 /// <reference types="react" />
 /// <reference types="react-dom" />
 
-import React, { FC, ComponentClass } from 'react';
+import React, { FC, ComponentClass, EventHandler, MouseEvent } from 'react';
 
 declare global {
 	namespace NodeJS {
@@ -93,4 +93,6 @@ declare global {
 	type Obj<T> = {
 		[key: string]: T;
 	};
+
+	type ClickHandler<E extends HTMLElement = HTMLElement> = EventHandler<MouseEvent<E>>;
 }

@@ -12,7 +12,7 @@ export interface MdDoc {
 	content: string;
 }
 
-interface Tag {
+export interface Tag {
 	articles: MdDoc[];
 	size: number;
 	name: string;
@@ -24,7 +24,7 @@ export interface Group {
 	groups?: Group[];
 }
 
-interface DocInfo {
+export interface DocInfo {
 	articles: MdDoc[];
 	tags: Tag[];
 	group: Group[];
@@ -106,7 +106,7 @@ function resolveGroups(docArray: MdDoc[], result: Group[]): void {
 				if (!groupObj[key]) {
 					groupObj[key] = item;
 				} else {
-					console.log('已存在group key', key);
+					// console.log('已存在group key', key);
 				}
 			});
 			key = group.join('/');
@@ -129,13 +129,13 @@ function resolveGroups(docArray: MdDoc[], result: Group[]): void {
 	});
 	const keys = Object.keys(groupObj);
 	const groupList = keys.map(key => groupObj[key]);
-	console.log('keys', keys);
-	console.log('groupList', groupList);
+	// console.log('keys', keys);
+	// console.log('groupList', groupList);
 	const topGroup = keys
 		.filter(key => !groupObj[key].parent)
 		.sort((a, b) => (a > b ? 1 : -1))
 		.map(key => groupObj[key]);
-	console.log('topGroup', topGroup);
+	// console.log('topGroup', topGroup);
 	resolveGroupTree(topGroup, groupList, result);
 }
 
