@@ -11,7 +11,7 @@ html {
 	font-size: 15px;
 	line-height: 1.8;
 }
-@media screen and (max-width: 1366px) {
+@media screen and (max-device-width: 1366px) {
 	html {
 		font-size: 12px;
 	}

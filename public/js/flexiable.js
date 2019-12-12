@@ -31,6 +31,10 @@
 			`width=${width}, user-scalable=no, initial-scale=${scale}, maximum-scale=${scale}, minimum-scale=${scale}`
 		);
 		document.head.insertAdjacentHTML('beforeend', `<style>html { font-size: ${remCalc}px!important; }</style>`);
+		window.addEventListener('load', function () {
+			document.body.setAttribute('data-mobile', 'data-mobile');
+			document.body.setAttribute('data-dpr', dpr);
+		})
 	}
 	return function(rem, designWidth) {
 		if (isMobile()) {

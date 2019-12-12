@@ -5,7 +5,7 @@
 .tagOverview {
 	//margin: 1rem 0;
 }
-@media (max-width: 1000px) {
+@media (max-device-width: 1000px) {
 	.tagOverview {
 		//padding: 1rem .5rem;
 		@include card;

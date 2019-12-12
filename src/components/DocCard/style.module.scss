@@ -211,7 +211,7 @@
 					border-color: $main-color;
 				}
 			}
-			@media (max-width: 1000px) {
+			@media (max-device-width: 1000px) {
 				.tag {
 					height: 2rem;
 				}
@@ -298,7 +298,7 @@
 	}
 }
 
-@media (max-width: 1000px) {
+@media (max-device-width: 1000px) {
 	.docCard {
 		padding: 1rem 1.5rem;
 		.header {

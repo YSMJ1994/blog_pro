@@ -27,7 +27,7 @@
 	bottom: 7.5rem;
 }
 
-@media (max-width: 1000px) {
+@media (max-device-width: 1000px) {
 	.root {
 		flex-direction: column;
 		justify-content: flex-start;

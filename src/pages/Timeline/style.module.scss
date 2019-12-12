@@ -4,7 +4,7 @@
 .timeline {
 }
 
-@media (max-width: 1000px) {
+@media (max-device-width: 1000px) {
 	.timeline {
 		@include card;
 		padding-bottom: 2rem;

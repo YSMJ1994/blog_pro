@@ -91,7 +91,7 @@
 	}
 }
 
-@media (max-width: 1000px) {
+@media screen and (max-device-height: 1000px) {
 	.header {
 		justify-content: flex-start;
 

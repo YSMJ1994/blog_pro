@@ -32,7 +32,7 @@
 		font-size: 0.875rem;
 	}
 
-	@media (max-width: 1000px) {
+	@media (max-device-width: 1000px) {
 		.sub {
 			display: inline;
 			margin-top: unset;
