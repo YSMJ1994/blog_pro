@@ -20,6 +20,13 @@
       "unicode_decimal": 59069
     },
     {
+      "icon_id": "356876",
+      "name": "search",
+      "font_class": "search",
+      "unicode": "e60d",
+      "unicode_decimal": 58893
+    },
+    {
       "icon_id": "433840",
       "name": "email",
       "font_class": "email",
