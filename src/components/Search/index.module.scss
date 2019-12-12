@@ -14,7 +14,7 @@
 	position: absolute;
 	left: 0.7rem;
 	top: 50%;
-	transform: translateY(calc(-50% - 2px));
+	transform: translateY(calc(-50% - 1px));
 	transition: all 0.5s ease;
 }
 .searchInput {
@@ -140,6 +140,7 @@
 		}
 		.searchIcon {
 			left: -0.7rem;
+			transform: translateY(calc(-50% - 2px));
 		}
 	}
 	.cancelText {
