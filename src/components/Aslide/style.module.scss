@@ -3,11 +3,10 @@
 	width: 100%;
 	min-height: 5rem;
 	position: sticky;
-	top: $header-height + 1rem;
+	top: 1rem;
 }
 
 @media screen and (max-device-width: 1000px) {
-	/*移动端适配*/
 	.aside {
 		position: static;
 	}

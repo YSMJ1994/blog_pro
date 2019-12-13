@@ -6,30 +6,26 @@ import cs from 'classnames';
 interface ToTopProps {
 	className?: string;
 	style?: CSSProperties;
+	target?: HTMLElement;
 }
 
-const ToTopComp: FC<ToTopProps> = ({ className, style }) => {
+const ToTopComp: FC<ToTopProps> = ({ className, style, target = document.documentElement }) => {
 	return (
 		<button
 			className={cs(styles.toTop, className)}
 			style={style}
-			onClick={() => window.scrollTo({ left: 0, top: 0, behavior: 'smooth' })}
+			onClick={() => target.scrollTo({ left: 0, top: 0, behavior: 'smooth' })}
 		>
 			<SIcon className={styles.toTopIcon} name="arrow-down-hollow" />
 		</button>
 	);
 };
 
-export default function useScrollToTop(target: HTMLElement | Window = window) {
+export default function useScrollToTop(target: HTMLElement = document.documentElement) {
 	const [ToTop, setToTop] = useState<FC<ToTopProps> | null>(null);
 	const ref = useRef<() => void>();
 	ref.current = () => {
-		let scrollY = 0;
-		if (target === window) {
-			scrollY = (target as Window).scrollY;
-		} else {
-			scrollY = (target as HTMLElement).scrollTop;
-		}
+		let scrollY = target.scrollTop;
 		if (scrollY > 200) {
 			// 滚动距离超过200px，展示置顶按钮
 			!ToTop && setToTop(() => ToTopComp);
@@ -47,6 +43,6 @@ export default function useScrollToTop(target: HTMLElement | Window = window) {
 		};
 	}, [target]);
 	return ({ className, style }: ToTopProps) => {
-		return ToTop && <ToTop className={className} style={style} />;
+		return ToTop && <ToTop className={className} style={style} target={target} />;
 	};
 }

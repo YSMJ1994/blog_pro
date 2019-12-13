@@ -6,6 +6,7 @@ import SIcon from '@/components/SIcon';
 import CustomLink from '@/components/Link';
 import cs from 'classnames';
 import InfoCtx from '@/ctx/InfoCrx';
+import StateCtx from '@/ctx/StateCtx';
 import defaultAvatar from '@/assets/img/avatar.jpeg';
 import useTimeout from '@/utils/useTimeout';
 
@@ -96,6 +97,8 @@ const Header: FC<{ className?: string; style: CSSProperties }> = ({ className, s
 	const [avatar, setAvatar] = useState('');
 	const [phoneShowMenu, setPhoneShowMenu] = useState(false);
 	const info = useContext(InfoCtx);
+	const { searchFocus, searchPaneShow, scrollElement } = useContext(StateCtx);
+	const [otherStyle, setOtherStyle] = useState<CSSProperties>({});
 	const [hide, setHide] = useState<boolean>(false);
 	const timeoutRef = useRef<NodeJS.Timeout>();
 	const { avatar_url, name } = info;
@@ -104,14 +107,19 @@ const Header: FC<{ className?: string; style: CSSProperties }> = ({ className, s
 	}, [avatar_url]);
 
 	useEffect(() => {
-		let beforeScrollY = window.scrollY;
+		let beforeScrollY = 0;
 		const listener = () => {
-			if (!beforeScrollY) {
-				beforeScrollY = window.scrollY;
+			if (searchFocus || searchPaneShow) {
+				// 当搜索框focus或搜索面板展示时，不隐藏header
+				return;
 			}
-			const scrollY = window.scrollY;
+			if (!beforeScrollY) {
+				beforeScrollY = scrollElement.scrollTop;
+			}
+			const scrollY = scrollElement.scrollTop;
 			const offset = scrollY - beforeScrollY;
-			if (offset < -20 || scrollY <= 0) {
+			const scrollHeight = scrollY + scrollElement.clientHeight;
+			if ((offset < -20 || scrollY <= 0) && scrollHeight <= scrollElement.scrollHeight) {
 				// 上滑50px则显示header
 				if (hide && !timeoutRef.current) {
 					// timeoutRef.current && clearTimeout(timeoutRef.current);
@@ -137,13 +145,39 @@ const Header: FC<{ className?: string; style: CSSProperties }> = ({ className, s
 				beforeScrollY = scrollY;
 			}
 		};
-		window.addEventListener('scroll', listener);
+		scrollElement.addEventListener('scroll', listener);
 		return () => {
-			window.removeEventListener('scroll', listener);
+			scrollElement.removeEventListener('scroll', listener);
 		};
-	}, [hide]);
+	}, [hide, scrollElement, searchFocus, searchPaneShow]);
+
+	useEffect(() => {
+		// todo:
+		/*if(searchFocus) {
+			const scrollTop = document.documentElement.scrollTop;
+			setOtherStyle({
+				top: `${scrollTop}px`
+			})
+			setTimeout(() => {
+				document.documentElement.scrollTop = scrollTop
+			}, 5)
+		} else {
+			setOtherStyle({
+				top: '0px'
+			})
+		}*/
+	}, [searchFocus]);
+	const resultStyle = {
+		...style,
+		...otherStyle
+	};
 	return (
-		<header className={cs(Styles.header, className, { [Styles.headerHide]: hide })} style={style}>
+		<header
+			className={cs(Styles.header, className, {
+				[Styles.headerHide]: hide
+			})}
+			style={resultStyle}
+		>
 			<div className={Styles.headerInner}>
 				<SIcon name="menu" className={Styles.menuIcon} onClick={() => setPhoneShowMenu(!phoneShowMenu)} />
 				<Link to="/" style={{ fontSize: 0 }}>

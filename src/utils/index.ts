@@ -27,3 +27,7 @@ export function* ObjectIterator(obj: any) {
 		yield obj[keys[i]];
 	}
 }
+
+export function isMobile(): boolean {
+	return /(iPhone|iPad|iPod|iOS|Android)/i.test(navigator.userAgent);
+}

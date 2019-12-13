@@ -75,6 +75,7 @@
 
 	&.searchPaneShow {
 		display: block;
+		pointer-events: auto;
 	}
 
 	.searchPaneBlank {

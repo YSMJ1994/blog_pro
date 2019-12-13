@@ -1,4 +1,4 @@
-import React, { CSSProperties, useContext, useEffect, useState } from 'react';
+import React, { CSSProperties, useContext, useEffect, useRef } from 'react';
 import cs from 'classnames';
 import Styles from './Pages.module.scss';
 import Header from '@/components/Header';
@@ -10,6 +10,7 @@ import { HashRouter as Router, Route, Switch, Redirect, withRouter, RouteCompone
 import WithAnimateShow from '@/hoc/WithAnimateShow';
 import WithPageWrapper from '@/hoc/WithPageWrapper';
 import InfoCtx from '@/ctx/InfoCrx';
+import StateCtx from '@/ctx/StateCtx';
 import defaultAvatar from '@/assets/img/avatar.jpeg';
 
 const Home = WithPageWrapper(asyncComponent(() => import(/* webpackChunkName: "home" */ './Home')));
@@ -29,13 +30,16 @@ interface MainWrapProps {
 type ResolveMainWrapProps = MainWrapProps & RouteComponentProps<any>;
 
 const AnimateMainWrap = WithAnimateShow(({ className, style, history }: ResolveMainWrapProps) => {
+	const { scrollElement } = useContext(StateCtx);
 	useEffect(() => {
 		return history.listen((location, action) => {
 			if (action === 'PUSH') {
-				window.scrollTo({ left: 0, top: 0, behavior: 'auto' });
+				setTimeout(() => {
+					scrollElement.scrollTop = 0;
+				}, 5);
 			}
 		});
-	}, []);
+	}, [scrollElement]);
 	return (
 		<div className={cs(Styles.main, className)} style={style}>
 			<Switch>
@@ -58,6 +62,8 @@ const AnimatedHeader = WithAnimateShow(Header);
 
 export default function() {
 	const info = useContext(InfoCtx);
+	const state = useContext(StateCtx);
+	const scrollViewRef = useRef<HTMLDivElement>(null);
 	const { name = 'SoberZ', avatar_url } = info;
 	const avatar = avatar_url || defaultAvatar;
 	useEffect(() => {
@@ -66,18 +72,23 @@ export default function() {
 		// const shortcutLink = document.querySelector<HTMLLinkElement>('#shortcut');
 		// shortcutLink && (shortcutLink.href = avatar_url);
 	}, [name, avatar]);
-	const ToTop = WithAnimateShow(useScrollToTop());
+	const ToTop = WithAnimateShow(useScrollToTop(state.scrollElement));
 	useEffect(() => {
 		document.body.addEventListener('touchstart', function() {});
 	}, []);
+	useEffect(() => {
+		scrollViewRef.current && state.setState({ scrollElement: scrollViewRef.current });
+	}, [scrollViewRef.current]);
 	return (
 		<Router>
 			<AnimatedHeader direction="up" />
-			<div className={Styles.root}>
-				<MainWrap direction="down" />
-				<AsideWrapped direction="right" className={Styles.aside} delay={1000} />
+			<div ref={scrollViewRef} className={Styles.scrollView}>
+				<div className={Styles.root}>
+					<MainWrap direction="down" />
+					<AsideWrapped direction="right" className={Styles.aside} delay={1000} />
+				</div>
+				<Footer />
 			</div>
-			<Footer />
 			<ToTop className={Styles.toTop} direction="right" />
 		</Router>
 	);

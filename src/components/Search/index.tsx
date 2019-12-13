@@ -4,20 +4,9 @@ import cs from 'classnames';
 import styles from './index.module.scss';
 import SIcon from '@/components/SIcon';
 import SearchWorker, { SearchArticle, SearchGroup, SearchResult, SearchTag } from '@/utils/SearchWorker';
-import DocCtx, { Group, MdDoc, Tag } from '@/ctx/DocCtx';
-import { History } from 'history';
-
-function string2reg(str: string) {
-	return new RegExp(
-		`(${str
-			.split('')
-			.map(char => {
-				return char.replace(/([.\\\[\]^$()?:*+|{},=!])/, '\\$1');
-			})
-			.join('|')})`,
-		'g'
-	);
-}
+import DocCtx from '@/ctx/DocCtx';
+import StateCtx from '@/ctx/StateCtx';
+import { isMobile } from '@/utils';
 
 const SearchItemBox: FC<{ title: string }> = ({ title, children }) => {
 	return (
@@ -154,16 +143,37 @@ const SearchPane: FC<{ keyword: string; show: boolean; onSearch: (pathname: stri
 
 export default withRouter<RouteComponentProps>(function Search({ history }) {
 	const inputRef = useRef<HTMLInputElement>(null);
-	const [focus, setFocus] = useState(false);
-	const [show, setShow] = useState<boolean>(false);
+	const { searchFocus: focus, searchPaneShow: show, scrollElement, setState } = useContext(StateCtx);
+	const [scrollTop, setScrollTop] = useState<number>(0);
+	const setFocus = (focus: boolean) => {
+		setState({
+			searchFocus: focus
+		});
+	};
+	const setShow = (show: boolean) => {
+		// 滚动穿透处理
+		if (isMobile()) {
+			if (show) {
+				// 记录当前滚动视窗滚动高度，
+				setScrollTop(scrollElement.scrollTop);
+			} else {
+				// 复原
+				scrollElement.scrollTop = scrollTop;
+			}
+		}
+		setState({
+			searchPaneShow: show
+		});
+	};
+	// const [focus, setFocus] = useState(false);
 	const [isComposition, setIsComposition] = useState<boolean>(false);
 	const [keyword, setKeyword] = useState('');
 	const ref = useRef<HTMLDivElement>(null);
 	useEffect(() => {
 		const inputDom = inputRef.current;
 		if (inputDom) {
+			let scrollTop = 0;
 			const listenFocus = function() {
-				window.scrollTo({ left: 0, top: 0, behavior: 'smooth' });
 				setFocus(true);
 			};
 			const listenBlur = function() {
@@ -180,9 +190,9 @@ export default withRouter<RouteComponentProps>(function Search({ history }) {
 	useEffect(() => {
 		keyword && focus && setShow(true);
 	}, [focus, keyword]);
-	// outside click 处理
 	useEffect(() => {
 		if (show) {
+			// outside click 处理
 			const clickListener = (e: MouseEvent) => {
 				// 如果事件target等于或在pane内，则代表在pane内的点击，不做处理，否则隐藏pane
 				const pane = ref.current,
