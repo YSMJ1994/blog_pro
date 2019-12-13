@@ -2,7 +2,7 @@
 
 .scrollView {
 	height: 100vh;
-	//padding-top: $header-height;
+	padding-top: $header-height;
 	overflow: scroll;
 	-webkit-overflow-scrolling: touch;
 }
@@ -12,7 +12,7 @@
 	flex-direction: row;
 	align-items: flex-start;
 	justify-content: center;
-	margin-top: $header-height;
+	//margin-top: $header-height;
 
 	$ItemMarginTop: 1rem;
 
