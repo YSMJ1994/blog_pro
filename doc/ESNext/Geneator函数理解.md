@@ -1,4 +1,4 @@
-[tag]: #(es6,Generator,Itereator,javascript)
+[tag]: #(es6,Generator,Itereator,javascript,js)
 [preview]: #(start)
 
 关于 es6`Generator`函数的理解
