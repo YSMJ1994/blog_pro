@@ -268,7 +268,7 @@ function executeFullMatch(keyword, str) {
 使用`String`原型中的`includes`函数判断，替换 keyword 使用`String`的`replace`函数传入字符串递归替换，直到找不到 keyword 为止(因为`replace`函数在第一个参数传入字符串时，仅仅只会替换第一个匹配的字符串)，也可将`keyword`转换为`全局匹配`的`正则表达式`，然后用`replace`替换。而将一个字符串转换为正则表达式的实现大概如下：
 
 ```js
-function string2regexp(str) {
+function string2regstr(str) {
     // 将正则中的关键字符都使用\转义即可，将所有字符当成字符本身处理，而不是匹配字符(这里使用\\是因为\字符本身就需要被转义，故而\\代表\)，
     return str.replace(/([.\\\[\]^$()?:*+|{},=!])/gi, '\\$1');
 }
@@ -276,7 +276,7 @@ function string2regexp(str) {
 function executeIncludeMatch(keyword, str) {
     if (str.includes(keyword)) {
         // 匹配成功，权重+2
-        const keywordReg = new RegExp(string2regexp(keyword), 'gi');
+        const keywordReg = new RegExp(string2regstr(keyword), 'gi');
         return str.replace(keywordReg, matchStr => {
             return `<span class="keyword-highlight">${matchStr}</span>`;
         });
@@ -292,12 +292,12 @@ function executeIncludeMatch(keyword, str) {
 将 keyword 以空格分离成几个词组，然后将之转换为正则表达式进行匹配，替换 keyword 则以全局模式将这些词组都替换成<span>包裹的字符。
 
 ```js
-function string2regexp(str) {
+function string2regstr(str) {
     // 将正则中的关键字符都使用\转义即可，将所有字符当成字符本身处理，而不是匹配字符(这里使用\\是因为\字符本身就需要被转义，故而\\代表\)，
     return str.replace(/([.\\\[\]^$()?:*+|{},=!])/gi, '\\$1');
 }
 function executePartMatch(keyword, str) {
-    const keywordArr = string2regexp(keyword).split(/\s+/);
+    const keywordArr = string2regstr(keyword).split(/\s+/);
     // 分组匹配，比如keywordArr: ['I', 'am', 'Liu']，转换成 /(I|am|Liu)/gi
     const keywordReg = new RegExp(`(${keywordArr.join('|')})`, 'gi');
     if (str.match(keywordReg)) {
