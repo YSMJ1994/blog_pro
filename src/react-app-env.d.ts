@@ -84,9 +84,9 @@ declare global {
 		export default markdown;
 	}
 
-	type RC<P, S = {}> = FC<P> | ComponentClass<P, S>;
+	type RC<P = {}, S = {}> = FC<P> | ComponentClass<P, S>;
 
-	type Merge<T extends {}, P extends {}> = { [K in Exclude<keyof T, keyof P>]: T[K] } & { [K in keyof P]: P[K] };
+	type Merge<T extends {}, P extends {}> = Omit<T, keyof P> & P;
 
 	type PartialPart<T extends {}, P extends keyof T> = Merge<T, Partial<Pick<T, P>>>;
 
