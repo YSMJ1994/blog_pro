@@ -7,6 +7,9 @@ import SearchWorker, { SearchArticle, SearchGroup, SearchResult, SearchTag } fro
 import DocCtx from '@/ctx/DocCtx';
 import StateCtx from '@/ctx/StateCtx';
 import { isMobile } from '@/utils';
+import Input from '@/components/NoCompositionInput';
+import useClickOutside from '@/hooks/useClickOutside';
+import useFocus from '@/hooks/useFocus';
 
 const SearchItemBox: FC<{ title: string }> = ({ title, children }) => {
 	return (
@@ -60,7 +63,7 @@ const SearchPane: FC<{ keyword: string; show: boolean; onSearch: (pathname: stri
 		articles: []
 	});
 	const docInfo = useContext(DocCtx);
-	const [searchTimeout, setSearchTimeout] = useState<NodeJS.Timeout>();
+	const timeoutRef = useRef<NodeJS.Timeout>();
 	useEffect(() => {
 		// 没有关键字或input没有聚焦则不搜索
 		if (!keyword) {
@@ -72,8 +75,8 @@ const SearchPane: FC<{ keyword: string; show: boolean; onSearch: (pathname: stri
 			return;
 		}
 		// searching
-		searchTimeout && clearTimeout(searchTimeout);
-		const tag = setTimeout(() => {
+		timeoutRef.current && clearTimeout(timeoutRef.current);
+		timeoutRef.current = setTimeout(() => {
 			SearchWorker(keyword, docInfo)
 				.then(result => {
 					console.log('result', result);
@@ -82,9 +85,8 @@ const SearchPane: FC<{ keyword: string; show: boolean; onSearch: (pathname: stri
 				.catch(error => {
 					console.log('error', error);
 				});
-		}, 300);
-		setSearchTimeout(tag);
-		return () => clearTimeout(tag);
+		}, 200);
+		return () => timeoutRef.current && clearTimeout(timeoutRef.current);
 	}, [keyword]);
 	const { tags, groups, articles } = result;
 	const hasResult = tags.length || groups.length || articles.length;
@@ -142,7 +144,6 @@ const SearchPane: FC<{ keyword: string; show: boolean; onSearch: (pathname: stri
 };
 
 export default withRouter<RouteComponentProps>(function Search({ history }) {
-	const inputRef = useRef<HTMLInputElement>(null);
 	const { searchFocus: focus, searchPaneShow: show, scrollElement, setState } = useContext(StateCtx);
 	const [scrollTop, setScrollTop] = useState<number>(0);
 	const setFocus = (focus: boolean) => {
@@ -151,7 +152,7 @@ export default withRouter<RouteComponentProps>(function Search({ history }) {
 		});
 	};
 	const setShow = (show: boolean) => {
-		// 滚动穿透处理
+		// 移动端滚动穿透处理
 		if (isMobile()) {
 			if (show) {
 				// 记录当前滚动视窗滚动高度，
@@ -165,49 +166,26 @@ export default withRouter<RouteComponentProps>(function Search({ history }) {
 			searchPaneShow: show
 		});
 	};
-	// const [focus, setFocus] = useState(false);
-	const [isComposition, setIsComposition] = useState<boolean>(false);
+
 	const [keyword, setKeyword] = useState('');
-	const ref = useRef<HTMLDivElement>(null);
-	useEffect(() => {
-		const inputDom = inputRef.current;
-		if (inputDom) {
-			let scrollTop = 0;
-			const listenFocus = function() {
-				setFocus(true);
-			};
-			const listenBlur = function() {
-				setFocus(false);
-			};
-			inputDom.addEventListener('focus', listenFocus);
-			inputDom.addEventListener('blur', listenBlur);
-			return () => {
-				inputDom.removeEventListener('focus', listenFocus);
-				inputDom.removeEventListener('blur', listenBlur);
-			};
+
+	const inputRef = useFocus<HTMLInputElement>(
+		() => {
+			setFocus(true);
+		},
+		() => {
+			setFocus(false);
 		}
-	}, [inputRef.current]);
+	);
+
 	useEffect(() => {
 		keyword && focus && setShow(true);
 	}, [focus, keyword]);
-	useEffect(() => {
-		if (show) {
-			// outside click 处理
-			const clickListener = (e: MouseEvent) => {
-				// 如果事件target等于或在pane内，则代表在pane内的点击，不做处理，否则隐藏pane
-				const pane = ref.current,
-					target = e.target as Node;
-				if (!pane || !target) {
-					return;
-				}
-				if (pane !== target && !pane.contains(target)) {
-					setShow(false);
-				}
-			};
-			document.body.addEventListener('click', clickListener);
-			return () => document.body.removeEventListener('click', clickListener);
-		}
-	}, [show]);
+
+	const paneRef = useClickOutside<HTMLDivElement>(() => {
+		setShow(false);
+	});
+
 	const onSearch = (pathname: string) => {
 		if (pathname) {
 			history.push(pathname);
@@ -216,16 +194,13 @@ export default withRouter<RouteComponentProps>(function Search({ history }) {
 		}
 	};
 	return (
-		<div ref={ref} className={cs(styles.search, { [styles.searchFocus]: focus || show })}>
-			<input
+		<div ref={paneRef} className={cs(styles.search, { [styles.searchFocus]: focus || show })}>
+			<Input
 				ref={inputRef}
 				className={styles.searchInput}
 				value={keyword}
-				onCompositionStart={() => setIsComposition(true)}
-				onCompositionUpdate={() => setIsComposition(true)}
-				onCompositionEnd={() => setIsComposition(false)}
-				onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-					setKeyword(String(e.target.value));
+				onChange={value => {
+					setKeyword(String(value));
 				}}
 			/>
 			<SIcon name="search" className={styles.searchIcon} />
@@ -238,7 +213,7 @@ export default withRouter<RouteComponentProps>(function Search({ history }) {
 			>
 				取消
 			</a>
-			<SearchPane show={show} keyword={isComposition ? '' : keyword} onSearch={onSearch} />
+			<SearchPane show={show} keyword={keyword} onSearch={onSearch} />
 		</div>
 	);
 });
