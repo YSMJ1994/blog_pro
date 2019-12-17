@@ -51,6 +51,7 @@
 		a {
 			color: #00b3b3;
 			text-decoration: none;
+			margin: 0 0.2rem;
 
 			&[href] {
 				cursor: pointer;
@@ -111,18 +112,19 @@
 			color: darken(#2c3e50, 10%);
 		}
 		code {
-			padding: 0.2em 0.4em;
+			padding: 0 0.4em;
 			margin: 0 0.2em;
 			border-radius: 4px;
 			background-color: transparent;
 			color: #a34a4d;
-			font-size: 0.9em;
+			font-size: 1em;
 		}
 		img {
 			max-width: 100%;
 			box-shadow: 0 0 8px 2px #f0f0f0;
 		}
 		pre {
+			font-size: 0.9rem;
 			padding: 1rem;
 			overflow: auto;
 
@@ -136,6 +138,10 @@
 		}
 		ul li {
 			list-style: disc;
+			margin-left: 2em;
+		}
+		ol li {
+			list-style: decimal;
 			margin-left: 2em;
 		}
 
