@@ -18,14 +18,14 @@ const Article: FC<{ className?: string } & RouteComponentProps<{ id: string }>> 
 	let index: number = 0;
 	// console.log('articles', articles, id);
 	const article = articles.filter((a, i) => {
-		if (a.id === intId) {
+		if (a.id === intId || a.title === id) {
 			index = i;
 			return true;
 		} else {
 			return false;
 		}
 	})[0];
-	if (isNaN(intId) || !articles) {
+	if (!articles) {
 		return (
 			<div>
 				<h1>参数错误</h1>
