@@ -6,7 +6,7 @@ const config = {
 	highlight: function(str, lang) {
 		if (lang && HighLight.getLanguage(lang)) {
 			try {
-				return HighLight.highlight(lang, str).value;
+				return HighLight.highlight(lang, str.replace(/\t/g, '    ')).value;
 			} catch (__) {}
 		}
 		return '';
