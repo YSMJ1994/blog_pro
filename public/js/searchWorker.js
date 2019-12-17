@@ -1,10 +1,5 @@
 function string2regstr(str) {
-	return str
-		.split('')
-		.map(char => {
-			return char.replace(/([.\\\[\]^$()?:*+|{},=!])/, '\\$1');
-		})
-		.join('');
+	return str.replace(/([.\\\[\]^$()?:*+|{},=!])/gi, '\\$1');
 }
 
 function string2regPart(str) {
@@ -25,9 +20,9 @@ function wrapKeyword(keyword) {
 }
 
 onmessage = function({ data }) {
-	console.log('Worker: Message receive data from main script', data);
+	// console.log('Worker: Message receive data from main script', data);
 	let { keyword, docInfo } = data;
-	// 搜索算法准则： 权重占比（完全匹配权重4，包含keyword增加2，包含部分keyword增加1）,keyword拆分
+	// 搜索算法准则： 权重占比（完全匹配权重+4，包含keyword权重+2，包含部分keyword权重+1）
 	// postMessage({ data, msg: 'worker received!' });
 	keyword = String(keyword).trim();
 	const { tags, group: groups, articles } = docInfo;
@@ -39,7 +34,7 @@ onmessage = function({ data }) {
 	const keywordRegStr = string2regstr(keyword);
 	const keywordSentenceReg = new RegExp(`[^，,;；。.\\b\\r\\n]*(${keywordRegStr})[^，,;；。.\\b\\r\\n]*`, 'i');
 	const keywordSingleSentenceReg = new RegExp(
-		`[^，,;；。.\\b\\r\\n]*(${keywordRegStr.split(' ').join('|')})[^，,;；。.\\b\\r\\n]*`,
+		`[^，,;；。.\\b\\r\\n]*(${keywordRegStr.split(/\s+/).join('|')})[^，,;；。.\\b\\r\\n]*`,
 		'i'
 	);
 	tags.forEach(tag => {
