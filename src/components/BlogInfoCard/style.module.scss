@@ -1,0 +1,33 @@
+@import '~@/styles/variables.scss';
+@import '~@/styles/mixin.scss';
+@import '~@/styles/placeholder.scss';
+
+.blogInfoCard {
+	width: 100%;
+	height: 100%;
+	font-size: 0.875rem;
+	@extend %card;
+
+	.title {
+		font-size: 1rem;
+
+		.titleIcon {
+			font-size: 1.1rem;
+			margin-right: 0.3rem;
+		}
+	}
+	.row {
+		line-height: 2rem;
+		text-indent: 1rem;
+		display: flex;
+		justify-content: space-between;
+
+		> span {
+			&:first-child {
+				&:after {
+					content: '：';
+				}
+			}
+		}
+	}
+}
