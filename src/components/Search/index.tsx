@@ -183,7 +183,7 @@ export default withRouter<RouteComponentProps>(function Search({ history }) {
 	}, [focus, keyword]);
 
 	const paneRef = useClickOutside<HTMLDivElement>(() => {
-		setShow(false);
+		show && setShow(false);
 	});
 
 	const onSearch = (pathname: string) => {

@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useEffect, useState, useCallback } from 'react';
 import DefaultPagination from '@/components/Pagination';
 
 interface PaginationProps {
@@ -16,9 +16,9 @@ export default function usePagination<T>(
 	const total = list.length;
 	const [page, setPage] = useState<number>(1);
 	const [pagingList, setPagingList] = useState<T[]>([]);
-	const PageComp: FC = () => {
+	const PageComp: FC = useCallback(() => {
 		return <Pagination current={page} total={total} onChange={nextPage => setPage(nextPage)} pageSize={pageSize} />;
-	};
+	}, [page, total, pageSize, Pagination]);
 	useEffect(() => {
 		setPagingList(list.slice((page - 1) * pageSize, page * pageSize));
 	}, [list, total, pageSize, page]);
