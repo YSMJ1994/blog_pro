@@ -21,24 +21,28 @@ export interface Tag {
 export interface Group {
 	name: string;
 	articles: MdDoc[];
-	groups?: Group[];
+	children?: Group[];
 }
 
 export interface DocInfo {
 	articles: MdDoc[];
 	tags: Tag[];
-	group: Group[];
+	groups: Group[];
+	expandGroups: Group[];
 	tagMap: { [name: string]: Tag };
 	articleMap: { [title: string]: MdDoc };
 }
 
-const DocCtx = React.createContext<DocInfo>({
+const initInfo: DocInfo = {
 	articles: [],
 	tags: [],
-	group: [],
+	groups: [],
+	expandGroups: [],
 	tagMap: {},
 	articleMap: {}
-});
+};
+
+const DocCtx = React.createContext<DocInfo>(initInfo);
 
 function resolveTags(docArray: MdDoc[], result: Tag[]): void {
 	let tagObj: { [key: string]: MdDoc[] } = {};
@@ -82,13 +86,13 @@ function resolveGroupTree(groupList: GroupObjItem[], allGroupList: GroupObjItem[
 		result.push(resultItem);
 		const children = allGroupList.filter(g => g.parent === key).sort((a, b) => (a.name > b.name ? 1 : -1));
 		if (children && children.length) {
-			resultItem.groups = [];
-			resolveGroupTree(children, allGroupList, resultItem.groups);
+			resultItem.children = [];
+			resolveGroupTree(children, allGroupList, resultItem.children);
 		}
 	});
 }
 
-function resolveGroups(docArray: MdDoc[], result: Group[]): void {
+function resolveGroups(docArray: MdDoc[], result: Group[], expandResult: Group[]): void {
 	let groupObj: { [key: string]: GroupObjItem } = {};
 	docArray.forEach(doc => {
 		const { group } = doc;
@@ -129,6 +133,16 @@ function resolveGroups(docArray: MdDoc[], result: Group[]): void {
 	});
 	const keys = Object.keys(groupObj);
 	const groupList = keys.map(key => groupObj[key]);
+	expandResult.push.apply(
+		expandResult,
+		keys.map(key => {
+			const { name, articles } = groupObj[key];
+			return {
+				name,
+				articles
+			};
+		})
+	);
 	// console.log('keys', keys);
 	// console.log('groupList', groupList);
 	const topGroup = keys
@@ -149,23 +163,19 @@ function resolveTagMap(tags: Tag[]) {
 }
 
 export const Provider: React.FC = ({ children }) => {
-	const [docInfo, setDocInfo] = useState<DocInfo>({
-		articles: [],
-		tags: [],
-		group: [],
-		tagMap: {},
-		articleMap: {}
-	});
+	const [docInfo, setDocInfo] = useState<DocInfo>(initInfo);
 	useEffect(() => {
 		const tags: Tag[] = [],
-			group: Group[] = [];
+			groups: Group[] = [],
+			expandGroups: Group[] = [];
 		resolveTags(docArray, tags);
-		resolveGroups(docArray, group);
+		resolveGroups(docArray, groups, expandGroups);
 		const articles = docArray.sort((a, b) => b.createTime - a.createTime);
 		const info: DocInfo = {
 			articles,
 			tags,
-			group,
+			groups,
+			expandGroups,
 			tagMap: resolveTagMap(tags),
 			articleMap: articles.reduce(
 				(pre, article) => {
@@ -181,15 +191,3 @@ export const Provider: React.FC = ({ children }) => {
 };
 
 export default DocCtx;
-
-interface Person {
-	name: string;
-	age: number;
-}
-
-type Person1 = Readonly<Person>;
-type Person2 = Partial<Person>;
-
-type Readonly2<T> = { readonly [k in keyof T]: T[k] };
-
-type Partial2<T> = { [k in keyof T]?: T[k] };

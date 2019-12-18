@@ -28,7 +28,7 @@
 		}
 		viewport.setAttribute(
 			'content',
-			`width=${width}, user-scalable=no, initial-scale=${scale}, maximum-scale=${scale}, minimum-scale=${scale}`
+			`width=${width},initial-scale=${scale},maximum-scale=${scale},minimum-scale=${scale},user-scalable=no`
 		);
 		document.head.insertAdjacentHTML('beforeend', `<style>html { font-size: ${remCalc}px!important; }</style>`);
 		window.addEventListener('load', function () {

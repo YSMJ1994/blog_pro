@@ -12,7 +12,7 @@ const InfoCard: React.FC<RouteComponentProps & { style: CSSProperties }> = ({ hi
 	const { avatar_url, name, bio, followers, following, html_url, email } = info;
 	const [avatar, setAvatar] = useState(avatar_url);
 	const docCount = docList.articles.length;
-	const groupCount = docList.group.length;
+	const groupCount = docList.expandGroups.length;
 	const tagCount = docList.tags.length;
 	useEffect(() => {
 		setAvatar(avatar_url);

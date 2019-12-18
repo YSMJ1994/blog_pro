@@ -56,11 +56,11 @@ const GroupItem: FC<
 		onChildOpen?: (name: string) => void;
 		animated?: boolean;
 	}
-> = ({ name, articles = [], groups = [], open = false, goArticle, paramsName, onChildOpen, animated = true }) => {
+> = ({ name, articles = [], children = [], open = false, goArticle, paramsName, onChildOpen, animated = true }) => {
 	// 若默认url参数name和当前分组名称相同或默认为展开则当前分组展开
 	const [itemOpen, setItemOpen] = useState(open);
 	const [isInit, setIsInit] = useState(true);
-	const hasChildrenGroups = Boolean(groups.length);
+	const hasChildrenGroups = Boolean(children.length);
 	const hasArticles = Boolean(articles.length);
 	// 监听子分组open 事件，子分组展开则当前分组也展开
 	const listenChildOpen = (name: string) => {
@@ -91,7 +91,7 @@ const GroupItem: FC<
 			<CollapseBox show={itemOpen} animated={animated}>
 				<ul className={cs(styles.groupItemChildren)} style={{ height: 'auto' }}>
 					{hasChildrenGroups &&
-						groups.map(childGroup => {
+						children.map(childGroup => {
 							return (
 								<li key={childGroup.name}>
 									<GroupItem
@@ -150,7 +150,7 @@ const GroupPage: FC<{ className?: string } & RouteComponentProps<{ name?: string
 		params: { name }
 	}
 }) => {
-	const { group: groups } = useContext(DocCtx);
+	const { groups } = useContext(DocCtx);
 	const [open, setOpen] = useState<boolean>(false);
 	const [animated, setAnimated] = useState<boolean>(true);
 	console.log('groups', groups);
