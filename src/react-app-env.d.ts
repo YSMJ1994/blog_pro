@@ -96,3 +96,23 @@ declare global {
 
 	type ClickHandler<E extends HTMLElement = HTMLElement> = EventHandler<MouseEvent<E>>;
 }
+
+declare module 'axios' {
+	interface AxiosInstance {
+		<R = undefined>(config: AxiosRequestConfig): Promise<R>;
+		<R = undefined>(url: string, config?: AxiosRequestConfig): Promise<R>;
+		defaults: AxiosRequestConfig;
+		interceptors: {
+			request: AxiosInterceptorManager<AxiosRequestConfig>;
+			response: AxiosInterceptorManager<AxiosResponse>;
+		};
+		getUri(config?: AxiosRequestConfig): string;
+		request<R = any>(config: AxiosRequestConfig): Promise<R>;
+		get<R = any>(url: string, config?: AxiosRequestConfig): Promise<R>;
+		delete<R = any>(url: string, config?: AxiosRequestConfig): Promise<R>;
+		head<R = any>(url: string, config?: AxiosRequestConfig): Promise<R>;
+		post<R = any>(url: string, data?: any, config?: AxiosRequestConfig): Promise<R>;
+		put<R = any>(url: string, data?: any, config?: AxiosRequestConfig): Promise<R>;
+		patch<R = any>(url: string, data?: any, config?: AxiosRequestConfig): Promise<R>;
+	}
+}

@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useState, useEffect, CSSProperties } from 'react';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import DocCtx from '@/ctx/DocCtx';
 import InfoCtx from '@/ctx/InfoCrx';
@@ -6,7 +6,7 @@ import styles from './style.module.scss';
 import SIcon from '@/components/SIcon';
 import defaultAvatar from '@/assets/img/avatar.jpeg';
 
-const InfoCard: React.FC<RouteComponentProps> = ({ history }) => {
+const InfoCard: React.FC<RouteComponentProps & { style: CSSProperties }> = ({ history, style }) => {
 	const docList = useContext(DocCtx);
 	const info = useContext(InfoCtx);
 	const { avatar_url, name, bio, followers, following, html_url, email } = info;
@@ -18,7 +18,7 @@ const InfoCard: React.FC<RouteComponentProps> = ({ history }) => {
 		setAvatar(avatar_url);
 	}, [avatar_url]);
 	return (
-		<div className={styles.infoCard}>
+		<div className={styles.infoCard} style={style}>
 			<div className={styles.author}>
 				<img
 					className={styles.avatar}

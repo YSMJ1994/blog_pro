@@ -4,6 +4,14 @@
 	min-height: 5rem;
 	position: sticky;
 	top: 1rem;
+
+	> div {
+		margin-bottom: 1rem;
+
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
 }
 
 @media screen and (max-device-width: 1000px) {

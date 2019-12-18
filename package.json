@@ -9,8 +9,10 @@
     "rebuild": "git pull && yarn run build",
     "publish2home": "scp -r ./build/* soberz@home.soberz.cn:/home/soberz/workspace/static/blog",
     "publish2tencent": "scp -r ./build/* sober@soberz.cn:/home/sober/staticManager/blog",
+    "publish2blog_server": "scp -r ./build/* sober@soberz.cn:/home/sober/projects/blog_pro_server/blog",
     "build&publish2home": "yarn run build && yarn run publish2home",
-    "build&publish2tencent": "yarn run build && yarn run publish2tencent"
+    "build&publish2tencent": "yarn run build && yarn run publish2tencent",
+    "build&publish2blog_server": "yarn run build && yarn run publish2blog_server"
   },
   "husky": {
     "hooks": {
@@ -32,8 +34,8 @@
     "@types/koa-router": "^7.0.42",
     "@types/koa-static": "^4.0.1",
     "@types/node": "^12.12.20",
-    "@types/react": "16.8.6",
-    "@types/react-dom": "16.8.4",
+    "@types/react": "^16.8.6",
+    "@types/react-dom": "^16.8.6",
     "@types/react-router-dom": "^4.3.2",
     "axios": "^0.19.0",
     "babel-jest": "24.7.1",

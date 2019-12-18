@@ -6,6 +6,13 @@
   "description": "SoberZ的个人站点",
   "glyphs": [
     {
+      "icon_id": "3137",
+      "name": "统计",
+      "font_class": "tongji",
+      "unicode": "e601",
+      "unicode_decimal": 58881
+    },
+    {
       "icon_id": "128976",
       "name": "github",
       "font_class": "github",

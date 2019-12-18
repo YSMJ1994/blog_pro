@@ -6,7 +6,7 @@ import useTimeout from '@/utils/useTimeout';
 export interface AnimateShowWrapperProps {
 	className?: string;
 	style?: CSSProperties;
-	direction?: 'up' | 'down' | 'left' | 'right';
+	direction?: 'up' | 'down' | 'left' | 'right' | 'unset';
 	delay?: number;
 	distance?: string | number;
 }
@@ -20,6 +20,9 @@ const WithAnimateShow: WithAnimateShow = WrappedComp => props => {
 	let xOffset, yOffset;
 	const calcDistance = typeof distance === 'number' ? `${distance}rem` : distance;
 	switch (direction) {
+		case 'unset': {
+			return <WrappedComp {...otherProps as any} style={style} />;
+		}
 		case 'up': {
 			xOffset = 0;
 			yOffset = `-${calcDistance}`;

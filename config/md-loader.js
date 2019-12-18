@@ -38,7 +38,7 @@ async function mdLoader(source) {
 	const relativePath = mdPath.replace(appDoc, '')
 	const group = relativePath.split(path.sep).filter(t => t).slice(0, -1)
 	const reviewStr = (source.match(reviewRegExp) || [])[1] || '';
-	source = source.replace(reviewRegExp, '');
+	source = source.replace(reviewRegExp, '$1');
 	const review = MDT.render(reviewStr)
 	const content = MDT.render(source)
 	const md = {
