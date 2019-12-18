@@ -44,7 +44,7 @@ export default Input;
 
 ## How to use?
 
-当成一个普通 input 来使用就行了，区别是，onChange 的参数是 input 框的值，且在输入法状态下不会触发 onChange,只有输入法输入完成时才触发 onChange
+当成一个普通 input 来使用就行了，区别是，onChange 的参数是 input 框的值，且在输入法状态下不会触发 onChange。
 
 like this:
 
