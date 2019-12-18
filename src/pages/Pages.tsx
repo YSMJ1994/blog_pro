@@ -12,6 +12,7 @@ import WithPageWrapper from '@/hoc/WithPageWrapper';
 import InfoCtx from '@/ctx/InfoCrx';
 import StateCtx from '@/ctx/StateCtx';
 import defaultAvatar from '@/assets/img/avatar.jpeg';
+import { access_log } from '@/api/blog_server';
 
 const Home = WithPageWrapper(asyncComponent(() => import(/* webpackChunkName: "home" */ './Home')));
 const About = WithPageWrapper(asyncComponent(() => import(/* webpackChunkName: "about" */ './About')));
@@ -79,6 +80,16 @@ export default function() {
 	useEffect(() => {
 		scrollViewRef.current && state.setState({ scrollElement: scrollViewRef.current });
 	}, [scrollViewRef.current]);
+	useEffect(() => {
+		const access_session_tag = sessionStorage.getItem('blog_access');
+		if (!access_session_tag) {
+			access_log().then(res => {
+				// 已经记录过本次访问
+				sessionStorage.setItem('blog_access', '1');
+				console.log('access log result: ', res);
+			});
+		}
+	}, []);
 	return (
 		<Router>
 			<AnimatedHeader direction="up" />
