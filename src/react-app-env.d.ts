@@ -11,7 +11,6 @@ declare global {
 			readonly PUBLIC_URL: string;
 			readonly BASE_API: string;
 			readonly ICON_URL: string;
-			readonly GITHUB_TOKEN: string;
 			readonly PROXY_PATH: string;
 		}
 	}

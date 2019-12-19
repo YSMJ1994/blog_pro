@@ -1,7 +1,7 @@
 import fetch from '@/utils/fetch';
 
 export function access_log() {
-	return fetch.get<number>('/blog_server/blog_access');
+	return fetch.get<number>('/blog_access');
 }
 
 export interface BlogInfo {
@@ -10,5 +10,5 @@ export interface BlogInfo {
 }
 
 export function getBlogInfo() {
-	return fetch.get<BlogInfo>('/blog_server/blog_info');
+	return fetch.get<BlogInfo>('/blog_info');
 }

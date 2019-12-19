@@ -49,9 +49,5 @@ export const defaultInfo = {
 export type InfoType = typeof defaultInfo;
 
 export function getInfo() {
-	return fetch.get<any, InfoType>('https://api.github.com/user', {
-		params: {
-			access_token: process.env.GITHUB_TOKEN
-		}
-	});
+	return fetch.get<any, InfoType>('/github_user');
 }

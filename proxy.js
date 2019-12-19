@@ -6,7 +6,7 @@ module.exports = function(app) {
 			target: process.env.PROXY_PATH,
 			changeOrigin: true,
 			pathRewrite: {
-				[`^${process.env.BASE_API}`]: ''
+				[`^${process.env.BASE_API}`]: process.env.PROXY_REWRITE || ''
 			}
 		})
 	);
