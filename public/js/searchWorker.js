@@ -25,7 +25,7 @@ onmessage = function({ data }) {
 	// 搜索算法准则： 权重占比（完全匹配权重+4，包含keyword权重+2，包含部分keyword权重+1）
 	// postMessage({ data, msg: 'worker received!' });
 	keyword = String(keyword).trim();
-	const { tags, group: groups, articles } = docInfo;
+	const { tags, groups, articles } = docInfo;
 	const resultTags = [],
 		resultGroups = [],
 		resultArticles = [];
