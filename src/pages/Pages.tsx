@@ -12,7 +12,7 @@ import WithPageWrapper from '@/hoc/WithPageWrapper';
 import InfoCtx from '@/ctx/InfoCrx';
 import StateCtx from '@/ctx/StateCtx';
 import defaultAvatar from '@/assets/img/avatar.jpeg';
-import { access_log } from '@/api/blog_server';
+import { access_log } from '@/api/blogInfo';
 
 const Home = WithPageWrapper(asyncComponent(() => import(/* webpackChunkName: "home" */ './Home')));
 const About = WithPageWrapper(asyncComponent(() => import(/* webpackChunkName: "about" */ './About')));

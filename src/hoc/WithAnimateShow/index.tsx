@@ -1,7 +1,7 @@
 import React, { ComponentClass, CSSProperties, FC, useState, PropsWithChildren } from 'react';
 import cs from 'classnames';
 import styles from './style.module.scss';
-import useTimeout from '@/utils/useTimeout';
+import { useTimeout } from '@ysmj/web_utils';
 
 export interface AnimateShowWrapperProps {
 	className?: string;

@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useState } from 'react';
-import { getBlogInfo, BlogInfo } from '@/api/blog_server';
+import { getBlogInfo, BlogInfo } from '@/api/blogInfo';
 
 const initInfo: BlogInfo = {
 	access_num: 0,

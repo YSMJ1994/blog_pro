@@ -1,9 +1,9 @@
 import React, { FC, useEffect, useState } from 'react';
 import { getInfo, defaultInfo, InfoType } from '@/api/github';
-import { get, set } from 'utils/localCache';
+import { localCache } from '@ysmj/web_utils';
 
 const cacheKey = '__github_info';
-const cacheInfo = get<InfoType>(cacheKey);
+const cacheInfo = localCache.get<InfoType>(cacheKey);
 const initInfo = cacheInfo || defaultInfo;
 const InfoCtx = React.createContext<InfoType>(initInfo);
 
@@ -12,7 +12,7 @@ export const Provider: FC = ({ children }) => {
 	useEffect(() => {
 		getInfo().then(result => {
 			if (result) {
-				set(cacheKey, result);
+				localCache.set(cacheKey, result);
 				// console.log('request github info', result);
 				setInfo(result);
 			}

@@ -8,7 +8,6 @@ import cs from 'classnames';
 import InfoCtx from '@/ctx/InfoCrx';
 import StateCtx from '@/ctx/StateCtx';
 import defaultAvatar from '@/assets/img/avatar.jpeg';
-import useTimeout from '@/utils/useTimeout';
 
 interface MenuItemProps extends RouteComponentProps {
 	label: string;
@@ -16,34 +15,36 @@ interface MenuItemProps extends RouteComponentProps {
 	cross?: boolean;
 	onClick?: (e?: MouseEvent) => void;
 }
-const MenuItem = withRouter<MenuItemProps>(({ label, link, cross = false, history, location, onClick }) => {
-	const [active, setActive] = useState(false);
-	const { pathname } = location;
-	useEffect(() => {
-		// 去文章详情页面不改变导航栏激活状态
-		if (/^\/article/.test(pathname)) {
-			return;
-		}
-		if (link === '/') {
-			setActive(pathname === link);
-		} else {
-			setActive(pathname.startsWith(link));
-		}
-	}, [pathname]);
-	return (
-		<CustomLink
-			active={active}
-			to={cross ? link : undefined}
-			onClick={e => {
-				!cross && history.push(link);
-				onClick && onClick();
-			}}
-			className={cs(Styles.menuItem, { [Styles.menuItemActive]: active })}
-		>
-			{label}
-		</CustomLink>
-	);
-});
+const MenuItem = withRouter<MenuItemProps, FC<MenuItemProps>>(
+	({ label, link, cross = false, history, location, onClick }) => {
+		const [active, setActive] = useState(false);
+		const { pathname } = location;
+		useEffect(() => {
+			// 去文章详情页面不改变导航栏激活状态
+			if (/^\/article/.test(pathname)) {
+				return;
+			}
+			if (link === '/') {
+				setActive(pathname === link);
+			} else {
+				setActive(pathname.startsWith(link));
+			}
+		}, [pathname]);
+		return (
+			<CustomLink
+				active={active}
+				to={cross ? link : undefined}
+				onClick={e => {
+					!cross && history.push(link);
+					onClick && onClick();
+				}}
+				className={cs(Styles.menuItem, { [Styles.menuItemActive]: active })}
+			>
+				{label}
+			</CustomLink>
+		);
+	}
+);
 
 function MenuList({
 	className,
@@ -98,7 +99,6 @@ const Header: FC<{ className?: string; style: CSSProperties }> = ({ className, s
 	const [phoneShowMenu, setPhoneShowMenu] = useState(false);
 	const info = useContext(InfoCtx);
 	const { searchFocus, searchPaneShow, scrollElement } = useContext(StateCtx);
-	const [otherStyle, setOtherStyle] = useState<CSSProperties>({});
 	const [hide, setHide] = useState<boolean>(false);
 	const timeoutRef = useRef<NodeJS.Timeout>();
 	const { avatar_url, name } = info;
@@ -150,33 +150,12 @@ const Header: FC<{ className?: string; style: CSSProperties }> = ({ className, s
 			scrollElement.removeEventListener('scroll', listener);
 		};
 	}, [hide, scrollElement, searchFocus, searchPaneShow]);
-
-	useEffect(() => {
-		// todo:
-		/*if(searchFocus) {
-			const scrollTop = document.documentElement.scrollTop;
-			setOtherStyle({
-				top: `${scrollTop}px`
-			})
-			setTimeout(() => {
-				document.documentElement.scrollTop = scrollTop
-			}, 5)
-		} else {
-			setOtherStyle({
-				top: '0px'
-			})
-		}*/
-	}, [searchFocus]);
-	const resultStyle = {
-		...style,
-		...otherStyle
-	};
 	return (
 		<header
 			className={cs(Styles.header, className, {
 				[Styles.headerHide]: hide
 			})}
-			style={resultStyle}
+			style={style}
 		>
 			<div className={Styles.headerInner}>
 				<SIcon name="menu" className={Styles.menuIcon} onClick={() => setPhoneShowMenu(!phoneShowMenu)} />

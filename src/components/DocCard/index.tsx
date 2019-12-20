@@ -1,11 +1,10 @@
-import React, { FC } from 'react';
+import React, { FC, PropsWithChildren } from 'react';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
 import styles from './style.module.scss';
-import { formatTime } from '@/utils';
+import { formatTime } from '@ysmj/web_utils';
 import { MdDoc } from '@/ctx/DocCtx';
 import Title from '@/components/Link';
 import cs from 'classnames';
-import { PropsWithChildren } from '~/node_modules/@types/react';
 
 interface DocCardProps {
 	doc: MdDoc;
@@ -84,4 +83,4 @@ const DocCard: FC<ResolveProps> = ({ mini = false, doc, history, children }) => 
 	);
 };
 
-export default withRouter<ResolveProps>(DocCard);
+export default withRouter<ResolveProps, FC<ResolveProps>>(DocCard);

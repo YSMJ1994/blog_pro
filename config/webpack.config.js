@@ -304,7 +304,7 @@ module.exports = function(webpackEnv = 'development') {
 						// The preset includes JSX, Flow, TypeScript, and some ESnext features.
 						{
 							test: /\.(js|mjs|jsx|ts|tsx)$/,
-							include: paths.appSrc,
+							include: [paths.appSrc, /node_modules\/@ysmj\/web_utils/],
 							loader: require.resolve('babel-loader'),
 							options: {
 								customize: require.resolve('babel-preset-react-app/webpack-overrides'),

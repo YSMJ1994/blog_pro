@@ -6,7 +6,7 @@ import DocCtx, { Group, MdDoc } from '@/ctx/DocCtx';
 import SIcon from '@/components/SIcon';
 import PageTitle from '@/components/PageTitle';
 import Btn from '@/components/Btn';
-import { CollapseBox } from 'sober_components';
+import { CollapseBox } from '@ysmj/react-ui';
 
 const Row: FC<{ label: string; icon?: string }> = ({ label, icon }) => {
 	return (

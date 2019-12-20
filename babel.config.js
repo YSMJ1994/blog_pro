@@ -13,12 +13,12 @@ module.exports = {
 		[
 			'import',
 			{
-				libraryName: 'sober_components',
+				libraryName: '@ysmj/react-ui',
 				camel2DashComponentName: false,
 				libraryDirectory: 'es',
 				style: 'css'
 			},
-			'import-for-sober_components'
+			'import-for-@ysmj/react-ui'
 		]
 	]
 };

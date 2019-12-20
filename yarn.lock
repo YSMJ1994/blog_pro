@@ -1225,9 +1225,9 @@
   integrity sha512-rzOhiQ55WzAiFgXRtitP/ZUT8iVNyllEpylJ5zHzR4vArUvMB39GTk+Zon/uAM0JxEFAWnwsxC2gH8s+tZ3Myg==
 
 "@types/history@*":
-  version "4.7.2"
-  resolved "https://registry.npmjs.org/@types/history/-/history-4.7.2.tgz#0e670ea254d559241b6eeb3894f8754991e73220"
-  integrity sha512-ui3WwXmjTaY73fOQ3/m3nnajU/Orhi6cEu5rzX+BrAAJxa3eITXZ5ch9suPqtM03OWhAHhPSyBGCN4UKoxO20Q==
+  version "4.7.3"
+  resolved "https://registry.npmjs.org/@types/history/-/history-4.7.3.tgz#856c99cdc1551d22c22b18b5402719affec9839a"
+  integrity sha512-cS5owqtwzLN5kY+l+KgKdRJ/Cee8tlmQoGQuIE9tWnSmS3JMKzmxo2HIAk2wODMifGwO20d62xZQLYz+RLfXmw==
 
 "@types/istanbul-lib-coverage@^2.0.0":
   version "2.0.1"
@@ -1271,14 +1271,14 @@
   resolved "https://registry.npmjs.org/@types/q/-/q-1.5.2.tgz#690a1475b84f2a884fd07cd797c00f5f31356ea8"
   integrity sha512-ce5d3q03Ex0sy4R14722Rmt6MT07Ua+k4FwDfdcToYJcMKNtRVQvJ6JCAPdAmAnbRb6CsX6aYb9m96NGod9uTw==
 
-"@types/react-dom@^16.8.6":
-  version "16.9.4"
-  resolved "https://registry.npm.taobao.org/@types/react-dom/download/@types/react-dom-16.9.4.tgz?cache=0&sync_timestamp=1573057568068&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40types%2Freact-dom%2Fdownload%2F%40types%2Freact-dom-16.9.4.tgz#0b58df09a60961dcb77f62d4f1832427513420df"
-  integrity sha1-C1jfCaYJYdy3f2LU8YMkJ1E0IN8=
+"@types/react-dom@^16.9.0":
+  version "16.9.0"
+  resolved "https://registry.npmjs.org/@types/react-dom/-/react-dom-16.9.0.tgz#ba6ddb00bf5de700b0eb91daa452081ffccbfdea"
+  integrity sha512-OL2lk7LYGjxn4b0efW3Pvf2KBVP0y1v3wip1Bp7nA79NkOpElH98q3WdCEdDj93b2b0zaeBG9DvriuKjIK5xDA==
   dependencies:
     "@types/react" "*"
 
-"@types/react-router-dom@^4.3.2":
+"@types/react-router-dom@4.3.2":
   version "4.3.2"
   resolved "https://registry.npmjs.org/@types/react-router-dom/-/react-router-dom-4.3.2.tgz#52c17c3682597638f31c17c42620403dc5c2a3f5"
   integrity sha512-biesHodFxPgDxku2m08XwPeAfUYBcxAnrQG7pwFikuA3L2e3u2OKAb+Sb16bJuU3L5CTHd+Ivap+ke4mmGsHqQ==
@@ -1288,25 +1288,17 @@
     "@types/react-router" "*"
 
 "@types/react-router@*":
-  version "4.4.5"
-  resolved "https://registry.npmjs.org/@types/react-router/-/react-router-4.4.5.tgz#1166997dc7eef2917b5ebce890ebecb32ee5c1b3"
-  integrity sha512-12+VOu1+xiC8RPc9yrgHCyLI79VswjtuqeS2gPrMcywH6tkc8rGIUhs4LaL3AJPqo5d+RPnfRpNKiJ7MK2Qhcg==
+  version "5.1.3"
+  resolved "https://registry.npmjs.org/@types/react-router/-/react-router-5.1.3.tgz#7c7ca717399af64d8733d8cb338dd43641b96f2d"
+  integrity sha512-0gGhmerBqN8CzlnDmSgGNun3tuZFXerUclWkqEhozdLaJtfcJRUTGkKaEKk+/MpHd1KDS1+o2zb/3PkBUiv2qQ==
   dependencies:
     "@types/history" "*"
     "@types/react" "*"
 
-"@types/react@*":
+"@types/react@*", "@types/react@16.8.15":
   version "16.8.15"
   resolved "https://registry.npmjs.org/@types/react/-/react-16.8.15.tgz#a76515fed5aa3e996603056f54427fec5f2a5122"
   integrity sha512-dMhzw1rWK+wwJWvPp5Pk12ksSrm/z/C/+lOQbMZ7YfDQYnJ02bc0wtg4EJD9qrFhuxFrf/ywNgwTboucobJqQg==
-  dependencies:
-    "@types/prop-types" "*"
-    csstype "^2.2.0"
-
-"@types/react@^16.8.6":
-  version "16.9.16"
-  resolved "https://registry.npm.taobao.org/@types/react/download/@types/react-16.9.16.tgz#4f12515707148b1f53a8eaa4341dae5dfefb066d"
-  integrity sha1-TxJRVwcUix9TqOqkNB2uXf77Bm0=
   dependencies:
     "@types/prop-types" "*"
     csstype "^2.2.0"
@@ -1498,6 +1490,16 @@
   version "4.2.2"
   resolved "https://registry.npmjs.org/@xtuc/long/-/long-4.2.2.tgz#d291c6a4e97989b5c61d9acf396ae4fe133a718d"
   integrity sha512-NuHqBY1PB/D8xU6s/thBgOAiAP7HOYDQ32+BFZILJ8ivkUkAHQnWfn6WhL79Owj1qmUnoN/YPhktdIoucipkAQ==
+
+"@ysmj/react-ui@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.npmjs.org/@ysmj/react-ui/-/react-ui-1.0.1.tgz#163b531f02fce812feb7ff517667d0c0681bbc06"
+  integrity sha512-JgVR3am9+CqjqeptoMUToJ1xt9Xt4sd2QW6b4XoMm93sH7Co4xylPREOvxOXzvzR6tl3iazKyWkE7WTlajUcOA==
+
+"@ysmj/web_utils@^1.1.1":
+  version "1.1.1"
+  resolved "https://registry.npmjs.org/@ysmj/web_utils/-/web_utils-1.1.1.tgz#f3b3312237c3900f685e67906d6e0f9a0750a211"
+  integrity sha512-Bl1UJ23iDTBrKdgJzhofsRQ6xvFjL/WvoCeQNNaYTX8Uet3KyrQDllZUlAHpLQkX4JPjq4Ykno2l3kDGdQfqvg==
 
 abab@^2.0.0:
   version "2.0.0"
@@ -8206,10 +8208,10 @@ react-dev-utils@^9.0.0:
     strip-ansi "5.2.0"
     text-table "0.2.0"
 
-react-dom@^16.8.6:
+react-dom@16.8.6:
   version "16.8.6"
-  resolved "https://registry.npm.taobao.org/react-dom/download/react-dom-16.8.6.tgz#71d6303f631e8b0097f56165ef608f051ff6e10f"
-  integrity sha1-cdYwP2MeiwCX9WFl72CPBR/24Q8=
+  resolved "https://registry.npmjs.org/react-dom/-/react-dom-16.8.6.tgz#71d6303f631e8b0097f56165ef608f051ff6e10f"
+  integrity sha512-1nL7PIq9LTL3fthPqwkvr2zY7phIPjYrT0jp4HjyEQrEROnw4dG41VVwi/wfoCneoleqrNX7iAD+pXebJZwrwA==
   dependencies:
     loose-envify "^1.1.0"
     object-assign "^4.1.1"
@@ -8255,10 +8257,10 @@ react-router@5.0.0:
     tiny-invariant "^1.0.2"
     tiny-warning "^1.0.0"
 
-react@^16.8.6:
+react@16.8.6:
   version "16.8.6"
-  resolved "https://registry.npm.taobao.org/react/download/react-16.8.6.tgz#ad6c3a9614fd3a4e9ef51117f54d888da01f2bbe"
-  integrity sha1-rWw6lhT9Ok6e9REX9U2IjaAfK74=
+  resolved "https://registry.npmjs.org/react/-/react-16.8.6.tgz#ad6c3a9614fd3a4e9ef51117f54d888da01f2bbe"
+  integrity sha512-pC0uMkhLaHm11ZSJULfOBqV4tIZkx87ZLvbbQYunNixAAvjnC+snJCg0XQXn9VIsttVsbZP/H/ewzgsd5fxKXw==
   dependencies:
     loose-envify "^1.1.0"
     object-assign "^4.1.1"
@@ -8989,11 +8991,6 @@ snapdragon@^0.8.1:
     source-map "^0.5.6"
     source-map-resolve "^0.5.0"
     use "^3.1.0"
-
-sober_components@^0.1.6:
-  version "0.1.6"
-  resolved "https://registry.npmjs.org/sober_components/-/sober_components-0.1.6.tgz#c11f8f4f97004e376e2dd5b9eac3431868aeb453"
-  integrity sha512-niyTv5iOfs82xgVB+KfKPm5r9OZJVc0G1Ibxf8OMt7CGfVma5A+2EXEPrNm4wfeHvXwEKNu8YscCXN4VWeLtFw==
 
 sockjs-client@1.3.0:
   version "1.3.0"

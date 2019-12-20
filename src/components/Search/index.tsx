@@ -6,10 +6,8 @@ import SIcon from '@/components/SIcon';
 import SearchWorker, { SearchArticle, SearchGroup, SearchResult, SearchTag } from '@/utils/SearchWorker';
 import DocCtx from '@/ctx/DocCtx';
 import StateCtx from '@/ctx/StateCtx';
-import { isMobile } from '@/utils';
+import { isMobile, useClickOutside, useFocus } from '@ysmj/web_utils';
 import Input from '@/components/NoCompositionInput';
-import useClickOutside from '@/hooks/useClickOutside';
-import useFocus from '@/hooks/useFocus';
 
 const SearchItemBox: FC<{ title: string }> = ({ title, children }) => {
 	return (
@@ -143,7 +141,7 @@ const SearchPane: FC<{ keyword: string; show: boolean; onSearch: (pathname: stri
 	);
 };
 
-export default withRouter<RouteComponentProps>(function Search({ history }) {
+export default withRouter<RouteComponentProps, FC<RouteComponentProps>>(function Search({ history }) {
 	const { searchFocus: focus, searchPaneShow: show, scrollElement, setState } = useContext(StateCtx);
 	const [scrollTop, setScrollTop] = useState<number>(0);
 	const setFocus = (focus: boolean) => {
