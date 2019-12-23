@@ -12,17 +12,6 @@
     "build&publish2tencent": "yarn run build && yarn run publish2tencent",
     "build&publish2blog_server": "yarn run build && yarn run publish2blog_server"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "(src|scripts)/**/*.{js,jsx,ts,tsx,json,css,less,scss,sass}": [
-      "prettier --write",
-      "git add"
-    ]
-  },
   "dependencies": {
     "@babel/core": "7.4.3",
     "@svgr/webpack": "4.1.0",

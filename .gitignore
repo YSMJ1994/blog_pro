@@ -23,3 +23,6 @@ yarn-error.log*
 .idea
 .vscode
 src/assets/md
+.prettierrc.js
+.huskyrc.js
+lint-staged.config.js

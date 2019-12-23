@@ -20,7 +20,7 @@
 const worker = new Worker('js/plus.js');
 // 监听消息
 worker.onmessage = function(self, ev) {
-    console.log('Plus Worker Result: ', ev.data);
+  console.log('Plus Worker Result: ', ev.data);
 };
 // 发送消息
 worker.postMessage([1, 2]);
@@ -31,10 +31,10 @@ worker.postMessage([1, 2]);
 ```js
 // 监听消息
 onmessage = function(ev) {
-    // 获取数据
-    const [arg1, arg2] = ev.data;
-    //  发送消息
-    postMessage(arg1 + arg2);
+  // 获取数据
+  const [arg1, arg2] = ev.data;
+  //  发送消息
+  postMessage(arg1 + arg2);
 };
 ```
 
@@ -54,9 +54,9 @@ onmessage = function(ev) {
 
 根据输入的关键字`keyword`给出三类搜索结果，分别为`标签`、`分组`、`文章`，每类结果仅当有搜索结果时才展示。
 
--   `标签`：根据`keyword`与`标签名`对比计算权重，完全匹配权重为`4`，包含`keyword`权重为`2`，只包含`keyword`中部分字符权重为`1`。匹配结果根据`权重倒序`和`标签名字母表`顺序排序。
--   `分组`：同上`标签`，区别是`keyword`和`分组名`作比对。
--   `文章`：根据`keyword`与`文章标题`、`文章内容`作匹配，比对规则同`标签`，然后根据`累计权重倒序`和`文章标题的字母表`顺序排列。
+- `标签`：根据`keyword`与`标签名`对比计算权重，完全匹配权重为`4`，包含`keyword`权重为`2`，只包含`keyword`中部分字符权重为`1`。匹配结果根据`权重倒序`和`标签名字母表`顺序排序。
+- `分组`：同上`标签`，区别是`keyword`和`分组名`作比对。
+- `文章`：根据`keyword`与`文章标题`、`文章内容`作匹配，比对规则同`标签`，然后根据`累计权重倒序`和`文章标题的字母表`顺序排列。
 
 #### 定义主线程和搜索 Worker 互通的数据类型
 
@@ -64,18 +64,18 @@ onmessage = function(ev) {
 
 ```typescript
 interface DocInfo {
-    // 标签列表
-    tags: { name: string }[];
-    // 分组列表
-    group: { name: string }[];
-    // 文章列表
-    articles: { title: string; content: string }[];
+  // 标签列表
+  tags: { name: string }[];
+  // 分组列表
+  group: { name: string }[];
+  // 文章列表
+  articles: { title: string; content: string }[];
 }
 
 interface MainData {
-    // 搜索的关键字
-    keyword: string;
-    docInfo: DocInfo;
+  // 搜索的关键字
+  keyword: string;
+  docInfo: DocInfo;
 }
 ```
 
@@ -83,26 +83,26 @@ interface MainData {
 
 ```typescript
 interface SearchResult {
-    tags: {
-        // 标签名称
-        name: string;
-        // 带有高亮keyword的标签名
-        match: string;
-    }[];
-    groups: {
-        // 组名
-        name: string;
-        // 带有高亮keyword的组名
-        match: string;
-    }[];
-    articles: {
-        // 文章id
-        id: number;
-        // 带有高亮keyword的文章title
-        title: string;
-        // 带有高亮keyword的文章content
-        match: string;
-    }[];
+  tags: {
+    // 标签名称
+    name: string;
+    // 带有高亮keyword的标签名
+    match: string;
+  }[];
+  groups: {
+    // 组名
+    name: string;
+    // 带有高亮keyword的组名
+    match: string;
+  }[];
+  articles: {
+    // 文章id
+    id: number;
+    // 带有高亮keyword的文章title
+    title: string;
+    // 带有高亮keyword的文章content
+    match: string;
+  }[];
 }
 ```
 
@@ -117,38 +117,38 @@ interface SearchResult {
 ```typescript
 // 自执行函数闭包管理worker及workerStatus变量
 const getWorker = (function() {
-    // 搜索脚本的路径
-    const scriptUrl = 'js/searchWorker.js';
-    // worker实例
-    let worker: Worker | undefined;
-    // worker状态： 1为空闲，0为繁忙或不可用
-    let workerStatus: 0 | 1 = 0;
-    // 上次任务的reject
-    let latestReject: ((reason?: any) => any) | undefined;
+  // 搜索脚本的路径
+  const scriptUrl = 'js/searchWorker.js';
+  // worker实例
+  let worker: Worker | undefined;
+  // worker状态： 1为空闲，0为繁忙或不可用
+  let workerStatus: 0 | 1 = 0;
+  // 上次任务的reject
+  let latestReject: ((reason?: any) => any) | undefined;
 
-    return () => {
-        // 未初始化或繁忙，则重置worker
-        if (!worker || !workerStatus) {
-            // 上次任务reject
-            latestReject && latestReject('有新的搜索任务');
-            // 销毁线程
-            worker && worker.terminate();
-            // 初始化worker
-            worker = new Worker(scriptUrl);
-            // 初始化状态
-            workerStatus = 1;
-        }
-        return {
-            worker,
-            status: workerStatus,
-            setStatus(status: 0 | 1) {
-                workerStatus = status;
-            },
-            setReject(reject: (reason?: any) => any) {
-                latestReject = reject;
-            }
-        };
+  return () => {
+    // 未初始化或繁忙，则重置worker
+    if (!worker || !workerStatus) {
+      // 上次任务reject
+      latestReject && latestReject('有新的搜索任务');
+      // 销毁线程
+      worker && worker.terminate();
+      // 初始化worker
+      worker = new Worker(scriptUrl);
+      // 初始化状态
+      workerStatus = 1;
+    }
+    return {
+      worker,
+      status: workerStatus,
+      setStatus(status: 0 | 1) {
+        workerStatus = status;
+      },
+      setReject(reject: (reason?: any) => any) {
+        latestReject = reject;
+      }
     };
+  };
 })();
 ```
 
@@ -156,40 +156,40 @@ const getWorker = (function() {
 
 ```typescript
 interface DocInfo {
-    // ...
+  // ...
 }
 interface SearchResult {
-    // ....
+  // ....
 }
 function getWorker() {
-    // ...
+  // ...
 }
 function Search(keyword: string, docInfo: DocInfo) {
-    return new Promise<SearchResult>((resolve, reject) => {
-        // 获取worker
-        const { worker, setStatus, setReject } = getWorker();
-        // 设置worker状态为繁忙
-        setStatus(0);
-        // 5s秒后超时
-        let timeout = setTimeout(() => {
-            reject('timeout');
-            // 释放资源
-            worker && worker.terminate();
-        }, 5000);
-        // 监听消息
-        worker.onmessage = function(this: Worker, ev: MessageEvent) {
-            // 清除超时设置
-            clearTimeout(timeout);
-            // 设置worker状态为空闲
-            setStatus(1);
-            // 返回搜索结果
-            resolve(ev.data);
-        };
-        // 记录reject
-        setReject(reject);
-        // 发送消息
-        worker.postMessage({ keyword, docInfo });
-    });
+  return new Promise<SearchResult>((resolve, reject) => {
+    // 获取worker
+    const { worker, setStatus, setReject } = getWorker();
+    // 设置worker状态为繁忙
+    setStatus(0);
+    // 5s秒后超时
+    let timeout = setTimeout(() => {
+      reject('timeout');
+      // 释放资源
+      worker && worker.terminate();
+    }, 5000);
+    // 监听消息
+    worker.onmessage = function(this: Worker, ev: MessageEvent) {
+      // 清除超时设置
+      clearTimeout(timeout);
+      // 设置worker状态为空闲
+      setStatus(1);
+      // 返回搜索结果
+      resolve(ev.data);
+    };
+    // 记录reject
+    setReject(reject);
+    // 发送消息
+    worker.postMessage({ keyword, docInfo });
+  });
 }
 ```
 
@@ -199,43 +199,43 @@ function Search(keyword: string, docInfo: DocInfo) {
 import React, { useState, useEffect, useRef } from 'react';
 
 function Search(keyword, docInfo) {
-    // ...
-    // return Promise.resolve()
+  // ...
+  // return Promise.resolve()
 }
 const docInfo = {};
 
 const SearchComp = () => {
-    const [keyword, setKeyword] = useState('');
-    const timeoutRef = useRef();
-    // keyword变化时，防抖200毫秒执行搜索
-    useEffect(() => {
-        if (!keyword) {
-            // 处理keyword为空的情况
-            return;
-        }
-        // 清除上次的延迟执行
-        clearTimeout(timeoutRef.current);
-        // 启动本次延迟执行
-        timeoutRef.current = setTimeout(() => {
-            // 调用Search执行搜索
-            Search(keyword, docInfo).then(res => {
-                // 处理搜索结果
-            });
-        }, 200);
-        // useEffect副作用清除
-        return () => {
-            clearTimeout(timeoutRef.current);
-        };
-    }, [keyword]);
-    return (
-        <input
-            type="text"
-            value={keyword}
-            onChange={ev => {
-                setKeyword(ev.target.value);
-            }}
-        />
-    );
+  const [keyword, setKeyword] = useState('');
+  const timeoutRef = useRef();
+  // keyword变化时，防抖200毫秒执行搜索
+  useEffect(() => {
+    if (!keyword) {
+      // 处理keyword为空的情况
+      return;
+    }
+    // 清除上次的延迟执行
+    clearTimeout(timeoutRef.current);
+    // 启动本次延迟执行
+    timeoutRef.current = setTimeout(() => {
+      // 调用Search执行搜索
+      Search(keyword, docInfo).then(res => {
+        // 处理搜索结果
+      });
+    }, 200);
+    // useEffect副作用清除
+    return () => {
+      clearTimeout(timeoutRef.current);
+    };
+  }, [keyword]);
+  return (
+    <input
+      type="text"
+      value={keyword}
+      onChange={ev => {
+        setKeyword(ev.target.value);
+      }}
+    />
+  );
 };
 ```
 
@@ -243,9 +243,9 @@ const SearchComp = () => {
 
 如上的权重计算准则分为三种情况：
 
--   完全匹配
--   包含 keyword
--   只包含 keyword 中部分(指 keyword 中以空格分开的单词)
+- 完全匹配
+- 包含 keyword
+- 只包含 keyword 中部分(指 keyword 中以空格分开的单词)
 
 ##### `完全匹配`
 
@@ -253,13 +253,13 @@ const SearchComp = () => {
 
 ```js
 function executeFullMatch(keyword, str) {
-    if (keyword === str) {
-        // 匹配成功，权重+4
-        return `<span class="keyword-highlight">${str}</span>`;
-    } else {
-        // 匹配成功，权重+0
-        return false;
-    }
+  if (keyword === str) {
+    // 匹配成功，权重+4
+    return `<span class="keyword-highlight">${str}</span>`;
+  } else {
+    // 匹配成功，权重+0
+    return false;
+  }
 }
 ```
 
@@ -269,21 +269,21 @@ function executeFullMatch(keyword, str) {
 
 ```js
 function string2regstr(str) {
-    // 将正则中的关键字符都使用\转义即可，将所有字符当成字符本身处理，而不是匹配字符(这里使用\\是因为\字符本身就需要被转义，故而\\代表\)，
-    return str.replace(/([.\\\[\]^$()?:*+|{},=!])/gi, '\\$1');
+  // 将正则中的关键字符都使用\转义即可，将所有字符当成字符本身处理，而不是匹配字符(这里使用\\是因为\字符本身就需要被转义，故而\\代表\)，
+  return str.replace(/([.\\\[\]^$()?:*+|{},=!])/gi, '\\$1');
 }
 
 function executeIncludeMatch(keyword, str) {
-    if (str.includes(keyword)) {
-        // 匹配成功，权重+2
-        const keywordReg = new RegExp(string2regstr(keyword), 'gi');
-        return str.replace(keywordReg, matchStr => {
-            return `<span class="keyword-highlight">${matchStr}</span>`;
-        });
-    } else {
-        // 匹配成功，权重+0
-        return false;
-    }
+  if (str.includes(keyword)) {
+    // 匹配成功，权重+2
+    const keywordReg = new RegExp(string2regstr(keyword), 'gi');
+    return str.replace(keywordReg, matchStr => {
+      return `<span class="keyword-highlight">${matchStr}</span>`;
+    });
+  } else {
+    // 匹配成功，权重+0
+    return false;
+  }
 }
 ```
 
@@ -293,22 +293,22 @@ function executeIncludeMatch(keyword, str) {
 
 ```js
 function string2regstr(str) {
-    // 将正则中的关键字符都使用\转义即可，将所有字符当成字符本身处理，而不是匹配字符(这里使用\\是因为\字符本身就需要被转义，故而\\代表\)，
-    return str.replace(/([.\\\[\]^$()?:*+|{},=!])/gi, '\\$1');
+  // 将正则中的关键字符都使用\转义即可，将所有字符当成字符本身处理，而不是匹配字符(这里使用\\是因为\字符本身就需要被转义，故而\\代表\)，
+  return str.replace(/([.\\\[\]^$()?:*+|{},=!])/gi, '\\$1');
 }
 function executePartMatch(keyword, str) {
-    const keywordArr = string2regstr(keyword).split(/\s+/);
-    // 分组匹配，比如keywordArr: ['I', 'am', 'Liu']，转换成 /(I|am|Liu)/gi
-    const keywordReg = new RegExp(`(${keywordArr.join('|')})`, 'gi');
-    if (str.match(keywordReg)) {
-        // 匹配成功，权重+1
-        return str.replace(keywordReg, matchStr => {
-            return `<span class="keyword-highlight">${matchStr}</span>`;
-        });
-    } else {
-        // 匹配成功，权重+0
-        return false;
-    }
+  const keywordArr = string2regstr(keyword).split(/\s+/);
+  // 分组匹配，比如keywordArr: ['I', 'am', 'Liu']，转换成 /(I|am|Liu)/gi
+  const keywordReg = new RegExp(`(${keywordArr.join('|')})`, 'gi');
+  if (str.match(keywordReg)) {
+    // 匹配成功，权重+1
+    return str.replace(keywordReg, matchStr => {
+      return `<span class="keyword-highlight">${matchStr}</span>`;
+    });
+  } else {
+    // 匹配成功，权重+0
+    return false;
+  }
 }
 ```
 

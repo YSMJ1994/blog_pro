@@ -13,10 +13,10 @@
 
 ```typescript
 type Generator = () => {
-    next: () => {
-        value: any;
-        done: boolean;
-    };
+  next: () => {
+    value: any;
+    done: boolean;
+  };
 };
 ```
 
@@ -31,9 +31,9 @@ type Generator = () => {
 ```typescript
 // Generator函数
 function* myIterator() {
-    yield 1;
-    yield 2;
-    yield 3;
+  yield 1;
+  yield 2;
+  yield 3;
 }
 // 生成器对象
 const it = myIterator();
@@ -56,7 +56,7 @@ ES6 的`for of`语法可以对实现了`可迭代协议`的对象遍历。一些
 ```typescript
 const array = ['李白', '王维', '杜甫'];
 for (const item of array) {
-    console.log(item);
+  console.log(item);
 }
 /* console:
     '李白'
@@ -78,30 +78,30 @@ for (const item of array) {
 ```typescript
 // 目标对象
 const user = {
-    id: 1,
-    name: '王维',
-    sex: '男'
+  id: 1,
+  name: '王维',
+  sex: '男'
 };
 
 // 定义该对象的迭代器
 // 迭代方式为：按照key的字母表顺序依次迭代该key的值
 function* Iterator() {
-    const keys = Object.keys(user).sort((a, b) => (a > b ? 1 : -1));
-    for (let i = 0, len = keys.length; i < len; i++) {
-        yield user[keys[i]];
-    }
+  const keys = Object.keys(user).sort((a, b) => (a > b ? 1 : -1));
+  for (let i = 0, len = keys.length; i < len; i++) {
+    yield user[keys[i]];
+  }
 }
 
 // 使对象符合可迭代协议
 Object.defineProperty(user, Symbol.iterator, {
-    configurable: true,
-    enumerable: false,
-    value: Iterator
+  configurable: true,
+  enumerable: false,
+  value: Iterator
 });
 
 // for of测试
 for (const value of user) {
-    console.log(value);
+  console.log(value);
 }
 /*console:
     1
@@ -124,9 +124,9 @@ it.next(); // { value: undefined, done: true }
 
 ```typescript
 function* Iterator() {
-    let a = 0;
-    let b = yield a + 2;
-    yield b * 2;
+  let a = 0;
+  let b = yield a + 2;
+  yield b * 2;
 }
 const it = Iterator();
 // 第一次执行，yield返回 a + 2 = 2

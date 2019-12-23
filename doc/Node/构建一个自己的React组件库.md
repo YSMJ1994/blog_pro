@@ -40,8 +40,8 @@ yarn start
 
 `---config ---`为该文档配置，以`key: value`的方式设置，可配置的 key 有：
 
--   `name`为文档的标题，如果不设置则默认为文件名，显示在 web 文档的左侧列表中；
--   `order`为文档的排序权重，按从小到大排序，如果不设置或相等则按照`name`的字母表排序。
+- `name`为文档的标题，如果不设置则默认为文件名，显示在 web 文档的左侧列表中；
+- `order`为文档的排序权重，按从小到大排序，如果不设置或相等则按照`name`的字母表排序。
 
 `---dependencies ---`为该文档的组件依赖，文档内可以使用我们在`components`目录下定义的 React 组件，前提是，在`dependencies`里面配置的对应的依赖。例如`quickStart.md`中引入的`Button`组件。webpack 配置了别名`components`指向`components`目录。
 
@@ -69,10 +69,10 @@ yarn start
 
 组件文档的配置方式与`doc`下的文档类似，同样是以`---config ---`的格式定义文档说明。可配置的 key 有：
 
--   `order` 为排序权重，不传则以`name`的字母表排序
--   `name` 为组件名，不传则以目录名称作为组件名
--   `type` 为组件分类，不传则默认为`未分配`
--   `sub` 为组件的中文名，不传则不显示
+- `order` 为排序权重，不传则以`name`的字母表排序
+- `name` 为组件名，不传则以目录名称作为组件名
+- `type` 为组件分类，不传则默认为`未分配`
+- `sub` 为组件的中文名，不传则不显示
 
 组件文档中可以自定义该组件的所有`demo`的位置，我们使用`<!-- demo -->`作为占位符，如果没有该占位符，则放置在文档的末尾。
 
@@ -84,15 +84,15 @@ yarn start
 
 demo 文档同样以`---config ---`格式定义文档说明。可配置的 key 有：
 
--   `order` 为排序权重，不传则以`title`的字母表排序
--   `title` 为 demo 的标题，不传则以目录名称作为标题名
+- `order` 为排序权重，不传则以`title`的字母表排序
+- `title` 为 demo 的标题，不传则以目录名称作为标题名
 
 demo 文档的`React`代码以及`css`代码以`markdown`语法中`code`的形式书写。 <code>\```{jt}sx\```</code> 的语法书写`React组件`、<code>\```(css|sass|scss|less)\```</code>的语法写`css`，而其它内容则会被解析为该 demo 的说明。
 
 `React`代码中 webpack 配置了别名:
 
--   `${require(package.json).name}$`指向一个自动生成的导出所有组件的 index.js 文件
--   `${require(package.json).name}`指向`components`目录
+- `${require(package.json).name}$`指向一个自动生成的导出所有组件的 index.js 文件
+- `${require(package.json).name}`指向`components`目录
 
 例如`components/Button/demo/basic.md`：
 
@@ -121,15 +121,17 @@ doc 的 publicPath 可以在`.env.production`中配置`CRU_PUBLIC_URL`修改，�
 而发布组件库则可命令行进入`build-library`目录，执行 npm publish 来发布到 npm 服务器。
 
 ## 如何使用已经发布的组件库
+
 跟 `ant-design`一样即可。
 
 比如：
+
 ```jsx harmony
-import { Button } from 'my_ui'
+import { Button } from 'my_ui';
 
 const Comp = () => {
-    return <Button>按钮</Button>
-}
+  return <Button>按钮</Button>;
+};
 ```
 
 ##### `babel-plugin-import`配置
@@ -137,22 +139,22 @@ const Comp = () => {
 ```javascript
 // babel.config.js
 module.exports = {
-    plugins: [
-        [
-            'import',
-            {
-                // my_ui换成自己库的名字
-                libraryName: 'my_ui',
-                // 关闭自动驼峰转换
-                camel2DashComponentName: false,
-                // 使用es目录下的组件
-                libraryDirectory: 'es',
-                // 加载 es/组件/style/css.js样式
-                style: 'css'
-            },
-            // 插件别名，多个import插件要不一样
-            'import-for-my_ui'
-        ]
+  plugins: [
+    [
+      'import',
+      {
+        // my_ui换成自己库的名字
+        libraryName: 'my_ui',
+        // 关闭自动驼峰转换
+        camel2DashComponentName: false,
+        // 使用es目录下的组件
+        libraryDirectory: 'es',
+        // 加载 es/组件/style/css.js样式
+        style: 'css'
+      },
+      // 插件别名，多个import插件要不一样
+      'import-for-my_ui'
     ]
+  ]
 };
 ```
