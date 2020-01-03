@@ -62,6 +62,7 @@ const SearchPane: FC<{ keyword: string; show: boolean; onSearch: (pathname: stri
 	});
 	const docInfo = useContext(DocCtx);
 	const timeoutRef = useRef<NodeJS.Timeout>();
+	const rootDom = useRef<HTMLDivElement>(null);
 	useEffect(() => {
 		// 没有关键字或input没有聚焦则不搜索
 		if (!keyword) {
@@ -86,10 +87,26 @@ const SearchPane: FC<{ keyword: string; show: boolean; onSearch: (pathname: stri
 		}, 200);
 		return () => timeoutRef.current && clearTimeout(timeoutRef.current);
 	}, [keyword]);
+
+	useEffect(() => {
+		if (!rootDom.current) {
+			return;
+		}
+		/*const listener = (e: Event) => {
+			e.preventDefault();
+		}
+		rootDom.current.addEventListener('scroll', listener, {
+			passive: true
+		})
+		return () => {
+			rootDom.current && rootDom.current.removeEventListener('scroll', listener);
+		}*/
+	}, [rootDom.current]);
+
 	const { tags, groups, articles } = result;
 	const hasResult = tags.length || groups.length || articles.length;
 	return (
-		<div className={cs(styles.searchPane, { [styles.searchPaneShow]: show })}>
+		<div ref={rootDom} className={cs(styles.searchPane, { [styles.searchPaneShow]: show })}>
 			{hasResult ? (
 				<table>
 					<tbody>
@@ -151,7 +168,7 @@ export default withRouter<RouteComponentProps, FC<RouteComponentProps>>(function
 	};
 	const setShow = (show: boolean) => {
 		// 移动端滚动穿透处理
-		if (isMobile()) {
+		/*if (isMobile()) {
 			if (show) {
 				// 记录当前滚动视窗滚动高度，
 				setScrollTop(scrollElement.scrollTop);
@@ -159,7 +176,7 @@ export default withRouter<RouteComponentProps, FC<RouteComponentProps>>(function
 				// 复原
 				scrollElement.scrollTop = scrollTop;
 			}
-		}
+		}*/
 		setState({
 			searchPaneShow: show
 		});
