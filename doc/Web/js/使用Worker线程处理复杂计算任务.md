@@ -1,9 +1,8 @@
-[tag]: #(Worker,javascript,js)
-[preview]: #(start)
+---tag: Worker,javascript,js ---start
 
 记录使用`Worker`线程来实现博客搜索功能的经历。
 
-[preview]: #(end)
+---end
 
 ## `Web Workers API`介绍
 

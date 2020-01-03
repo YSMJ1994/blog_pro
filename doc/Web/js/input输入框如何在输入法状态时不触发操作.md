@@ -1,9 +1,8 @@
-[tag]: #(input,javascript,js,isComposing)
-[preview]: #(start)
+---tag: input,javascript,js,isComposing ---start
 
 介绍如何设置 input 在输入法状态时不触发操作。
 
-[preview]: #(end)
+---end
 
 ## 直接来个 基于 React16.8.6 hooks 的组件
 

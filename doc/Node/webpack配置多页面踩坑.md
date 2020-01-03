@@ -1,10 +1,8 @@
-[title]: #(在CRA@3.2.0中配置webpack多页面踩坑)
-[tag]: #(webpack,多页面,CreatReactApp)
-[preview]: #(start)
+---title: 在 CRA@3.2.0 中配置 webpack 多页面踩坑 ---tag: webpack,多页面,CreatReactApp ---start
 
 记录在 CreatReactApp@3.2.0 创建的项目里配置 webpack`多页面`时的坑。
 
-[preview]: #(end)
+---end
 
 ## 场景
 

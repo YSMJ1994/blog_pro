@@ -1,10 +1,8 @@
-[title]: #(npm源管理)
-[tag]: #(npm,yarn,npm源)
-[preview]: #(start)
+---tag: npm,yarn,npm 换源 ---start
 
 汇总几种 npm 源管理的方案
 
-[preview]: #(end)
+---end
 
 ## 1、使用社区内的 npm 源管理工具
 

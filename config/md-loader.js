@@ -4,9 +4,12 @@ const {appDoc} = require('./paths')
 const markdownItConfig = require('../markdownit.config');
 const MDT = require('markdown-it')(markdownItConfig);
 const iterator = require('markdown-it-for-inline');
-const titleRegExp = /\[title]:\s*#\((.+)\)/;
-const tagRegExp = /\[tag]:\s*#\((.+)\)/;
-const reviewRegExp = /\[preview]:\s*#\(start\)([\s\S]+)\[preview]:\s*#\(end\)/;
+// const titleRegExp = /\[title]:\s*#\((.+)\)/;
+// const tagRegExp = /\[tag]:\s*#\((.+)\)/;
+// const reviewRegExp = /\[preview]:\s*#\(start\)([\s\S]+)\[preview]:\s*#\(end\)/;
+const titleRegExp = /---title[:：\s]+(.+)/;
+const tagRegExp = /---tag[:：\s]+(.+)/;
+const reviewRegExp = /---start([\s\S]+)---end/;
 
 // a标签设置target为_blank
 MDT.use(iterator, 'url_new_win', 'link_open', function (tokens, idx) {
