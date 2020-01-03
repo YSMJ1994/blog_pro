@@ -1,4 +1,5 @@
----tag: input,javascript,js,isComposing ---start
+---tag: input,javascript,js,isComposing
+---start
 
 介绍如何设置 input 在输入法状态时不触发操作。
 

@@ -1,4 +1,5 @@
----tag: Worker,javascript,js ---start
+---tag: Worker,javascript,js
+---start
 
 记录使用`Worker`线程来实现博客搜索功能的经历。
 

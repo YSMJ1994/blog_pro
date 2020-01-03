@@ -1,4 +1,5 @@
----tag: es6,Generator,Itereator,javascript,js ---start
+---tag: es6,Generator,Itereator,javascript,js
+---start
 
 关于 es6`Generator`函数的理解
 

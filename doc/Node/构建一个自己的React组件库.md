@@ -1,4 +1,5 @@
----tag: React,组件库,脚手架 ---start
+---tag: React,组件库,脚手架
+---start
 
 使用[create-react-ui](https://www.npmjs.com/package/create-react-ui)脚手架工具快速构建一个自己的 React 组件库
 
