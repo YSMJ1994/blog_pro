@@ -26,3 +26,5 @@ src/assets/md
 .prettierrc.js
 .huskyrc.js
 lint-staged.config.js
+
+/draftBox
