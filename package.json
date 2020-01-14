@@ -11,8 +11,8 @@
     "build&publish2home": "yarn run build && yarn run publish2home",
     "build&publish2tencent": "yarn run build && yarn run publish2tencent",
     "build&publish2blog_server": "yarn run build && yarn run publish2blog_server",
-    "build-in-my-server": "yarn run build && rm -rf ../blog_pro_server/blog/* && cp ./build/* ../blog_pro_server/blog/",
-    "server-build": "ssh sober@soberz.cn \"cd /home/sober/projects/blog_pro && sh ./build.sh\""
+    "build-in-my-server": "yarn run build && rm -rf ../blog_pro_server/blog/* && cp -r ./build/* ../blog_pro_server/blog/",
+    "server-build": "ssh sober@soberz.cn \"source ~/.zshrc && cd /home/sober/projects/blog_pro && git pull && yarn install && yarn run build-in-my-server\""
   },
   "dependencies": {
     "@babel/core": "7.4.3",
