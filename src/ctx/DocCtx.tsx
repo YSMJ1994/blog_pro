@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import docArray from '@/assets/md';
 
 export interface MdDoc {
-	id: number;
+	id: string;
 	title: string;
 	createTime: number;
 	modifyTime: number;

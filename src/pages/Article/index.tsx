@@ -13,22 +13,21 @@ const Article: FC<{ className?: string } & RouteComponentProps<{ id: string }>> 
 	},
 	history
 }) => {
-	const intId = +id;
 	const { articles } = useContext(DocCtx);
 	let index: number = 0;
 	// console.log('articles', articles, id);
 	const article = articles.filter((a, i) => {
-		if (a.id === intId || a.title === id) {
+		if (a.id === id || a.title === id) {
 			index = i;
 			return true;
 		} else {
 			return false;
 		}
 	})[0];
-	if (!articles) {
+	if (!article) {
 		return (
 			<div>
-				<h1>参数错误</h1>
+				<h1>文章不存在</h1>
 			</div>
 		);
 	}

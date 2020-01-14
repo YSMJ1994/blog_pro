@@ -4,6 +4,7 @@ const {appDoc} = require('./paths')
 const markdownItConfig = require('../markdownit.config');
 const MDT = require('markdown-it')(markdownItConfig);
 const iterator = require('markdown-it-for-inline');
+const crypto = require('crypto')
 // const titleRegExp = /\[title]:\s*#\((.+)\)/;
 // const tagRegExp = /\[tag]:\s*#\((.+)\)/;
 // const reviewRegExp = /\[preview]:\s*#\(start\)([\s\S]+)\[preview]:\s*#\(end\)/;
@@ -25,6 +26,17 @@ MDT.use(iterator, 'url_new_win', 'link_open', function (tokens, idx) {
 MDT.renderer.rules.table_open  = function () { return '<div class="table-wrapper"><table>'; };
 MDT.renderer.rules.table_close  = function () { return '</table></div>'; };
 
+const idCache = {}
+
+function filePath2Id(filename) {
+	if(idCache[filename]) {
+		return idCache[filename];
+	}
+	const id = crypto.createHash('md5').update(filename).digest('hex')
+	idCache[filename] = id;
+	return id;
+}
+
 async function mdLoader(source) {
 	const callback = this.async();
 	const mdPath = this.resourcePath;
@@ -45,7 +57,7 @@ async function mdLoader(source) {
 	const review = MDT.render(reviewStr)
 	const content = MDT.render(source)
 	const md = {
-		id: parseInt(birthtimeMs),
+		id: filePath2Id(mdPath),
 		title,
 		tag,
 		createTime: birthtimeMs,

@@ -51,7 +51,7 @@ const ArticleItem: FC<MdDoc & { onClick?: (e: MouseEvent<HTMLDivElement>) => voi
 const GroupItem: FC<
 	Group & {
 		open?: boolean;
-		goArticle?: (id: number) => void;
+		goArticle?: (id: string) => void;
 		paramsName?: string;
 		onChildOpen?: (name: string) => void;
 		animated?: boolean;
@@ -154,7 +154,7 @@ const GroupPage: FC<{ className?: string } & RouteComponentProps<{ name?: string
 	const [open, setOpen] = useState<boolean>(false);
 	const [animated, setAnimated] = useState<boolean>(true);
 	console.log('groups', groups);
-	const goArticle = (id: number) => {
+	const goArticle = (id: string) => {
 		history.push(`/article/${id}`);
 	};
 	return (

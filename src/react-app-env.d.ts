@@ -71,7 +71,7 @@ declare global {
 
 	module '*.md' {
 		const markdown: {
-			id: number;
+			id: string;
 			title: string;
 			tag: string[];
 			createTime: number;
