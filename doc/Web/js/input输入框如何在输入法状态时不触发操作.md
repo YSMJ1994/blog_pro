@@ -13,26 +13,33 @@ import React, { useState, useEffect, forwardRef } from 'react';
 
 const NoCompositionInput = ({ value, onChange, ...otherProps }, ref) => {
   const [inputValue, setInputValue] = useState(value);
-  const [isComposition, setIsComposition] = useState(false);
 
+  // 当value变化时保持inputValue与value一致
   useEffect(() => {
     setInputValue(value);
   }, [value]);
-
-  useEffect(() => {
-    !isComposition && onChange && onChange(inputValue);
-  }, [isComposition, inputValue]);
 
   return (
     <input
       ref={ref}
       {...otherProps}
       value={inputValue}
-      onCompositionStart={() => setIsComposition(true)}
-      onCompositionUpdate={() => setIsComposition(true)}
-      onCompositionEnd={() => setIsComposition(false)}
+      onCompositionEnd={() => {
+        // 当输入法键入结束时，onChange事件的isComposing仍为true，所以需要在这里提交键入的inputValue值
+        onChange && onChange(inputValue);
+      }}
       onChange={e => {
-        setInputValue(e.target.value);
+        // 判断是否是输入法状态
+        const isComposing = e.nativeEvent.isComposing;
+        // 获取value
+        const value = e.target.value;
+        if (isComposing) {
+          // 输入法状态只改变内部状态
+          setInputValue(value);
+        } else {
+          // 否则触发onChange事件
+          onChange && onChange(value);
+        }
       }}
     />
   );
