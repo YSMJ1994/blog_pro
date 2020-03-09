@@ -2,6 +2,7 @@ const fs = require('fs-extra');
 const path = require('path');
 const {appDoc} = require('./paths')
 const markdownItConfig = require('../markdownit.config');
+const prism = require('markdown-it-prism')
 const MDT = require('markdown-it')(markdownItConfig);
 const iterator = require('markdown-it-for-inline');
 const crypto = require('crypto')
@@ -11,6 +12,9 @@ const crypto = require('crypto')
 const titleRegExp = /---title[:：\s]+(.+)/;
 const tagRegExp = /---tag[:：\s]+(.+)/;
 const reviewRegExp = /---start([\s\S]+)---end/;
+
+// 语法高亮
+MDT.use(prism, {});
 
 // a标签设置target为_blank
 MDT.use(iterator, 'url_new_win', 'link_open', function (tokens, idx) {

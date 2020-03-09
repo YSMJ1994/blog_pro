@@ -1,0 +1,22 @@
+@import '~prismjs/themes/prism-tomorrow.css';
+
+.token.tag,
+.token.attr-name,
+.token.namespace,
+.token.deleted {
+	& [class*='language-'],
+	[class*='language-'] {
+		color: #ccc;
+	}
+}
+.token.function {
+	color: #61aeef;
+}
+.token.parameter {
+}
+.token.attr-name {
+	color: #e5c17c;
+}
+.token.tag .token.class-name {
+	color: #e2777a;
+}

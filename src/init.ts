@@ -1,6 +1,7 @@
 import '@/styles/fix.scss';
 import '@/styles/global.scss';
-import 'highlight.js/styles/atom-one-dark.css';
+import '@/styles/code-theme.scss';
+// import 'highlight.js/styles/atom-one-dark.css';
 import { loadIcon } from '@ysmj/web_utils';
 import 'moment/locale/zh-cn';
 import Moment from 'moment';
