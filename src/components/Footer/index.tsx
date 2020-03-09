@@ -25,7 +25,11 @@ const Footer: FC = () => {
 					TypeScript v3.7.2
 				</a>
 			</div>
-			<div>苏ICP备18024799号</div>
+			<div>
+				<a href="http://beian.miit.gov.cn" target="_blank">
+					苏ICP备18024799号
+				</a>
+			</div>
 		</footer>
 	);
 };
