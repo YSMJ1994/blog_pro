@@ -1,23 +1,27 @@
-name: Bug Report
-description: File a bug report
-title: "[Bug]: "
-labels: ["bug", "triage"]
-projects: ["octo-org/1", "octo-org/44"]
-assignees:
-  - octocat
+name: Bug Report (中文)
+description: 提交一个bug
+title: "[组件名]: "
+labels: ["🐞 Bug", "ownerless"]
 body:
   - type: markdown
     attributes:
-      value: |
-        Thanks for taking the time to fill out this bug report!
-  - type: input
-    id: contact
+      value: "## 感谢你对xx的贡献"
+  - type: markdown
     attributes:
-      label: Contact Details
-      description: How can we get in touch with you if we need more info?
-      placeholder: ex. email@example.com
-    validations:
-      required: false
+      value: |
+        你需要花一些时间填写这份bug报告!
+  - type: markdown
+    attributes:
+      value: "## 在开始之前"
+  - type: markdown
+    attributes:
+      value: |
+        为了能在有限的人力下提高解决问题的效率，问题和讨论应该发生在Github issue列表之外，这里只用于提出明确的缺陷或者未支持的特性。表单中选项请尽可能地完善，足够的信息能大大提高问题解决的效率。
+  - type: input
+    id: version
+    attrubutes:
+      label: Version
+
   - type: textarea
     id: what-happened
     attributes:
