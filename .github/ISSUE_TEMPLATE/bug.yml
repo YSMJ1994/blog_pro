@@ -19,7 +19,7 @@ body:
         为了能在有限的人力下提高解决问题的效率，问题和讨论应该发生在Github issue列表之外，这里只用于提出明确的缺陷或者未支持的特性。表单中选项请尽可能地完善，足够的信息能大大提高问题解决的效率。
   - type: input
     id: version
-    attrubutes:
+    attributes:
       label: 版本
       desciprtion: 在哪个版本发生了问题
       placeholder: 1.*.*
