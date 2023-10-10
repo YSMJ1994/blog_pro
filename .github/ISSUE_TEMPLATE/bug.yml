@@ -16,15 +16,15 @@ body:
   - type: markdown
     attributes:
       value: |
-        为了能在有限的人力下提高解决问题的效率，问题和讨论应该发生在Github issue列表之外，这里只用于提出明确的缺陷或者未支持的特性
+        为了能在有限的人力下提高解决问题的效率,这里只用于提出明确的缺陷或者未支持的特性
   - type: markdown
     attributes:
       value: |
-        另外表单中选项请尽可能地完善，足够的信息能大大提高问题解决的效率
+        另外表单中选项请尽可能地完善，充足的信息能大大提高问题解决的效率
   - type: input
     id: version
     attributes:
-      label: 版本
+      label: 组件库版本
       description: 在哪个版本发生了问题
       placeholder: 1.0.0
     validations:
@@ -41,7 +41,7 @@ body:
         - Microsoft Edge
         - IE11
         - Others
-      default: 1
+      default: [1]
   - type: input
     id: reproduction
     attributes:
