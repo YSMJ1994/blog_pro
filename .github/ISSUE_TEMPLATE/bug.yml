@@ -21,7 +21,7 @@ body:
     id: version
     attributes:
       label: 版本
-      desciprtion: 在哪个版本发生了问题
+      description: 在哪个版本发生了问题
       placeholder: 1.*.*
     validations:
       required: true
