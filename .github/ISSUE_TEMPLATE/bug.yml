@@ -5,14 +5,11 @@ labels: ["🐞 Bug", "ownerless"]
 body:
   - type: markdown
     attributes:
-      value: "## 感谢你对xx的贡献"
+      value: "## 在开始之前, 感谢你对xx的贡献"
   - type: markdown
     attributes:
       value: |
         你需要花一些时间填写这份bug报告!
-  - type: markdown
-    attributes:
-      value: "## 在开始之前"
   - type: markdown
     attributes:
       value: |
@@ -29,6 +26,12 @@ body:
       placeholder: 1.0.0
     validations:
       required: true
+  - type: input
+    id: react
+    attributes:
+      label: React版本
+      description: 在哪个react版本发生了问题
+      placeholder: 16.10.0
   - type: dropdown
     id: browser
     attributes:
@@ -41,7 +44,6 @@ body:
         - Microsoft Edge
         - IE11
         - Others
-      default: 1
   - type: input
     id: reproduction
     attributes:
@@ -54,13 +56,14 @@ body:
     id: steps
     attributes:
       label: 重现步骤
-      description: 请输入简洁清晰的重现步骤，以便我们更快速地定位问题
+      description: 请简洁清晰地描述重现步骤，以便我们更快速地定位问题
     validations:
       required: true
   - type: textarea
     id: expected
     attributes:
-      label: 预期结果
+      label: 实际结果与预期结果
+      description: 请简要描述实际结果和预期结果
     validations:
       required: true
   - type: textarea
