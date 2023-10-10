@@ -41,6 +41,7 @@ body:
         - Microsoft Edge
         - IE11
         - Others
+      default: 1
   - type: input
     id: reproduction
     attributes:
@@ -50,35 +51,19 @@ body:
     validations:
       required: true
   - type: textarea
-    id: what-happened
+    id: steps
     attributes:
-      label: What happened?
-      description: Also tell us, what did you expect to happen?
-      placeholder: Tell us what you see!
-      value: "A bug happened!"
+      label: 重现步骤
+      description: 请输入简洁清晰的重现步骤，以便我们更快速地定位问题
     validations:
       required: true
-  - type: dropdown
-    id: browsers
-    attributes:
-      label: What browsers are you seeing the problem on?
-      multiple: true
-      options:
-        - Firefox
-        - Chrome
-        - Safari
-        - Microsoft Edge
   - type: textarea
-    id: logs
+    id: expected
     attributes:
-      label: Relevant log output
-      description: Please copy and paste any relevant log output. This will be automatically formatted into code, so no need for backticks.
-      render: shell
-  - type: checkboxes
-    id: terms
+      label: 预期结果
+    validations:
+      required: true
+  - type: textarea
+    id: remarks
     attributes:
-      label: Code of Conduct
-      description: By submitting this issue, you agree to follow our [Code of Conduct](https://example.com)
-      options:
-        - label: I agree to follow this project's Code of Conduct
-          required: true
+      label: 其它补充说明
