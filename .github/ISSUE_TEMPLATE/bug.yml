@@ -41,7 +41,7 @@ body:
         - Microsoft Edge
         - IE11
         - Others
-      default: [1]
+      default: 1
   - type: input
     id: reproduction
     attributes:
