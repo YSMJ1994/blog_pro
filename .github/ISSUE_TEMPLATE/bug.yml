@@ -46,8 +46,7 @@ body:
     attributes:
       label: 重现链接
       placeholder: https://codesandbox.io/s/...
-      description: |
-      前往<a href="https://codesandbox.io/s/fusion-next-1-x-glk2g6?file=/src/App.js" target="_blank">CodeSandbox</a>创建最小化复现场景
+      description: 前往<a target="_blank" href="https://codesandbox.io/s/fusion-next-1-x-glk2g6?file=/src/App.js">CodeSandbox</a>创建最小化复现场景
     validations:
       required: true
   - type: textarea
