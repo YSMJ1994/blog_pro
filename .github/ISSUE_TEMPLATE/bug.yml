@@ -49,7 +49,7 @@ body:
     attributes:
       label: 重现链接
       placeholder: https://codesandbox.io/s/...
-      description: 前往 [CodeSandbox](https://codesandbox.io/s/fusion-design-demo-rpr46k) 创建最小化复现场景
+      description: 前往 [CodeSandbox](https://codesandbox.io/s/fusion-design-demo-rpr46k) or [Riddle(内部)](https://riddle.alibaba-inc.com/riddles/f1a050c2) 创建最小化复现场景
     validations:
       required: true
   - type: textarea
